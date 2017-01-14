@@ -5,7 +5,7 @@ var stateStart=false;
 var stateBath=false;
 var stateKitchen=false;
 var Jack;
-var name=input.value();
+var input;
 
 function preload() {
     myBg = loadImage('images/background.png');
@@ -69,7 +69,10 @@ function draw(){
     fill(255);
     textSize(40);
     textAlign(RIGHT);
+<<<<<<< HEAD
     //textFont("Arial");
+=======
+>>>>>>> origin/master
     text('Hi,',width/2-20,y+height/2+33);
     pop();
     
