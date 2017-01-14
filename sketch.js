@@ -9,7 +9,7 @@ var input;
 
 function preload() {
     myBg = loadImage('images/background.png');
-    Jack = loadImage('images/Jack_Start.png');
+    Jack = loadImage('images/Jack_start.png');
 }
 
 function setup() {
