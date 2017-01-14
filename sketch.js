@@ -1,5 +1,6 @@
-var valueW=0;
-var valueH=0;
+var x, y = 0;
+var button;
+var state=false;
 
 function preload() {
     myBg = loadImage('images/background.png');
@@ -7,21 +8,33 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth,windowHeight);
-    imageMode(CORNER);
-}
-
-function draw() {
-
-    image(myBg,valueW,valueH,width*3,height*2);
+    button = createButton('click me');
+    button.position(width/2,height/2);
+    button.mousePressed(changeRoom);
     
 }
 
-function mousePressed() {
-    if (valueH == 0) {
-        valueH = -height;
-    } else if (valueW ==0 && valueH == -height) {
-        valueW = -width;
-    } else if (valueW ==-width && valueH == -height) {
-        valueW = -width*2;
+function draw() {  
+    image(myBg,x,y,width*3,height*2);
+    
+    if(state==true){
+        y=y-10;
+
+        if (y>height) {
+            y==height;
+        }
     }
 }
+
+function changeRoom() {
+    if(state==false){
+        state=true;
+    } else {
+        state=false;
+    }
+}
+
+function windowResized() {
+    resizeCanvas(windowWidth,windowHeight);
+}
+
