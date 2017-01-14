@@ -4,11 +4,12 @@
     color:white;
     background-color:#00a9ff;
     border:none;
-    border-bottom:1px solid #bbe3f2;
+    /*border-bottom:1px solid #bbe3f2;*/
 }
 
 #inputName:focus {
     outline: none;
+    
 }
 
 #inputName::-webkit-input-placeholder {

@@ -26,12 +26,12 @@ function setup() {
     buttonBath = createButton('bath');
     buttonBath.position(width/2,height/3*2);
     buttonBath.mousePressed(BathToKitchen);
-//    buttonBath.hide();
+    buttonBath.hide();
 // Kitchen to Laundry
     buttonKitchen = createButton('kitchen');
     buttonKitchen.position(width/3*2,height/3*2);
     buttonKitchen.mousePressed(KitchenToLaundry);
-//    buttonKitchen.hide();
+    buttonKitchen.hide();
 
 /////////////////////////////////////////// START
 // INPUT NAME
