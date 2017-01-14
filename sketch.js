@@ -16,28 +16,33 @@ function setup() {
     buttonStart = createButton('start');
     buttonStart.position(width/3,height/2);
     buttonStart.mousePressed(StartToBath);
+    buttonStart.hide();
     // Bathroom to Kitchen
     buttonBath = createButton('bath');
     buttonBath.position(width/2,height/2);
     buttonBath.mousePressed(BathToKitchen);
+    buttonBath.hide();
     // Kitchen to Laundry
     buttonKitchen = createButton('kitchen');
     buttonKitchen.position(width/3*2,height/2);
     buttonKitchen.mousePressed(KitchenToLaundry);
+    buttonKitchen.hide();
     
 }
 
 function draw() {  
+    // Background
     image(myBg,x,y,width*3,height*2);
     
     // Start to Bathroom
+    buttonStart.show();
     if(stateStart==true){
         y=y-10;
 
         if (y<-height) {
             y=-height;
         }
-        
+        buttonStart.hide();
     }
     // Bathroom to Kitchen
     if(stateBath==true){
@@ -55,8 +60,6 @@ function draw() {
             x=-width*2;
         }
     }
-    
-    text(x,width/2,height/3);
 }
 
 // Start to Bathroom
