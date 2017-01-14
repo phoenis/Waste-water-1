@@ -42,7 +42,6 @@ function draw() {
     // Bathroom to Kitchen
     if(stateBath==true){
         x=x-10;
-        y=-height;
 
         if (x<-width) {
             x=-width;
@@ -51,12 +50,13 @@ function draw() {
     // Kitchen to Laundry
     if(stateKitchen==true){
         x=x-10;
-        y=-height;
 
-        if (x<width) {
+        if (x<-width*2) {
             x=-width*2;
         }
     }
+    
+    text(x,width/2,height/3);
 }
 
 // Start to Bathroom
@@ -68,12 +68,14 @@ function StartToBath() {
 // Bathroom to Kitchen
 function BathToKitchen() {
     if(stateBath==false){
+        stateStart=false;
         stateBath=true;
     } 
 }
 // Kitchen to Laundry
 function KitchenToLaundry() {
     if(stateKitchen==false){
+        stateBath=false;
         stateKitchen=true;
     } 
 }
