@@ -26,17 +26,18 @@ function draw() {
     if(stateStart==true){
         y=y-10;
 
-        if (y>height) {
-            y==height;
+        if (y<-height) {
+            y=-height;
         }
+        
     }
     
     if(stateRoom==true){
         x=x-10;
         y=-height;
 
-        if (x>=width) {
-            x==width;
+        if (x<-width) {
+            x=-width;
         }
     }
 }
