@@ -69,7 +69,6 @@ function draw(){
     fill(255);
     textSize(40);
     textAlign(RIGHT);
-    textFont("Arial");
     text('Hi,',width/2-20,y+height/2+33);
     pop();
     
