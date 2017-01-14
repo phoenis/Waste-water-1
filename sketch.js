@@ -6,7 +6,6 @@ var stateBath=false;
 var stateKitchen=false;
 var Jack;
 var input;
-var name=input.value();
 
 function preload() {
     myBg = loadImage('images/background.png');
