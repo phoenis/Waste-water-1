@@ -9,7 +9,7 @@ var name=input.value();
 
 function preload() {
     myBg = loadImage('images/background.png');
-    Jack = loadImage('images/Jack_Start.png');
+    Jack = loadImage('images/Jack_start.png');
 }
 
 function setup() {
@@ -69,7 +69,7 @@ function draw(){
     fill(255);
     textSize(40);
     textAlign(RIGHT);
-    textFont("Arial");
+    //textFont("Arial");
     text('Hi,',width/2-20,y+height/2+33);
     pop();
     
