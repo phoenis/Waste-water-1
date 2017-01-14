@@ -1,8 +1,9 @@
 var x = 0;
 var y = 0;
-var buttonStart, buttonBath;
+var buttonStart, buttonBath, buttonKitchen;
 var stateStart=false;
-var stateRoom=false;
+var stateBath=false;
+var stateKitchen=false;
 
 function preload() {
     myBg = loadImage('images/background.png');
@@ -14,11 +15,15 @@ function setup() {
     // Start to Bathroom
     buttonStart = createButton('start');
     buttonStart.position(width/3,height/2);
-    buttonStart.mousePressed(Start);
+    buttonStart.mousePressed(StartToBath);
     // Bathroom to Kitchen
-    buttonBath = createButton('change');
+    buttonBath = createButton('bath');
     buttonBath.position(width/2,height/2);
-    buttonBath.mousePressed(changeRoom);
+    buttonBath.mousePressed(BathToKitchen);
+    // Kitchen to Laundry
+    buttonKitchen = createButton('kitchen');
+    buttonKitchen.position(width/3*2,height/2);
+    buttonKitchen.mousePressed(KitchenToLaundry);
     
 }
 
@@ -35,7 +40,7 @@ function draw() {
         
     }
     // Bathroom to Kitchen
-    if(stateRoom==true){
+    if(stateBath==true){
         x=x-10;
         y=-height;
 
@@ -43,18 +48,33 @@ function draw() {
             x=-width;
         }
     }
+    // Kitchen to Laundry
+    if(stateKitchen==true){
+        x=x-10;
+        y=-height;
+
+        if (x<width) {
+            x=-width*2;
+        }
+    }
 }
 
 // Start to Bathroom
-function Start() {
+function StartToBath() {
     if(stateStart==false){
         stateStart=true;
     } 
 }
 // Bathroom to Kitchen
-function changeRoom() {
-    if(stateRoom==false){
-        stateRoom=true;
+function BathToKitchen() {
+    if(stateBath==false){
+        stateBath=true;
+    } 
+}
+// Kitchen to Laundry
+function KitchenToLaundry() {
+    if(stateKitchen==false){
+        stateKitchen=true;
     } 
 }
 
