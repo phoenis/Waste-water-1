@@ -12,6 +12,7 @@ function preload() {
     Jack_start = loadImage('images/Jack_start.png');
 }
 
+//-------------------------------------------------•°o.O SETUP O.o°•
 function setup() {
     createCanvas(windowWidth,windowHeight);
     
@@ -43,17 +44,52 @@ function setup() {
     // Placeholder
     var input = document.getElementById ("inputName");
     input.placeholder = "your name..";
+    
+//----------------------------------------------------------JACK
+    Jack = createSprite(width/5,height/3*2,height/2.4,height/1.6);
+    
+    var myAnimation = Jack.addAnimation("start", "images/Jack_start.png");
+    Jack.addAnimation("stand", "images/Jack_stand.png");
+    Jack.addAnimation("bathroom", "images/Jack_bathroom.png");
+    Jack.addAnimation("moving", "images/Jack_walk1.png", "images/Jack_walk2.png");
 }
 
+//-------------------------------------------------•°o.O DRAW O.o°•
 function draw(){  
 /////////////////////////////////////////// BACKGROUND
     image(myBg,x,y,width*3,height*2);
     
 /////////////////////////////////////////// JACK <3
-    push();
-    imageMode(CENTER);
-    Jack=image(Jack_start,width/5,height/3*2,height/2.4,height/1.5);
-    pop();
+    if(y<=-height){
+        //if mouse is to the left
+        if(mouseX < Jack.position.x - 10) {
+        Jack.changeAnimation("moving");
+        //flip horizontally
+        Jack.mirrorX(-1);
+        //negative x velocity: move left
+        Jack.velocity.x = - 2;
+        }
+        else if(mouseX > Jack.position.x + 10) {
+        Jack.changeAnimation("moving");
+        //unflip 
+        Jack.mirrorX(1);
+        Jack.velocity.x = 2;
+        }
+        else if (y<-height){
+        //if close to the mouse, don't move
+        Jack.changeAnimation("start");
+        Jack.velocity.x = 0;
+        } else {
+        //if close to the mouse, don't move
+        Jack.changeAnimation("stand");
+        Jack.velocity.x = 0;
+        }
+    }
+//??????????????????????????????????????????????????????????????????? CHIEDERE
+    Jack.scale = 0.88;
+
+    //draw the sprite
+    drawSprites();
     
 /////////////////////////////////////////// START
 // TEXT - Question
@@ -86,12 +122,8 @@ function draw(){
         };
 
         buttonStart.hide();
-/*||||||||||||||||||||||||||||||||| CHIEDERE ||||||||||||||||||||||||||||||||*/
-        document.getElementById("inputName").style.display='none';
-        push();
-        imageMode(CENTER);        
-       // Jack=image(Jack_walk,width/5,height/3*2,height/2.6,height/1.5);
-        pop();
+//??????????????????????????????????????????????????????????????????? CHIEDERE
+        document.getElementById("inputName").style.visibility='hidden';
     }
 
 /////////////////////////////////////////// BATHROOM
@@ -103,6 +135,12 @@ function draw(){
             x=-width;
         }
     }
+    /*
+    if(Jack.position.x==width/5 && y<=-height){
+        ellipse(width/2,height/2,50,50);
+        Jack.changeAnimation("bathroom");
+        Jack.velocity.x = 0;
+    }*/
 
 /////////////////////////////////////////// KITCHEN
 // BUTTON - Kitchen to Laundry
@@ -143,8 +181,4 @@ function KitchenToLaundry() {
 
 function windowResized() {
     resizeCanvas(windowWidth,windowHeight);
-}
-
-function hideImage() { 
-    document.getElementById(Jack).style.display = 'none';
 }
