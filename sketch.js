@@ -4,15 +4,26 @@ var buttonStart, buttonBath, buttonKitchen;
 var stateStart=false;
 var stateBath=false;
 var stateKitchen=false;
-var Jack;
+var Jack,Bath;
 var input;
+
+//-----> INPUT Bathroom
+var week = 1;
+var bathroomData = [5, 150, 80];
+var buttonShower, buttonTub, showerSlider, selTub, buttonBathroom;
+var showerMinutes, tubCapacity, showerWeek, bathWeek;
+var resultShower, resultBath;
+var pressShower=false;
+var pressTub=false;
+var pressBathroom=false;
+var RESULTS = [];
+
 
 function preload() {
     myBg = loadImage('images/background.png');
-    Jack_start = loadImage('images/Jack_start.png');
 }
 
-//-------------------------------------------------•°o.O SETUP O.o°•
+//------------------------------------------------•°o.O Setup O.o°•
 function setup() {
     createCanvas(windowWidth,windowHeight);
     
@@ -35,58 +46,101 @@ function setup() {
     buttonKitchen.hide();
 
 /////////////////////////////////////////// START
-// INPUT NAME
-    input = createInput();
-    input.id("inputName");
-    input.position(width/2,height/2);
-    input.size(250,40);
-    input.value = text;
+//-----> INPUT NAME
+    inputName = createInput();
+    inputName.id("inputName");
+    inputName.position(width/2,height/2);
+    inputName.size(250,40);
+    inputName.value = text;
     // Placeholder
-    var input = document.getElementById ("inputName");
-    input.placeholder = "your name..";
+    var inputName = document.getElementById ("inputName");
+   // if (isNaN(inputName) && inputName.length<1){
+        inputName.placeholder = "your name..";
+    /*} else {
+        inputName.value = inputName.value + "!";
+    }*/
     
-//----------------------------------------------------------JACK
-    Jack = createSprite(width/5,height/3*2,height/2.4,height/1.6);
+/////////////////////////////////////////// JACK <3
+    var JackX = width/3.3;
+    var JackY = height/3*2;
+    Jack = createSprite(JackX,JackY,height/2.4,height/1.6);
     
-    var myAnimation = Jack.addAnimation("start", "images/Jack_start.png");
+    var JackAnimation = Jack.addAnimation("start", "images/Jack_start1.png", "images/Jack_start1.png", "images/Jack_start1.png", "images/Jack_start2.png", "images/Jack_start2.png", "images/Jack_start2.png");
     Jack.addAnimation("stand", "images/Jack_stand.png");
-    Jack.addAnimation("bathroom", "images/Jack_bathroom.png");
-    Jack.addAnimation("moving", "images/Jack_walk1.png", "images/Jack_walk2.png");
+    Jack.addAnimation("shower", "images/Jack_shower.png");
+    Jack.addAnimation("moving", "images/Jack_walk1.png", "images/Jack_walk1.png", "images/Jack_walk2.png", "images/Jack_walk2.png");
+    Jack.addAnimation("falling", "images/Jack_falling1.png", "images/Jack_falling1.png", "images/Jack_falling2.png", "images/Jack_falling2.png");
+
+/////////////////////////////////////////// BATHROOM
+    // Bathtub - Tub
+    Bath = createSprite(JackX,JackY,height/2.4,height/1.6);
+    var BathAnimation = Bath.addAnimation("bath_none", "images/tub1.png");
+    Bath.addAnimation("bath_tub", "images/tub2.png", "images/tub2.png", "images/tub3.png", "images/tub3.png");
+    
+//-----> INPUT Bathroom
+    buttonShower = createButton("Shower");
+    buttonShower.mousePressed(showerOptions);
+    buttonShower.position(20,80);
+    buttonShower.hide();
+    
+    buttonTub = createButton("Bath");
+    buttonTub.mousePressed(tubOptions);
+    buttonTub.position(85,80);
+    buttonTub.hide();
+    
+    showerSlider = createSlider(0,60,10);
+    showerSlider.position(20,140);
+    showerSlider.hide();
+    
+    input = createInput();
+    input.id("numShower");
+    input.position(265,165);
+    input.size(25,15);
+    //placeholder
+    input = document.getElementById("numShower");
+    input.placeholder = 4;
+    document.getElementById("numShower").style.visibility = "hidden";
+    
+    selTub = createSelect();
+    selTub.position(20,140);
+    selTub.size(130,20);
+    selTub.option('Full');
+    selTub.option('Half-full');
+    selTub.hide();
+    
+    input = createInput();
+    input.id("numBaths");
+    input.position(265,165);
+    input.size(25,15);
+    //placeholder
+    input = document.getElementById("numBaths");
+    input.placeholder = 4;
+    document.getElementById("numBaths").style.visibility = "hidden";
+    
+    buttonBathroom = createButton("Done!");
+    buttonBathroom.position(20,200);
+    buttonBathroom.mousePressed(bathroomResults);
+    buttonBathroom.hide();
+    
 }
 
-//-------------------------------------------------•°o.O DRAW O.o°•
+//------------------------------------------------•°o.O Draw O.o°•
 function draw(){  
 /////////////////////////////////////////// BACKGROUND
     image(myBg,x,y,width*3,height*2);
     
-/////////////////////////////////////////// JACK <3
-    if(y<=-height){
-        //if mouse is to the left
-        if(mouseX < Jack.position.x - 10) {
-        Jack.changeAnimation("moving");
-        //flip horizontally
-        Jack.mirrorX(-1);
-        //negative x velocity: move left
-        Jack.velocity.x = - 2;
-        }
-        else if(mouseX > Jack.position.x + 10) {
-        Jack.changeAnimation("moving");
-        //unflip 
-        Jack.mirrorX(1);
-        Jack.velocity.x = 2;
-        }
-        else if (y<-height){
-        //if close to the mouse, don't move
-        Jack.changeAnimation("start");
-        Jack.velocity.x = 0;
-        } else {
-        //if close to the mouse, don't move
-        Jack.changeAnimation("stand");
-        Jack.velocity.x = 0;
-        }
-    }
-//??????????????????????????????????????????????????????????????????? CHIEDERE
+//??????????????????????????????? CHIEDERE (si può mettere in percentuale?)
+    // Jack resize
+    if (y==0){
     Jack.scale = 0.88;
+    } 
+    if (y<0){
+    Jack.scale -= 0.01;
+    }
+    if (Jack.scale <= 0.7){
+    Jack.scale = 0.7;   
+    Jack.position.y = height/3*1.77;
+    }
 
     //draw the sprite
     drawSprites();
@@ -113,21 +167,86 @@ function draw(){
     /*var myText = document.getElementById("inputName").value
     text("Hi " + myText + "!",width/3,height/3+y);*/
     
-// BUTTON - Start to Bathroom
+//(()) BUTTON - Start to Bathroom
     if(stateStart==true){
         y=y-10;
 
         if (y<-height) {
             y=-height;
         };
-
+    
         buttonStart.hide();
-//??????????????????????????????????????????????????????????????????? CHIEDERE
+//????????????????????????????????????????? CHIEDERE (non si può traslare?)
         document.getElementById("inputName").style.visibility='hidden';
     }
 
 /////////////////////////////////////////// BATHROOM
-// BUTTON - Bathroom to Kitchen
+    // Bathtub
+    Bath.position.x=x+740;
+    Bath.position.y=y+height+275; //andrebbe height/2
+    Bath.scale = 1.6;  
+
+//-----> INPUT Bathroom
+    if(y<=-height){
+        buttonShower.show();
+        buttonTub.show();
+
+        var Q1Bath = text("Do you prefer to take a shower or a bath?", 20, 60);
+
+        if(pressShower===true){
+            var Q2Bath = text("How long does the shower last?", 20, 130);
+            showerSlider.show();
+            showerMinutes = showerSlider.value();
+            var Q3Bath = text(showerMinutes+" minutes", 160,153);
+            var Q4Bath = text("How many showers do you take each week?",20,180);
+            document.getElementById("numShower").style.visibility = "visible";
+            buttonBathroom.show();
+        }
+
+        if(pressTub===true){
+            var Q5Bath = text("How much do you fill your bathtub?", 20, 130);
+            selTub.show();
+            var Q6Bath = text("How many baths do you take each week?",20,180);
+            document.getElementById("numBaths").style.visibility = "visible";
+            buttonBathroom.show();
+        } 
+
+        if(pressBathroom===true){
+
+            if(pressTub===true){
+                if(selTub.value() === 'Full') {
+                tubCapacity = bathroomData[1];
+                } else if (selTub.value() === 'Half-full') {
+                    tubCapacity = bathroomData[2];
+                }
+
+            bathWeek = document.getElementById("numBaths").value;
+            resultBath = week * bathWeek * tubCapacity;
+
+            resultShower = 0;
+            }
+
+            if(pressShower===true){
+
+            showerMinutes = showerSlider.value();
+
+            showerWeek = document.getElementById("numShower").value;
+
+            resultShower = week * showerWeek * showerMinutes * bathroomData[0];
+
+            resultBath = 0;
+            }
+            RESULTS.push(resultBath);
+            RESULTS.push(resultShower);
+            
+            text("results: "+resultShower+" "+resultBath, 20,25);
+            text(RESULTS, 200,25);
+        }        
+//????????????????????????????????????????? CHIEDERE (nascondere input)
+    Bath.changeAnimation("bath_tub");
+    }
+
+//(()) BUTTON - Bathroom to Kitchen
     if(stateBath==true){
         x=x-10;
 
@@ -135,15 +254,9 @@ function draw(){
             x=-width;
         }
     }
-    /*
-    if(Jack.position.x==width/5 && y<=-height){
-        ellipse(width/2,height/2,50,50);
-        Jack.changeAnimation("bathroom");
-        Jack.velocity.x = 0;
-    }*/
 
 /////////////////////////////////////////// KITCHEN
-// BUTTON - Kitchen to Laundry
+//(()) BUTTON - Kitchen to Laundry
     if(stateKitchen==true){
         x=x-10;
 
@@ -154,10 +267,45 @@ function draw(){
     
 /////////////////////////////////////////// LAUNDRY
     
-    
+/////////////////////////////////////////// JACK <3
+        //if mouse is to the left
+        if(mouseX < Jack.position.x - 10 && y==-height && pressBathroom==true) {
+        Jack.changeAnimation("moving");
+        //flip horizontally
+        Jack.mirrorX(-1);
+        //negative x velocity: move left
+        Jack.velocity.x = - 2;
+        }
+        else if(mouseX > Jack.position.x + 10 && y==-height && pressBathroom==true) {
+        Jack.changeAnimation("moving");
+        //unflip 
+        Jack.mirrorX(1);
+        Jack.velocity.x = 2;
+        }
+        // don't move > START
+        else if (y==0){
+        Jack.changeAnimation("start");
+        Jack.velocity.x = 0;
+        }
+        // JACK fall down
+        else if(y<0 && y>-height) {
+            Jack.changeAnimation("falling");
+            Jack.velocity.x = 0;
+        } 
+        // don't move > underpants
+        else if (y==-height && Jack.position.y==height/3*1.77 && pressBathroom==false) {
+        Jack.changeAnimation("shower");
+        Jack.velocity.x = 0;   
+        }    
+        // don't move
+        else {
+        Jack.changeAnimation("stand");
+        Jack.velocity.x = 0;
+        }    
 }
 
-/////////////////////////////////////////// TRANSLATE BACKGROUND
+//------------------------------------------------•°o.O Translate bg O.o°•
+
     // Start to Bathroom
 function StartToBath() {
     if(stateStart==false){
@@ -179,6 +327,35 @@ function KitchenToLaundry() {
     } 
 }
 
+//------------------------------------------------•°o.O Bathroom O.o°•
+//-----> INPUT Bathroom
+function showerOptions(){
+    if(pressShower===false && pressTub===false){
+        pressShower=true;
+    } else if(pressShower===false && pressTub===true){
+        pressTub=false;
+        selTub.hide();
+        pressShower=true;
+    }
+}
+
+function tubOptions(){
+    if(pressTub===false && pressShower===false){
+        pressTub=true;
+    } else if(pressTub===false && pressShower===true){
+        pressShower=false;
+        showerSlider.hide();
+        pressTub=true;
+    }
+}
+
+function bathroomResults(){
+    if(pressBathroom===false){
+        pressBathroom=true;
+    }
+}
+
+//------------------------------------------------•°o.O Window resize O.o°•
 function windowResized() {
     resizeCanvas(windowWidth,windowHeight);
 }
