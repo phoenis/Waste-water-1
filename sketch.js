@@ -318,7 +318,7 @@ function draw(){
             Jack.velocity.x = 0;
         } 
         // don't move > underpants
-        else if (y==-height && Jack.position.y==height*0.62 && pressBathroom==false) {
+        else if (y<=-height && Jack.position.y==height*0.64 && pressBathroom==false) {
         Jack.changeAnimation("shower");
         Jack.velocity.x = 0;   
         }    
