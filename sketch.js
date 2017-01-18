@@ -49,15 +49,14 @@ function setup() {
 
 /////////////////////////////////////////// START
 //-----> INPUT NAME
-    var inputName = document.getElementById ("inputName");
-    inputName = createInput('');
+    var inputName = createInput();
     inputName.id("inputName");
-    inputName.position(width/2,height/2);
-    inputName.size(250,40);
+    inputName.position(width/2,height/2-10);
+    inputName.size(250,60);
     inputName.value = text;
     // Placeholder
    // if (isNaN(inputName) && inputName.length<1){
-        inputName.placeholder = "your name..";
+    document.getElementById("inputName").placeholder = "your name..";
     /*} else {
         inputName.value = inputName.value + "!";
     }*/
@@ -143,7 +142,7 @@ function draw(){
     image(TubBack,ix,iy,wy,hx);
     pop();
     
-//??????????????????????????????? CHIEDERE (usare height/width)
+//??????????????????????????????????????????? CHIEDERE (usare height/width)
     // Jack fall - resize
     if (y==0){
     Jack.scale = 0.88;
@@ -151,8 +150,8 @@ function draw(){
     if (y<0){
     Jack.scale -= 0.01;
     }
-    if (Jack.scale <= 0.65){
-    Jack.scale = 0.65;   
+    if (Jack.scale <= 0.64){
+    Jack.scale = 0.64;   
     Jack.position.y = height*0.64;
     }
 
@@ -288,8 +287,8 @@ function draw(){
     
 /////////////////////////////////////////// RESULTS
     if (x<-width*2){
-        var myText = document.getElementById("inputName").value
-        text("Hi " + myText + "!",x+width/2,y+height*1.5);
+        var userName = document.getElementById("inputName").value
+        text("Hi " + userName + "!",x+width/2,y+height*1.5);
     }
     
 /////////////////////////////////////////// JACK <3
