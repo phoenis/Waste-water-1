@@ -1,11 +1,11 @@
 var x = 0;
 var y = 0;
+var myBg, TubBack, BathroomBg;
 var buttonStart, buttonBath, buttonKitchen;
 var stateStart=false;
 var stateBath=false;
 var stateKitchen=false;
 var Jack,Bath;
-var input;
 
 //-----> INPUT Bathroom
 var week = 1;
@@ -18,16 +18,18 @@ var pressTub=false;
 var pressBathroom=false;
 var RESULTS = [];
 
-
 function preload() {
     myBg = loadImage('images/background.png');
+    bathroom_background = loadImage('images/bathroom_background.png');
+    TubBack = loadImage('images/tub-back.png');
+    BathroomBg = loadImage('images/bathroom.png');
 }
 
 //------------------------------------------------•°o.O Setup O.o°•
 function setup() {
     createCanvas(windowWidth,windowHeight);
     
-/////////////////////////////////////////// BUTTONS
+/////////////////////////////////////////// BUTTONS Translate bg
 // Start to Bathroom
     buttonStart = createButton("→<br>Let's go!");
     buttonStart.addClass('buttons');
@@ -47,35 +49,35 @@ function setup() {
 
 /////////////////////////////////////////// START
 //-----> INPUT NAME
-    inputName = createInput();
+    var inputName = document.getElementById ("inputName");
+    inputName = createInput('');
     inputName.id("inputName");
     inputName.position(width/2,height/2);
     inputName.size(250,40);
     inputName.value = text;
     // Placeholder
-    var inputName = document.getElementById ("inputName");
    // if (isNaN(inputName) && inputName.length<1){
         inputName.placeholder = "your name..";
     /*} else {
         inputName.value = inputName.value + "!";
     }*/
-    
 /////////////////////////////////////////// JACK <3
-    var JackX = width/3.3;
+    var JackX = width/3.4;
     var JackY = height/3*2;
     Jack = createSprite(JackX,JackY,height/2.4,height/1.6);
     
     var JackAnimation = Jack.addAnimation("start", "images/Jack_start1.png", "images/Jack_start1.png", "images/Jack_start1.png", "images/Jack_start2.png", "images/Jack_start2.png", "images/Jack_start2.png");
     Jack.addAnimation("stand", "images/Jack_stand.png");
     Jack.addAnimation("shower", "images/Jack_shower.png");
-    Jack.addAnimation("moving", "images/Jack_walk1.png", "images/Jack_walk1.png", "images/Jack_walk2.png", "images/Jack_walk2.png");
+    Jack.addAnimation("moving", "images/Jack_walk1.png", "images/Jack_walk1.png", "images/Jack_walk1.png", "images/Jack_walk2.png", "images/Jack_walk2.png", "images/Jack_walk2.png");
     Jack.addAnimation("falling", "images/Jack_falling1.png", "images/Jack_falling1.png", "images/Jack_falling2.png", "images/Jack_falling2.png");
 
 /////////////////////////////////////////// BATHROOM
     // Bathtub - Tub
     Bath = createSprite(JackX,JackY,height/2.4,height/1.6);
-    var BathAnimation = Bath.addAnimation("bath_none", "images/tub1.png");
-    Bath.addAnimation("bath_tub", "images/tub2.png", "images/tub2.png", "images/tub3.png", "images/tub3.png");
+    var BathAnimation = Bath.addAnimation("bath_none", "images/tub0.png");
+    Bath.addAnimation("bath_before", "images/tub-front.png");
+    Bath.addAnimation("bath_tub", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png");
     
 //-----> INPUT Bathroom
     buttonShower = createButton("Shower");
@@ -127,19 +129,31 @@ function setup() {
 //------------------------------------------------•°o.O Draw O.o°•
 function draw(){  
 /////////////////////////////////////////// BACKGROUND
+
     image(myBg,x,y,width*3,height*2);
+    push();
+    imageMode(CENTER);   
+    // size objects
+    var hx=width*0.56;
+    var wy=width;
+    var ix=x+width/2;
+    var iy=y+height*1.5;
+    image(bathroom_background,ix,iy,wy,hx);
+    image(BathroomBg,ix,iy,wy,hx);
+    image(TubBack,ix,iy,wy,hx);
+    pop();
     
-//??????????????????????????????? CHIEDERE (si può mettere in percentuale?)
-    // Jack resize
+//??????????????????????????????? CHIEDERE (usare height/width)
+    // Jack fall - resize
     if (y==0){
     Jack.scale = 0.88;
     } 
     if (y<0){
     Jack.scale -= 0.01;
     }
-    if (Jack.scale <= 0.7){
-    Jack.scale = 0.7;   
-    Jack.position.y = height/3*1.77;
+    if (Jack.scale <= 0.65){
+    Jack.scale = 0.65;   
+    Jack.position.y = height*0.64;
     }
 
     //draw the sprite
@@ -164,12 +178,11 @@ function draw(){
     text('Hi,',width/2-15,y+height/2+35);
     pop();
         
-    /*var myText = document.getElementById("inputName").value
-    text("Hi " + myText + "!",width/3,height/3+y);*/
+    
     
 //(()) BUTTON - Start to Bathroom
     if(stateStart==true){
-        y=y-10;
+        y=y-5;
 
         if (y<-height) {
             y=-height;
@@ -182,9 +195,9 @@ function draw(){
 
 /////////////////////////////////////////// BATHROOM
     // Bathtub
-    Bath.position.x=x+740;
-    Bath.position.y=y+height+275; //andrebbe height/2
-    Bath.scale = 1.6;  
+    Bath.position.x=x+width*0.502;
+    Bath.position.y=y+height*1.495; //andrebbe height/2
+    Bath.scale=1.35;
 
 //-----> INPUT Bathroom
     if(y<=-height){
@@ -245,6 +258,12 @@ function draw(){
 //????????????????????????????????????????? CHIEDERE (nascondere input)
     Bath.changeAnimation("bath_tub");
     }
+    
+    if (pressBathroom==true) {
+        Bath.changeAnimation("bath_none");
+    } else if (y>-height){
+        Bath.changeAnimation("bath_before");
+    }
 
 //(()) BUTTON - Bathroom to Kitchen
     if(stateBath==true){
@@ -266,6 +285,12 @@ function draw(){
     }
     
 /////////////////////////////////////////// LAUNDRY
+    
+/////////////////////////////////////////// RESULTS
+    if (x<-width*2){
+        var myText = document.getElementById("inputName").value
+        text("Hi " + myText + "!",x+width/2,y+height*1.5);
+    }
     
 /////////////////////////////////////////// JACK <3
         //if mouse is to the left
@@ -293,7 +318,7 @@ function draw(){
             Jack.velocity.x = 0;
         } 
         // don't move > underpants
-        else if (y==-height && Jack.position.y==height/3*1.77 && pressBathroom==false) {
+        else if (y==-height && Jack.position.y==height*0.62 && pressBathroom==false) {
         Jack.changeAnimation("shower");
         Jack.velocity.x = 0;   
         }    
