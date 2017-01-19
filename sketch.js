@@ -19,7 +19,6 @@ var pressTooth=false;
 var pressShower=false;
 var pressTub=false;
 var pressBathroom=false;
-var RESULTS = [];
 
 //-----> INPUT Kitchen
 // > Dish
