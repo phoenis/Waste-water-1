@@ -1,3 +1,4 @@
+var week = 1;
 var x = 0;
 var y = 0;
 var myBg, BathroomBack, TubBack;
@@ -5,40 +6,41 @@ var buttonStart, buttonBath, buttonLaundry;     // Change room
 var stateStart=false;
 var stateBath=false;
 var stateKitchen=false;
-var Jack,Bath,Dish,Garden,WMachine,Mop;  // Animations
+var Jack,Bath,Dish,Garden,WMachine,Mop; // Animations
+var moving=false;
 
 //-----> INPUT Bathroom
-// > Shower
-var week = 1;
 var bathroomData = [5, 150, 80];
-var buttonShower, buttonTub, showerSlider, selTub, buttonBathroom;
-var showerMinutes, tubCapacity, showerWeek, bathWeek;
-var resultShower, resultBath;
-var moving=false;
-var pressTooth=false;
+var buttonShower, buttonTub, showerSlider, selTub, buttonDone1, teethSlider, buttonDone1;
+var showerMinutes, tubCapacity, showerWeek, bathWeek, teethMinutes, teethWeek;
+var resultShower, resultBath, resultTeeth;
 var pressShower=false;
 var pressTub=false;
-var pressBathroom=false;
-var pressWMachine=false;
-var pressMop=false;
-// > Teeth
+var pressDone1=false;
+var pressDone2=false;
 
 //-----> INPUT Kitchen
-// > Dish
-var week = 1;
 var kitchenData = [5,10,11,15];
-var buttonHands, buttonDishwasher, handsSlider, selDishwasher, buttonKitchen;
+var gardenData = [12,1];
+var buttonHands, buttonDishwasher, handsSlider, selDishwasher, buttonDone3;
 var handsMinutes, dishwasherProgram, handsWeek, dishwasherWeek;
-var resultHands, resultDishwasher;
+var buttonYes, buttonNo, selGarden, gardenSlider, buttonDone4;
+var gardenWeek = 1;
+var sizeGarden, gardenMinutes, waterGarden;
+var resultHands, resultDishwasher, resultGarden;
 var pressHands=false;
 var pressDishwasher=false;
-var pressKitchen=false;
-var pressGarden=false;
-// > Garden
+var pressDone3=false;
+var pressYes=false;
+var pressNo=false;
+var pressHose=false;
+var pressSprinkler=false;
+var pressDone4=false;
 
 //-----> INPUT Laundry
 // > Washing machine
-
+var pressWMachine=false;
+var pressMop=false;
 
 // > Mop
 
@@ -96,8 +98,8 @@ function setup() {
     WMachine.addAnimation("WMOpened", "images/washing_machine-opened.png");
     // Mop
     Mop = createSprite(width/2,height/2,1,1);
-    var MopAnimation = Mop.addAnimation("Mop", "images/mop1");
-    Mop.addAnimation("MopInUse", "images/mop1", "images/mop1", "images/mop1", "images/mop2", "images/mop2", "images/mop2");
+    var MopAnimation = Mop.addAnimation("MopNotInUse", "images/mop1.png");
+    Mop.addAnimation("MopInUse", "images/mop2.png");
 
 //-----> INPUT Laundry
     // > Washing machine
@@ -135,7 +137,7 @@ function setup() {
     buttonDishwasher.position(100,480);
     buttonDishwasher.hide();
     
-    handsSlider = createSlider(0,60,10);
+    handsSlider = createSlider(1,60,10);
     handsSlider.position(20,540);
     handsSlider.hide();
     
@@ -156,42 +158,52 @@ function setup() {
     input.placeholder = 4;
     document.getElementById("numDishwasher").style.visibility = "hidden";
     
-    buttonKitchen = createButton("Done!");
-    buttonKitchen.position(20,600);
-    buttonKitchen.mousePressed(kitchenResults);
-    buttonKitchen.hide();
+    buttonDone3 = createButton("Done!");
+    buttonDone3.position(20,600);
+    buttonDone3.mousePressed(Q3results);
+    buttonDone3.hide();
+    
     // > Garden
-    buttonGarden = createButton("Garden");
-    buttonGarden.mousePressed(gardenOptions);
-    buttonGarden.position(300,580);
-    buttonGarden.hide();
-
-/////////////////////////////////////////// JACK <3
-    var JackX = width/3.4;
-    var JackY = height/3*2;
-    Jack = createSprite(JackX,JackY,height/2.4,height/1.6);
-    // START
-    var JackAnimation = Jack.addAnimation("start", "images/Jack_start1.png", "images/Jack_start1.png", "images/Jack_start1.png", "images/Jack_start2.png", "images/Jack_start2.png", "images/Jack_start2.png");
-    // Falling
-    Jack.addAnimation("falling", "images/Jack_falling1.png", "images/Jack_falling1.png", "images/Jack_falling2.png", "images/Jack_falling2.png");
-    // Walking
-    Jack.addAnimation("stand", "images/Jack_stand.png");
-    Jack.addAnimation("moving", "images/Jack_walk1.png", "images/Jack_walk1.png", "images/Jack_walk1.png", "images/Jack_walk2.png", "images/Jack_walk2.png", "images/Jack_walk2.png");
-    // BATHROOM
-    Jack.addAnimation("shower", "images/Jack_shower.png");
-    Jack.addAnimation("toothbrush", "images/Jack_toothbrush1.png", "images/Jack_toothbrush1.png", "images/Jack_toothbrush1.png", "images/Jack_toothbrush1.png", "images/Jack_toothbrush2.png", "images/Jack_toothbrush2.png", "images/Jack_toothbrush2.png", "images/Jack_toothbrush2.png");
-    // KITCHEN
-    Jack.addAnimation("dish", "images/Jack_dish.png");
-    Jack.addAnimation("garden", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png");
-    // LAUNDRY
-    Jack.addAnimation("clothes", "images/Jack_clothes1.png");
-    Jack.addAnimation("mop", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png");
+    buttonYes = createButton("Yes");
+    buttonYes.mousePressed(yesOptions);
+    buttonYes.position(20,480);
+    buttonYes.hide();
+    
+    buttonNo = createButton("No");
+    buttonNo.mousePressed(noOptions);
+    buttonNo.position(80,480);
+    buttonNo.hide();
+    
+    input = createInput();
+    input.id("mqGarden");
+    input.position(100,515);
+    input.size(25,15);
+    //placeholder
+    input = document.getElementById("mqGarden");
+    input.placeholder = 100;
+    document.getElementById("mqGarden").style.visibility = "hidden";
+    
+    selGarden = createSelect();
+    selGarden.position(20,570);
+    selGarden.size(130,20);
+    selGarden.option('Hose');
+    selGarden.option('Sprinkler');
+    selGarden.hide();
+    
+    gardenSlider = createSlider(1,60,10);
+    gardenSlider.position(20,620);
+    gardenSlider.hide();
+    
+    buttonDone4 = createButton("Done!");
+    buttonDone4.position(20,650);
+    buttonDone4.mousePressed(Q4results);
+    buttonDone4.hide();
     
 /////////////////////////////////////////// BATHROOM
     // Bathtub - Tub
     Bath = createSprite(JackX,JackY,height/2.4,height/1.6);
     var BathAnimation = Bath.addAnimation("bath_before", "images/tub-front.png");
-    Bath.addAnimation("shower", "images/shower.png");
+    Bath.addAnimation("shower", "images/shower1.png", "images/shower1.png", "images/shower1.png", "images/shower2.png", "images/shower2.png", "images/shower2.png", "images/shower3.png", "images/shower3.png", "images/shower3.png");
     Bath.addAnimation("bath_none", "images/tub0.png");
     Bath.addAnimation("bath_tub", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png");
     
@@ -207,7 +219,7 @@ function setup() {
     buttonTub.position(85,80);
     buttonTub.hide();
     
-    showerSlider = createSlider(0,60,10);
+    showerSlider = createSlider(1,60,10);
     showerSlider.position(20,140);
     showerSlider.hide();
     
@@ -236,15 +248,43 @@ function setup() {
     input.placeholder = 4;
     document.getElementById("numBaths").style.visibility = "hidden";
     
-    buttonBathroom = createButton("Done!");
-    buttonBathroom.position(20,200);
-    buttonBathroom.mousePressed(bathroomResults);
-    buttonBathroom.hide();
+    buttonDone1 = createButton("Done!");
+    buttonDone1.position(20,200);
+    buttonDone1.mousePressed(Q1results);
+    buttonDone1.hide();
+    
     // > Teeth
-    buttonTooth = createButton("Tooth");
-    buttonTooth.mousePressed(toothOptions);
-    buttonTooth.position(300,80);
-    buttonTooth.hide();
+    
+    teethSlider = createSlider(1,10,4);
+    teethSlider.position(20,80);
+    teethSlider.hide();
+    
+    buttonDone2 = createButton("Done!");
+    buttonDone2.position(20,115);
+    buttonDone2.mousePressed(Q2results);
+    buttonDone2.hide();
+    
+    
+/////////////////////////////////////////// JACK <3
+    var JackX = width/3.4;
+    var JackY = height/3*2;
+    Jack = createSprite(JackX,JackY,height/2.4,height/1.6);
+    // START
+    var JackAnimation = Jack.addAnimation("start", "images/Jack_start1.png", "images/Jack_start1.png", "images/Jack_start1.png", "images/Jack_start2.png", "images/Jack_start2.png", "images/Jack_start2.png");
+    // Falling
+    Jack.addAnimation("falling", "images/Jack_falling1.png", "images/Jack_falling1.png", "images/Jack_falling2.png", "images/Jack_falling2.png");
+    // Walking
+    Jack.addAnimation("stand", "images/Jack_stand.png");
+    Jack.addAnimation("moving", "images/Jack_walk1.png", "images/Jack_walk1.png", "images/Jack_walk1.png", "images/Jack_walk2.png", "images/Jack_walk2.png", "images/Jack_walk2.png");
+    // BATHROOM
+    Jack.addAnimation("shower", "images/Jack_shower.png");
+    Jack.addAnimation("toothbrush", "images/Jack_toothbrush1.png", "images/Jack_toothbrush1.png", "images/Jack_toothbrush1.png", "images/Jack_toothbrush1.png", "images/Jack_toothbrush2.png", "images/Jack_toothbrush2.png", "images/Jack_toothbrush2.png", "images/Jack_toothbrush2.png");
+    // KITCHEN
+    Jack.addAnimation("dish", "images/Jack_dish.png");
+    Jack.addAnimation("garden", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png");
+    // LAUNDRY
+    Jack.addAnimation("clothes", "images/Jack_clothes1.png");
+    Jack.addAnimation("mop", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png");
 
 }
 
@@ -317,7 +357,7 @@ function draw(){
         Jack.scale = 0.64;   
         Jack.position.y=height*0.64;
         moving=false;
-    } if (pressBathroom==true){
+    } if (pressDone1==true){
         Jack.position.y=height*0.56;
     }
 
@@ -329,33 +369,38 @@ function draw(){
     Bath.position.x=x+width*0.5;
     Bath.position.y=y+height*1.5; //andrebbe height/2
     Bath.scale=1.35;
-
+    
 //-----> INPUT Shower
-    if(y<=-height && pressBathroom==false){
+    if(y<=-height && pressDone1==false){
+        
+        text("Do you prefer to take a shower or a bath?", 20, 60);
         buttonShower.show();
         buttonTub.show();
 
-        var Q1Bath = text("Do you prefer to take a shower or a bath?", 20, 60);
-
         if(pressShower===true){
-            var Q2Bath = text("How long does the shower last?", 20, 130);
+            text("How long does the shower last?", 20, 130);
             showerSlider.show();
             showerMinutes = showerSlider.value();
-            var Q3Bath = text(showerMinutes+" minutes", 160,153);
-            var Q4Bath = text("How many showers do you take each week?",20,180);
+            
+            if(showerMinutes===1){
+                text(showerMinutes+" minute", 160,153);
+            } else {
+            text(showerMinutes+" minutes", 160,153);}
+            
+            text("How many showers do you take each week?",20,180);
             document.getElementById("numShower").style.visibility = "visible";
-            buttonBathroom.show();
+            buttonDone1.show();
         }
 
         if(pressTub===true){
-            var Q5Bath = text("How much do you fill your bathtub?", 20, 130);
+            text("How much do you fill your bathtub?", 20, 130);
             selTub.show();
-            var Q6Bath = text("How many baths do you take each week?",20,180);
+            text("How many baths do you take each week?",20,180);
             document.getElementById("numBaths").style.visibility = "visible";
-            buttonBathroom.show();
+            buttonDone1.show();
         } 
 
-        if(pressBathroom===true){
+        if(pressDone1===true){
 
             if(pressTub===true){
                 if(selTub.value() === 'Full') {
@@ -380,13 +425,12 @@ function draw(){
 
             resultBath = 0;
             }
-            
-            text("results: "+resultShower+" "+resultBath, 20,25);
-        }        
+        }
+        
     Bath.changeAnimation("bath_before");
     }
     
-    if (pressBathroom==true) {
+    if (pressDone1==true) {
         Bath.changeAnimation("bath_none");
         moving=true;
     } else if (pressTub==true){
@@ -396,20 +440,32 @@ function draw(){
     }
     
 //-----> INPUT Sink
-    if (Jack.position.x>=width/10*6.5 && x==0) {
+    if (Jack.position.x>=width/10*6.5 && x==0 && pressDone2==false) {
         moving=false;
-        buttonTooth.show();
+        
+        text("How many minutes do you spend to brushing your teeth?", 20, 60);
+        teethSlider.show();
+        buttonDone2.show();
+        
+        teethMinutes = teethSlider.value();
+        if(teethMinutes===1){
+            text(teethMinutes+ " minute", 160,93);
+        } else {
+        text(teethMinutes+ " minutes", 160,93); }
         
         Jack.position.x = width/10*6.5;
         Jack.velocity.x = 0;   
-        
-        ellipse(100,100,200,200);
+
+        if(pressDone2==true){
+            teethWeek = 14;
+            resultTeeth = week * teethMinutes * bathroomData[0];
+        }
     }
     
-    if (pressTooth==true){
+    if (pressDone2==true){
         moving=true;
         buttonBath.show();
-        buttonTooth.hide();
+        buttonDone2.hide();
     }
 
 //(()) BUTTON - Bathroom to Kitchen
@@ -433,21 +489,21 @@ function draw(){
     Dish.scale=1.33;
     
 //-----> INPUT Dish
-    if (Jack.position.x>=width/9*4 && x==-width && pressKitchen===false) {
+    if (Jack.position.x>=width/9*4 && x==-width && pressDone3===false) {
         moving=false;
         
+        text("How do you clean your dishes?", 20, 460);
         buttonHands.show();
         buttonDishwasher.show();
-        Jack.position.x=width/9*4
         
-        text("How do you clean your dishes?", 20, 460);
+        Jack.position.x=width/9*4;
     
     if(pressHands===true) {
         text("How many minutes the faucet is turned on?", 20, 530);
         handsSlider.show();
         handsMinutes = handsSlider.value();
         text(handsMinutes+" minutes", 160,553);
-        buttonKitchen.show();
+        buttonDone3.show();
     }
     
     if(pressDishwasher===true) {
@@ -455,10 +511,10 @@ function draw(){
         selDishwasher.show();
         text("How many times a week do you run it?",20,580);
         document.getElementById("numDishwasher").style.visibility = "visible";
-        buttonKitchen.show();
+        buttonDone3.show();
     } 
     
-    if(pressKitchen===true) {
+    if(pressDone3===true) {
         
         if(pressDishwasher===true){
         if(selDishwasher.value() === 'Eco') {
@@ -484,13 +540,11 @@ function draw(){
             
             resultDishwasher = 0;
         }
-    
-        text("results: "+resultHands+" "+resultDishwasher, 20,425);
 
         }
     }
     
-    if (pressKitchen==true) {
+    if (pressDone3==true) {
         Dish.changeAnimation("Dish_none");
         moving=true;
     } else if (pressHands==true){
@@ -505,25 +559,70 @@ function draw(){
     Garden.scale=1.33;
 
 //-----> INPUT Window garden    
-    if (Jack.position.x>=width/20*17 && x==-width && pressGarden===false) {
+    if (Jack.position.x>=width/20*17 && x==-width && pressDone4===false) {
         moving=false;
         
-        buttonGarden.show();
+        text("Do you have a garden?", 20, 460);
+        buttonYes.show();
+        buttonNo.show();
+        
         Jack.position.x=width/20*17;
         
-        ellipse(100,100,200,200);
+        if(pressYes===true) {
+//            buttonYes.hide();
+//            buttonNo.hide();
+            
+        text("How big is it?", 20, 530);
+        document.getElementById("mqGarden").style.visibility = "visible";
+            
+        text("square meters", 135, 530);
+            
+        text("How do you water?",20,560);
+        selGarden.show();
+            
+        text("How long do you water each time?", 20, 610);
+        gardenSlider.show();
+        gardenMinutes = gardenSlider.value();
+            
+        if(gardenMinutes===1){
+            text(gardenMinutes+" minute", 160,631);
+        } else {
+        text(gardenMinutes+" minutes", 160,631);}
+        
+        buttonDone4.show();
+        }
+        
+        if(pressNo===true) {
+            resultGarden=0;
+        }
+        
+        if(pressDone4===true) {
+            
+            sizeGarden = document.getElementById("mqGarden").value;
+
+            if(selGarden.value() === 'Hose') {
+                waterGarden = gardenData[0];
+            } else if (selGarden.value() === 'Sprinkler') {
+                waterGarden = gardenData[1];
+            }
+            
+            gardenMinutes = gardenSlider.value();
+        
+            resultGarden = week * gardenWeek * sizeGarden * gardenMinutes * waterGarden;
+            
+        }
     }
-    if (Jack.position.x>=width/20*17 && x==-width && pressGarden===false) {
+    
+    if (Jack.position.x>=width/20*17 && x==-width && pressDone4===false) {
         Garden.changeAnimation("Kwindow_open");
     } else {
         Garden.changeAnimation("Kwindow");
     }
-    
-        
-    if (pressGarden==true){
+       
+    if (pressDone4==true){
         moving=true;
         buttonLaundry.show();
-        buttonGarden.hide();
+        buttonDone4.hide();
     }
     
 //(()) BUTTON - Kitchen to Laundry
@@ -584,6 +683,11 @@ function draw(){
         buttonMop.hide();
     }
     
+    if (Jack.position.x>=width/5*4 && x==-width*2 && pressMop===false) {
+        Mop.changeAnimation("MopInUse");
+    } else {
+        Mop.changeAnimation("MopNotInUse");
+    }
     
     
 /////////////////////////////////////////// RESULTS
@@ -619,22 +723,22 @@ function draw(){
             Jack.velocity.x = 0;
         } 
         // don't move > shower
-        else if (y<=-height && Jack.position.y==height*0.64 && pressBathroom==false) {
+        else if (y<=-height && Jack.position.y==height*0.64 && pressDone1==false) {
         Jack.changeAnimation("shower");
         Jack.velocity.x = 0;   
         } 
         // don't move > toothbrush
-        else if (Jack.position.x==width/10*6.5 && pressBathroom==true && x==0) {
+        else if (Jack.position.x==width/10*6.5 && pressDone1==true && x==0) {
         Jack.changeAnimation("toothbrush");
         Jack.velocity.x = 0;   
         }     
         // don't move > dish
-        else if (Jack.position.x==width/9*4 && x==-width && pressKitchen===false) {
+        else if (Jack.position.x==width/9*4 && x==-width && pressDone3===false) {
         Jack.changeAnimation("dish");
         Jack.velocity.x = 0;   
         }     
         // don't move > garden
-        else if (Jack.position.x==width/20*17 && x==-width && pressGarden===false) {
+        else if (Jack.position.x==width/20*17 && x==-width && pressDone4===false) {
         Jack.changeAnimation("garden");
         Jack.velocity.x = 0;   
         }     
@@ -715,22 +819,24 @@ function tubOptions(){
     }
 }
 
-function bathroomResults(){
-    if(pressBathroom===false){
-        pressBathroom=true;
+function Q1results(){
+    if(pressDone1===false){
+        pressDone1=true;
         selTub.hide();
         showerSlider.hide();
         buttonShower.hide();
         buttonTub.hide();
-        buttonBathroom.hide();
+        buttonDone1.hide();
         document.getElementById("numShower").style.visibility = "hidden";
         document.getElementById("numBaths").style.visibility = "hidden";
     }
 }
 
-function toothOptions(){
-    if(pressTooth===false){
-        pressTooth=true;
+function Q2results(){
+    if(pressDone2===false){
+        pressDone2=true;
+        teethSlider.hide();
+        buttonDone2.hide();
     }
 }
 
@@ -760,21 +866,41 @@ function dishwasherOptions() {
     }
 }
 
-function kitchenResults() {
-    if(pressKitchen===false){
-        pressKitchen=true;
+function Q3results() {
+    if(pressDone3===false){
+        pressDone3=true;
         buttonHands.hide();
         buttonDishwasher.hide();
         handsSlider.hide();
         selDishwasher.hide();
-        buttonKitchen.hide();
+        buttonDone3.hide();
         document.getElementById("numDishwasher").style.visibility = "hidden";
     }
 }
 
-function gardenOptions(){
-    if(pressGarden===false){
-        pressGarden=true;
+function yesOptions() {
+    if(pressYes===false){
+        pressYes=true;
+        buttonYes.hide();
+        buttonNo.hide();
+    }
+}
+
+function noOptions() {
+    if(pressNo===false){
+        pressNo=true;
+        buttonYes.hide();
+        buttonNo.hide();
+    }
+}
+
+function Q4results() {
+    if(pressDone4===false){
+        pressDone4=true;
+        document.getElementById("mqGarden").style.visibility = "hidden";
+        selGarden.hide();
+        gardenSlider.hide();
+        buttonDone4.hide();
     }
 }
 
