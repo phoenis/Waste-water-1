@@ -329,7 +329,7 @@ function draw(){
         if (dropy>=height/6*5.8) {
             dropy=height/6*5.8;
         }
-    }
+    
     // Waves
     if(dropy==height/6*5.8) {
         var a=3;
@@ -379,6 +379,7 @@ function draw(){
     // > Big
     ellipse(dropx,height/6*5.8,wavewB,wavehB)
     pop();
+    }
     
 // TEXT - Question
     push();
@@ -401,7 +402,7 @@ function draw(){
     
 //(()) BUTTON - Start to Bathroom
     if(stateStart==true){
-        y=y-5 //REMOVE 5
+        y=y-7 //REMOVE 5
 
         if (y<-height) {
             y=-height;
@@ -556,14 +557,14 @@ function draw(){
     Dish.scale=0.6;
     
 //-----> INPUT Dish
-    if (Jack.position.x>=width/9*4 && x==-width && pressDone3===false) {
+    if (Jack.position.x>=width/4.5 && x==-width && pressDone3===false) {
         moving=false;
         
         text("How do you clean your dishes?", 20, 460);
         buttonHands.show();
         buttonDishwasher.show();
         
-        Jack.position.x=width/9*4;
+        Jack.position.x=width/4.5;
     
     if(pressHands===true) {
         text("How many minutes the faucet is turned on?", 20, 530);
@@ -626,14 +627,14 @@ function draw(){
     Garden.scale=0.6;
 
 //-----> INPUT Window garden    
-    if (Jack.position.x>=width/20*17 && x==-width && pressDone4===false) {
+    if (Jack.position.x>=width/5*4 && x==-width && pressDone4===false) {
         moving=false;
         
         text("Do you have a garden?", 20, 460);
         buttonYes.show();
         buttonNo.show();
         
-        Jack.position.x=width/20*17;
+        Jack.position.x=width/5*4;
         
         if(pressYes===true) {
 //            buttonYes.hide();
@@ -680,7 +681,7 @@ function draw(){
         }
     }
     
-    if (Jack.position.x>=width/20*17 && x==-width && pressDone4===false) {
+    if (Jack.position.x>=width/5*4 && x==-width && pressDone4===false) {
         Garden.changeAnimation("Kwindow_open");
     } else {
         Garden.changeAnimation("Kwindow");
@@ -771,13 +772,13 @@ function draw(){
         //flip horizontally
         Jack.mirrorX(-1);
         //negative x velocity: move left
-        Jack.velocity.x = - 2 // REMOVE -2
+        Jack.velocity.x = - 3 // REMOVE -3
         }
         else if(mouseX > Jack.position.x + 10 && y==-height && moving==true) {
         Jack.changeAnimation("moving");
         //unflip 
         Jack.mirrorX(1);
-        Jack.velocity.x = 2 // REMOVE 2
+        Jack.velocity.x = 3 // REMOVE 3
         }
         // don't move > START
         else if (y==0){
@@ -800,12 +801,12 @@ function draw(){
         Jack.velocity.x = 0;   
         }     
         // don't move > dish
-        else if (Jack.position.x==width/9*4 && x==-width && pressDone3===false) {
+        else if (Jack.position.x==width/4.5 && x==-width && pressDone3===false) {
         Jack.changeAnimation("dish");
         Jack.velocity.x = 0;   
         }     
         // don't move > garden
-        else if (Jack.position.x==width/20*17 && x==-width && pressDone4===false) {
+        else if (Jack.position.x==width/5*4 && x==-width && pressDone4===false) {
         Jack.changeAnimation("garden");
         Jack.velocity.x = 0;   
         }     
@@ -851,7 +852,6 @@ function StartToBath() {
     // Bathroom to Kitchen
 function BathToKitchen() {
     if(stateBath==false){
-        stateStart=false;
         stateBath=true;
         
 //      Jack.position.x = width/5;
