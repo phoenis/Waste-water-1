@@ -2,11 +2,11 @@ var week = 1;
 var x = 0;
 var y = 0;
 var myBg, BathroomBack, TubBack;
-var buttonStart, buttonBath, buttonLaundry;     // Change room
+var buttonStart, buttonBathroom, buttonKitchen;     // Change room
 var stateStart=false;
 var stateBath=false;
 var stateKitchen=false;
-var Jack,Bath,Dish,Garden,WMachine,Mop; // Animations
+var Expand,Jack,Bath,Dish,Garden,WMachine,Mop; // Animations
 var moving=false;
 
 // DROP
@@ -77,15 +77,15 @@ function setup() {
     buttonStart.position(width/2,height/3*2);
     buttonStart.mousePressed(StartToBath);
 // Bathroom to Kitchen
-    buttonBath = createButton('bath');
-    buttonBath.position(width/2,height/3*2);
-    buttonBath.mousePressed(BathToKitchen);
-    buttonBath.hide();
+    buttonBathroom = createButton('bath');
+    buttonBathroom.position(width/10*9,height/2);
+    buttonBathroom.mousePressed(BathToKitchen);
+    buttonBathroom.hide();
 // Kitchen to Laundry
-    buttonLaundry = createButton('Laundry');
-    buttonLaundry.position(width/3*2,height/3*2);
-    buttonLaundry.mousePressed(KitchenToLaundry);
-    buttonLaundry.hide();
+    buttonKitchen = createButton('Laundry');
+    buttonKitchen.position(width/3*2,height/3*2);
+    buttonKitchen.mousePressed(KitchenToLaundry);
+    buttonKitchen.hide();
 
 /////////////////////////////////////////// START
 //-----> INPUT NAME
@@ -100,6 +100,12 @@ function setup() {
     /*} else {
         inputName.value = inputName.value + "!";
     }*/
+    
+////    Need to expand your window
+    Expand = createSprite(width/2,height/2,1,1);
+    var ExpandAnimation = Expand.addAnimation("Expand", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png");
+    Expand.addAnimation("NotExpand", "images/expand_none.png");
+    
     
 /////////////////////////////////////////// LAUNDRY
     // Washing machine
@@ -299,8 +305,44 @@ function setup() {
 
 //------------------------------------------------•°o.O Draw O.o°•
 function draw(){  
-/////////////////////////////////////////// BACKGROUND
     background("#a6cdda");
+    
+//// CAMBIARE?? (Così i background e le posizioni di Jack rimangono in un range per cui non si creano problemi... almeno che non si trova un altro modo..!! :D) > da qui
+    
+////    Need to expand your window    
+        Expand.position.x=width*0.5;
+        Expand.position.y=height*0.3;
+        Expand.scale=width/1000;
+
+    if (width/height <= 1.75) {
+        push();
+        textSize(width/15);
+        textAlign(CENTER);
+        textFont("Arial");
+        fill(255);
+        text("Please,\nexpand your window!",width/2,height/2);
+        fill(0, 102, 153);
+        
+        buttonStart.hide();
+        document.getElementById("inputName").style.visibility='hidden';
+        pop();
+        
+        Jack.visible=false;
+        Bath.visible=false;
+        Dish.visible=false;
+        Garden.visible=false;
+        WMachine.visible=false;
+        Mop.visible=false;
+        
+        drawSprites();
+    } else {
+    Expand.changeAnimation("NotExpand");
+// CAMBIARE > a qui (più una parentesi in fondo al draw() )
+        
+/////////////////////////////////////////// BACKGROUND
+    buttonStart.show();
+    document.getElementById("inputName").style.visibility='visible';
+        
     image(myBg,x,y,width*3,height*2);
     push();
     imageMode(CENTER);   
@@ -392,38 +434,43 @@ function draw(){
     pop();
 // TEXT - Hi x!
     push();
-    fill(255);
-    textSize(40);
-    textAlign(RIGHT);
-    //textFont("Arial");
-    text('Hi,',width/2-15,y+height/2+35);
-    pop();
+// CAMBIARE if
+    if (stateStart==false){
+        fill(255);
+        textSize(40);
+        textAlign(RIGHT);
+        //textFont("Arial");
+        text('Hi,',width/2-15,y+height/2+35);
+        pop();
+    }
         
     
 //(()) BUTTON - Start to Bathroom
     if(stateStart==true){
-        y=y-7 //REMOVE 5
+        y=y-6 //REMOVE 6
 
         if (y<-height) {
             y=-height;
         };
     
         buttonStart.hide();
-
-//????????????????????????????????????????? CHIEDERE (non si può traslare?)
         document.getElementById("inputName").style.visibility='hidden';
     }
 //??????????????????????????????????????????? CHIEDERE (usare height/width)
 //<3 JACK fall - resize
     if (y==0){
-        Jack.scale = 0.88;
+// CAMBIARE
+        Jack.scale = width/1552;    // 0.88
     } 
     if (y<0){
         Jack.scale -= 0.01;
     }
-    if (Jack.scale <= 0.64){
-        Jack.scale = 0.64;   
-        Jack.position.y=height*0.64;
+// CAMBIARE
+    var JackScale = width/2134;
+    
+    if (Jack.scale <= JackScale){
+        Jack.scale = JackScale;   
+        Jack.position.y=height*0.64;   //// CAMBIARE VALORI
         moving=false;
     } if (pressDone1==true){
         Jack.position.y=height*0.56;
@@ -434,9 +481,11 @@ function draw(){
 
 /////////////////////////////////////////// BATHROOM
     // Bathtub
+// CAMBIARE
+    var AnimationScale=width/2265;
     Bath.position.x=x+width*0.5;
-    Bath.position.y=y+height*1.5; //andrebbe height/2
-    Bath.scale=0.6;
+    Bath.position.y=y+height*1.5;
+    Bath.scale=AnimationScale;
     
 //-----> INPUT Shower
     if(y<=-height && pressDone1==false){
@@ -532,38 +581,45 @@ function draw(){
     
     if (pressDone2==true){
         moving=true;
-        buttonBath.show();
+        buttonBathroom.show();
         buttonDone2.hide();
     }
 
 //(()) BUTTON - Bathroom to Kitchen
     if(stateBath==true){
         x=x-10 // REMOVE 10
-
+        
         if (x<-width) {
             x=-width;
-        }
+        }        
+    }
+    if(stateBath==true && x>-width){
+        Jack.position.x=Jack.position.x-11;
         
-        buttonBath.hide();
+        if (Jack.position.x<100) {
+            Jack.position.x=100;
+            
+        }
     }
 
     if(x<=-width){
-        buttonBath.hide();
+        buttonBathroom.hide();
     }
 /////////////////////////////////////////// KITCHEN
     // Dishwasher
     Dish.position.x=x+width*1.5;
-    Dish.position.y=y+height*1.5; //andrebbe height/2
-    Dish.scale=0.6;
+    Dish.position.y=y+height*1.5;
+    Dish.scale=AnimationScale;
     
 //-----> INPUT Dish
+    // CAMBIARE position
     if (Jack.position.x>=width/4.5 && x==-width && pressDone3===false) {
         moving=false;
         
         text("How do you clean your dishes?", 20, 460);
         buttonHands.show();
         buttonDishwasher.show();
-        
+        // CAMBIARE position
         Jack.position.x=width/4.5;
     
     if(pressHands===true) {
@@ -623,22 +679,26 @@ function draw(){
 
 // Window garden
     Garden.position.x=x+width*1.5;
-    Garden.position.y=y+height*1.5; //andrebbe height/2
-    Garden.scale=0.6;
+    Garden.position.y=y+height*1.5;
+    Garden.scale=AnimationScale;
 
 //-----> INPUT Window garden    
-    if (Jack.position.x>=width/5*4 && x==-width && pressDone4===false) {
+    // CAMBIARE position
+    if (Jack.position.x>=width/5*4 && x==-width && pressDone4===false && pressNo===false) {
         moving=false;
-        
+        // CAMBIARE da qui
+        if(pressYes===false) {
         text("Do you have a garden?", 20, 460);
         buttonYes.show();
         buttonNo.show();
+        }
         
         Jack.position.x=width/5*4;
+        // a qui
         
         if(pressYes===true) {
-//            buttonYes.hide();
-//            buttonNo.hide();
+        buttonYes.hide();
+        buttonNo.hide();
             
         text("How big is it?", 20, 530);
         document.getElementById("mqGarden").style.visibility = "visible";
@@ -680,35 +740,44 @@ function draw(){
             
         }
     }
-    
-    if (Jack.position.x>=width/5*4 && x==-width && pressDone4===false) {
+// CAMBIARE if
+    if (Jack.position.x==width/5*4 && x==-width && pressDone4===false && pressNo===false) {
         Garden.changeAnimation("Kwindow_open");
     } else {
         Garden.changeAnimation("Kwindow");
     }
-       
-    if (pressDone4==true){
+
+// CAMBIARE if
+    if (pressDone4==true || pressNo==true){
         moving=true;
-        buttonLaundry.show();
+        buttonKitchen.show();
         buttonDone4.hide();
     }
     
 //(()) BUTTON - Kitchen to Laundry
     if(stateKitchen==true){
-        x=x-10;
+        x=x-10; // REMOVE 10
 
         if (x<-width*2) {
             x=-width*2;
         }
         
-        buttonLaundry.hide();
+        buttonKitchen.hide();
     }
     
+    if(stateKitchen==true && x>-width*2){
+        Jack.position.x=Jack.position.x-13;
+        
+        if (Jack.position.x<100) {
+            Jack.position.x=100;
+            
+        }
+    }
 /////////////////////////////////////////// LAUNDRY
 // Washing machine
     WMachine.position.x=x+width*2.5;
-    WMachine.position.y=y+height*1.5; //andrebbe height/2
-    WMachine.scale=0.6;
+    WMachine.position.y=y+height*1.5;
+    WMachine.scale=AnimationScale;
     
 //-----> INPUT Washing machine    
     if (Jack.position.x>=width/5*2 && x==-width*2 && pressWMachine===false) {
@@ -733,8 +802,8 @@ function draw(){
     
 // Mop
     Mop.position.x=x+width*2.5;
-    Mop.position.y=y+height*1.5; //andrebbe height/2
-    Mop.scale=0.6;
+    Mop.position.y=y+height*1.5;
+    Mop.scale=AnimationScale;
     
 //-----> INPUT Mop   
     if (Jack.position.x>=width/5*4 && x==-width*2 && pressMop===false) {
@@ -791,6 +860,7 @@ function draw(){
             Jack.velocity.x = 0;
         } 
         // don't move > shower
+    // CAMBIARE position
         else if (y<=-height && Jack.position.y==height*0.64 && pressDone1==false) {
         Jack.changeAnimation("shower");
         Jack.velocity.x = 0;   
@@ -801,11 +871,13 @@ function draw(){
         Jack.velocity.x = 0;   
         }     
         // don't move > dish
+    // CAMBIARE position
         else if (Jack.position.x==width/4.5 && x==-width && pressDone3===false) {
         Jack.changeAnimation("dish");
         Jack.velocity.x = 0;   
         }     
         // don't move > garden
+    // CAMBIARE position
         else if (Jack.position.x==width/5*4 && x==-width && pressDone4===false) {
         Jack.changeAnimation("garden");
         Jack.velocity.x = 0;   
@@ -840,6 +912,8 @@ function draw(){
     var lx=x+width*2.5;
     image(iron,lx,py,wx,hy);
     pop();
+
+    }   // CAMBIARE > questa parentesi qui
 }
 //------------------------------------------------•°o.O Translate bg O.o°•
 
@@ -948,8 +1022,6 @@ function Q3results() {
 function yesOptions() {
     if(pressYes===false){
         pressYes=true;
-        buttonYes.hide();
-        buttonNo.hide();
     }
 }
 
@@ -968,6 +1040,8 @@ function Q4results() {
         selGarden.hide();
         gardenSlider.hide();
         buttonDone4.hide();
+        buttonYes.hide();
+        buttonNo.hide();
     }
 }
 
