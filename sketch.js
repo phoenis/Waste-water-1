@@ -626,12 +626,14 @@ function draw(){
     }
     
 //-----> INPUT Sink
-    if (Jack.position.x>=width/10*6.5 && x==0 && pressDone1===true && pressDone2===false) {
+    if (Jack.position.x>=width/10*6.5 && x==0 && pressDone2==false) {
         moving=false;
         
         text("How many minutes do you spend to brushing your teeth?", width/10,height/10);
         teethSlider.show();
         buttonDone2.show();
+        
+        Jack.position.x=width/10*6.5;
     
         teethMinutes = teethSlider.value();
         if(teethMinutes===1){
@@ -1067,7 +1069,7 @@ function draw(){
         Jack.velocity.x = 0;   
         } 
         // don't move > toothbrush
-        else if (Jack.position.x==width/10*6.5 && pressDone1==true && x==0) {
+        else if (Jack.position.x==width/10*6.5 && pressDone2==false && x==0) {
         Jack.changeAnimation("toothbrush");
         Jack.velocity.x = 0;   
         }     
