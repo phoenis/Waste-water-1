@@ -356,8 +356,6 @@ function setup() {
 function draw(){  
     background("#a6cdda");
     
-//// CAMBIARE?? (Così i background e le posizioni di Jack rimangono in un range per cui non si creano problemi... almeno che non si trova un altro modo..!! :D) > da qui
-    
 ////    Need to expand your window    
         Expand.position.x=width*0.5;
         Expand.position.y=height*0.3;
@@ -386,7 +384,6 @@ function draw(){
         drawSprites();
     } else {
     Expand.changeAnimation("NotExpand");
-// CAMBIARE > a qui (più una parentesi in fondo al draw() )
         
 /////////////////////////////////////////// BACKGROUND
     buttonStart.show();
@@ -484,7 +481,6 @@ function draw(){
 // TEXT - Hi x!
     push();
         
-// CAMBIARE if
     if (stateStart==false){
         fill(255);
         textSize(40);
@@ -508,13 +504,11 @@ function draw(){
 //??????????????????????????????????????????? CHIEDERE (usare height/width)
 //<3 JACK fall - resize
     if (y==0){
-// CAMBIARE
         Jack.scale = width/1552;    // 0.88
     } 
     if (y<0){
         Jack.scale -= 0.01;
     }
-// CAMBIARE
     var JackScale = width/2134;
     
     if (Jack.scale <= JackScale){
@@ -530,7 +524,6 @@ function draw(){
 
 /////////////////////////////////////////// BATHROOM
     // Bathtub
-// CAMBIARE
     var AnimationScale=width/2265;
     Bath.position.x=x+width*0.5;
     Bath.position.y=y+height*1.5;
@@ -685,12 +678,10 @@ function draw(){
     Dish.scale=AnimationScale;
     
 //-----> INPUT Dish
-    // CAMBIARE position
     if (Jack.position.x>=width/4.5 && x==-width && pressDone1===true && pressDone2===true && pressDone3===false) {
         
         moving=false;
 
-        // CAMBIARE position
         Jack.position.x=width/4.5;
             
         text("How do you clean your dishes?", width/10,height/10);
@@ -777,18 +768,15 @@ function draw(){
     Garden.position.y=y+height*1.5;
     Garden.scale=AnimationScale;
 
-//-----> INPUT Window garden    
-    // CAMBIARE position
+//-----> INPUT Window garden 
     if (Jack.position.x>=width/5*4 && x==-width && pressDone1===true && pressDone2===true && pressDone3===true && pressNo===false && pressDone4===false) {
         moving=false;
-        // CAMBIARE da qui
         
             text("Do you have a garden?", width/10,height/10);
             buttonYes.show();
             buttonNo.show();
         
         Jack.position.x=width/5*4;
-        // a qui
         
         if(pressYes===true){
       
@@ -843,14 +831,12 @@ function draw(){
             } else { resultGarden = 0; }
         }
     
-// CAMBIARE if
     if (Jack.position.x==width/5*4 && x==-width && pressDone4===false && pressNo===false) {
         Garden.changeAnimation("Kwindow_open");
     } else {
         Garden.changeAnimation("Kwindow");
     }
 
-// CAMBIARE if
     if (pressDone4==true || pressNo==true){
         moving=true;
         buttonKitchen.show();
@@ -882,30 +868,10 @@ function draw(){
     WMachine.scale=AnimationScale;
     
 //-----> INPUT Washing machine    
-    
-    if (Jack.position.x>=width/5*2 && x==-width*2 && pressDone1===true && pressDone2===true && pressDone3===true && pressDone4===true && pressDone5===false) {
+    if(Jack.position.x>=width/5*2 && x==-width*2 && pressDone5===false){
         
         moving=false;
         Jack.position.x=width/5*2;
-        
-        text("Set your washine machine...", width/10,height/10);
-        selWMachine.show();
-        WMachineSlider.show();
-    
-        text("40°",150+width/10,height/7.2);
-        text("60°",210+width/10,height/7.2);
-    
-        text("How many times a week do you run it?", width/10,height/5.6);
-        document.getElementById("numWMachine").style.visibility = "visible";
-    
-        buttonDone5.show();
-
-    } else if(Jack.position.x>=width/5*2 && x==-width*2 && pressDone1===true && pressDone2===true && pressDone3===true && pressNo===true && pressDone5===false){
-        
-        moving=false;
-        Jack.position.x=width/5*2;
-        
-        WMachine.changeAnimation("WMOpened");
     
         text("Set your washine machine...", width/10,height/10);
         selWMachine.show();
@@ -919,12 +885,6 @@ function draw(){
     
         buttonDone5.show();
 
-    }
-        
-    if (Jack.position.x>=width/5*2 && pressDone5===false){
-        WMachine.changeAnimation("WMOpened");
-    } else {
-        WMachine.changeAnimation("WMClosed");
     }
   
     if(pressDone5===true){
@@ -950,9 +910,16 @@ function draw(){
         myWMachine = week * WMachineWeek * WMachineProgram;
         
         if(myWMachine !== 0 && myWMachine !== defaultWMachine){
-          resultWMachine = myWmachine;
+          resultWMachine = myWMachine;
         } else { resultWMachine = defaultWMachine; }
       
+    }
+    
+            
+    if (Jack.position.x>=width/5*2 && pressDone5===false){
+        WMachine.changeAnimation("WMOpened");
+    } else {
+        WMachine.changeAnimation("WMClosed");
     }
     
 // Mop
@@ -961,27 +928,7 @@ function draw(){
     Mop.scale=AnimationScale;
     
 //-----> INPUT Mop   
-    if (Jack.position.x>=width/5*4 && x==-width*2 && pressDone1===true && pressDone2===true && pressDone3===true && pressDone4===true && pressDone5===true && pressDone6===false) {
-        
-        moving=false;
-        Jack.position.x=width/5*4;
-        
-        text("How many times a week do you clean your house?", width/10,height/10);
-        document.getElementById("numMop").style.visibility = "visible";
-    
-        text("How many mop bucket do you fill?", width/10,height/7.4);
-        mopSlider.show();
-    
-        bucketMop = mopSlider.value();
-    
-        if(bucketMop===1){
-            text(bucketMop+" bucket",140+width/10,height/5.7);
-        } else {
-            text(bucketMop+" buckets",140+width/10,height/5.7);}
-    
-        buttonDone6.show();
-
-    } else if(Jack.position.x>=width/5*4 && x==-width*2 && pressDone1===true && pressDone2===true && pressDone3===true && pressNo===true && pressDone5===true && pressDone6===false){
+    if(Jack.position.x>=width/5*4 && x==-width*2 && pressDone6===false){
         
         moving=false;
         Jack.position.x=width/5*4;
@@ -1063,7 +1010,6 @@ function draw(){
             Jack.velocity.x = 0;
         } 
         // don't move > shower
-    // CAMBIARE position
         else if (y<=-height && Jack.position.y==height*0.64 && pressDone1==false) {
         Jack.changeAnimation("shower");
         Jack.velocity.x = 0;   
@@ -1074,13 +1020,11 @@ function draw(){
         Jack.velocity.x = 0;   
         }     
         // don't move > dish
-    // CAMBIARE position
         else if (Jack.position.x==width/4.5 && x==-width && pressDone3===false) {
         Jack.changeAnimation("dish");
         Jack.velocity.x = 0;   
         }     
         // don't move > garden
-    // CAMBIARE position
         else if (Jack.position.x==width/5*4 && x==-width && pressDone4===false) {
         Jack.changeAnimation("garden");
         Jack.velocity.x = 0;   
@@ -1116,7 +1060,7 @@ function draw(){
     image(iron,lx,py,wx,hy);
     pop();
     
-    }   // CAMBIARE > questa parentesi qui
+    }
 }
 //------------------------------------------------•°o.O Translate bg O.o°•
 
