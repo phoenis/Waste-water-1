@@ -125,11 +125,7 @@ function setup() {
     inputName.size(250,60);
     inputName.value = text;
     // Placeholder
-   // if (isNaN(inputName) && inputName.length<1){
     document.getElementById("inputName").placeholder = "your name..";
-    /*} else {
-        inputName.value = inputName.value + "!";
-    }*/
     
 ////    Need to expand your window
     Expand = createSprite(width/2,height/2,1,1);
@@ -1014,7 +1010,9 @@ function draw(){
         
         userName = document.getElementById("inputName").value;
         
-        text(userName+", you used "+Result+" liters of water!", 20,40);
+        if(userName=="" || userName==null || userName==undefined){
+        text("You used "+Result+" liters of water!", 20,40);
+        } else { text(userName+", you used "+Result+" liters of water!", 20,40); }
         
     }
     
