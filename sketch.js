@@ -997,7 +997,9 @@ function draw(){
         
         userName = document.getElementById("inputName").value;
         
-        text(userName+", you used "+Result+" liters of water!", 20,40);
+        if(userName=="" || userName==null || userName==undefined){
+        text("You used "+Result+" liters of water!", 20,40);
+        } else { text(userName+", you used "+Result+" liters of water!", 20,40); }
         
     }
     
