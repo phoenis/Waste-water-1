@@ -1,3 +1,18 @@
+//////////////////////// WAVES
+    var cnt=document.getElementById("count"); 
+    var water=document.getElementById("water");
+    document.getElementById("water").style.visibility='hidden';
+    var percent=cnt.innerText;
+    var interval;
+        interval=setInterval(function(){ 
+            percent++; 
+            cnt.innerHTML = percent; 
+            water.style.transform='translate(0'+','+(100-percent)+'%)';
+            if(percent==100){
+            clearInterval(interval);
+        }
+        },80);
+
 var week = 1;
 var userName;
 var Result;
@@ -82,7 +97,7 @@ function preload() {
 
 //------------------------------------------------•°o.O Setup O.o°•
 function setup() {
-    createCanvas(windowWidth,windowHeight);
+    createCanvas(windowWidth,windowHeight);    
     
 /////////////////////////////////////////// BUTTONS Translate bg
 // Start to Bathroom
@@ -1059,7 +1074,13 @@ function draw(){
     var lx=x+width*2.5;
     image(iron,lx,py,wx,hy);
     pop();
-    
+        
+    if(pressDone6===false){
+        percent=0;
+    } else {
+        document.getElementById("water").style.visibility='visible';
+    }
+        
     }
 }
 //------------------------------------------------•°o.O Translate bg O.o°•
