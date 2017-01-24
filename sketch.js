@@ -13,6 +13,8 @@
         }
         },80);
 
+//CANCELLARE QUESTO COMMENTO!
+
 var week = 1;
 var userName;
 var Result;
