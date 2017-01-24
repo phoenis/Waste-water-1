@@ -1,3 +1,18 @@
+//////////////////////// WAVES
+    var cnt=document.getElementById("count"); 
+    var water=document.getElementById("water");
+    document.getElementById("water").style.visibility='hidden';
+    var percent=cnt.innerText;
+    var interval;
+        interval=setInterval(function(){ 
+            percent++; 
+            cnt.innerHTML = percent; 
+            water.style.transform='translate(0'+','+(100-percent)+'%)';
+            if(percent==100){
+            clearInterval(interval);
+        }
+        },80);
+
 var week = 1;
 var userName;
 var Result;
@@ -82,7 +97,7 @@ function preload() {
 
 //------------------------------------------------•°o.O Setup O.o°•
 function setup() {
-    createCanvas(windowWidth,windowHeight);
+    createCanvas(windowWidth,windowHeight);    
     
 /////////////////////////////////////////// BUTTONS Translate bg
 // Start to Bathroom
@@ -127,6 +142,7 @@ function setup() {
     WMachine = createSprite(width/2,height/2,1,1);
     var WMachineAnimation = WMachine.addAnimation("WMClosed", "images/washing_machine-closed.png");
     WMachine.addAnimation("WMOpened", "images/washing_machine-opened.png");
+    WMachine.addAnimation("Finish", "images/mop2.png");
     // Mop
     Mop = createSprite(width/2,height/2,1,1);
     var MopAnimation = Mop.addAnimation("MopNotInUse", "images/mop1.png");
@@ -408,6 +424,24 @@ function draw(){
     image(LuandryBack,lx,py,wx,hy);
     image(Lclothes,lx,py,wx,hy);
     pop();
+        
+    /////////////////////////////////////////// WAVES
+    if(pressDone6===false){
+        percent=0;
+    } else {
+        document.getElementById("water").style.visibility='visible';
+    }
+    if(percent===100){
+        document.getElementById("water").style.visibility='hidden';
+        push();
+        noStroke();
+        fill('#a6cdda');
+        rect(0,0,width,height);
+        pop();
+        
+        Mop.changeAnimation("MopInUse");
+        WMachine.changeAnimation("Finish");
+    }
     
 /////////////////////////////////////////// START
 // DROP
@@ -501,7 +535,7 @@ function draw(){
         buttonStart.hide();
         document.getElementById("inputName").style.visibility='hidden';
     }
-//??????????????????????????????????????????? CHIEDERE (usare height/width)
+        
 //<3 JACK fall - resize
     if (y==0){
         Jack.scale = width/1552;    // 0.88
@@ -991,13 +1025,13 @@ function draw(){
         //flip horizontally
         Jack.mirrorX(-1);
         //negative x velocity: move left
-        Jack.velocity.x = - 3 // REMOVE -3
+        Jack.velocity.x = - 4 // REMOVE -4
         }
         else if(mouseX > Jack.position.x + 10 && y==-height && moving==true) {
         Jack.changeAnimation("moving");
         //unflip 
         Jack.mirrorX(1);
-        Jack.velocity.x = 3 // REMOVE 3
+        Jack.velocity.x = 4 // REMOVE 4
         }
         // don't move > START
         else if (y==0){
@@ -1056,11 +1090,15 @@ function draw(){
     var kx=x+width*1.5;
     image(table,kx,py,wx,hy);
     // - Laundry
-    var lx=x+width*2.5;
-    image(iron,lx,py,wx,hy);
-    pop();
-    
+    if(percent<100){
+        var lx=x+width*2.5;
+        image(iron,lx,py,wx,hy);
     }
+    pop();
+        
+
+        
+}
 }
 //------------------------------------------------•°o.O Translate bg O.o°•
 
@@ -1075,7 +1113,6 @@ function BathToKitchen() {
     if(stateBath==false){
         stateBath=true;
         
-//      Jack.position.x = width/5;
     } 
 }
     // Kitchen to Laundry
