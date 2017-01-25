@@ -27,6 +27,7 @@ var stateBath=false;
 var stateKitchen=false;
 var Expand,Jack,Bath,Dish,Garden,WMachine,Mop; // Animations
 var moving=false;
+var swimming=false;
 
 // DROP
 var dropx;
@@ -302,6 +303,8 @@ function setup() {
     // LAUNDRY
     Jack.addAnimation("clothes", "images/Jack_clothes1.png");
     Jack.addAnimation("mop", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png");
+    // RESULTS
+    Jack.addAnimation("swimming", "images/Jack_stand.png");
     
 /////////////////////////////////////////// BATHROOM
     // Bathtub - Tub
@@ -425,7 +428,24 @@ function draw(){
     image(LuandryBack,lx,py,wx,hy);
     image(Lclothes,lx,py,wx,hy);
     pop();
-    
+        
+/////////////////////////////////////////// WAVES        
+    if(pressDone6===false){
+        percent=0;
+    } else {
+        document.getElementById("water").style.visibility='visible';
+    }
+        
+    if (percent==100){
+        document.getElementById("water").style.visibility='hidden';
+        WMachine.visible=false;
+        Mop.visible=false;
+        
+        noStroke();
+        fill('#a6cdda');
+        rect(0,0,width,height);
+    }
+        
 /////////////////////////////////////////// START
 // DROP
     if(stateStart==false){
@@ -435,7 +455,7 @@ function draw(){
             dropy=height/6*5.8;
         }
     
-    // Waves
+    // DropWaves
     if(dropy==height/6*5.8) {
         var a=3;
         wavewS=wavewS+a;
@@ -468,7 +488,7 @@ function draw(){
     triangle(dropx-dropsize/2,dropy,dropx+dropsize/2,dropy,dropx,dropy-dropsize)
     pop();
     
-    // Waves
+    // DropWaves
     push();
     noFill();
     // Stroke
@@ -509,7 +529,7 @@ function draw(){
         
 //(()) BUTTON - Start to Bathroom
     if(stateStart==true){
-        y=y-6 //REMOVE 6
+        y=y-height //REMOVE 6
 
         if (y<-height) {
             y=-height;
@@ -518,7 +538,8 @@ function draw(){
         buttonStart.hide();
         document.getElementById("inputName").style.visibility='hidden';
     }
-//??????????????????????????????????????????? CHIEDERE (usare height/width)
+        
+/////////////////////////////////////////// JACK Size
 //<3 JACK fall - resize
     if (y==0){
         Jack.scale = width/1552;    // 0.88
@@ -534,6 +555,14 @@ function draw(){
         moving=false;
     } if (pressDone1==true){
         Jack.position.y=height*0.56;
+    } 
+    
+    //// RESULTS
+    if (percent==90){                 
+        Jack.position.y=height*0.5;
+    } 
+    if (percent > 90){
+        swimming=true;
     }
 
     //draw the sprite
@@ -670,7 +699,7 @@ function draw(){
 
 //(()) BUTTON - Bathroom to Kitchen
     if(stateBath==true){
-        x=x-10 // REMOVE 10
+        x=x-width // REMOVE 10
         
         if (x<-width) {
             x=-width;
@@ -685,7 +714,7 @@ function draw(){
         }
     }
 
-    if(x<=-width){
+    if(x<0){
         buttonBathroom.hide();
     }
 /////////////////////////////////////////// KITCHEN
@@ -861,7 +890,7 @@ function draw(){
     
 //(()) BUTTON - Kitchen to Laundry
     if(stateKitchen==true){
-        x=x-10; // REMOVE 10
+        x=x-width; // REMOVE 10
 
         if (x<-width*2) {
             x=-width*2;
@@ -985,8 +1014,7 @@ function draw(){
     } else {
         Mop.changeAnimation("MopNotInUse");
     }
-    
-    
+        
 /////////////////////////////////////////// RESULTS
     // Name
     if (pressDone6===true){
@@ -1000,23 +1028,28 @@ function draw(){
         if(userName=="" || userName==null || userName==undefined){
         text("You used "+Result+" liters of water!", 20,40);
         } else { text(userName+", you used "+Result+" liters of water!", 20,40); }
-        
     }
-    
+        
+    if (percent>=95){
+        moving=false;
+        Jack.scale = width/1552;    // 0.88
+        Jack.position.x=width/4;
+    }
+        
 /////////////////////////////////////////// JACK Animation <3
         //if mouse is to the left
-        if(mouseX < Jack.position.x - 10 && y==-height && moving==true) {
+        if(mouseX < Jack.position.x - 10 && moving==true) {
         Jack.changeAnimation("moving");
         //flip horizontally
         Jack.mirrorX(-1);
         //negative x velocity: move left
-        Jack.velocity.x = - 3 // REMOVE -3
+        Jack.velocity.x = - 30 // REMOVE -3
         }
-        else if(mouseX > Jack.position.x + 10 && y==-height && moving==true) {
+        else if(mouseX > Jack.position.x + 10 && moving==true) {
         Jack.changeAnimation("moving");
         //unflip 
         Jack.mirrorX(1);
-        Jack.velocity.x = 3 // REMOVE 3
+        Jack.velocity.x = 30 // REMOVE 3
         }
         // don't move > START
         else if (y==0){
@@ -1058,6 +1091,11 @@ function draw(){
         Jack.changeAnimation("mop");
         Jack.velocity.x = 0;   
         }
+        // swimming
+        else if(swimming===true) {
+        Jack.changeAnimation("swimming");
+        Jack.velocity.y = - 3 // REMOVE -3
+        }
         // don't move > stand
         else {
         Jack.changeAnimation("stand");
@@ -1075,16 +1113,12 @@ function draw(){
     var kx=x+width*1.5;
     image(table,kx,py,wx,hy);
     // - Laundry
-    var lx=x+width*2.5;
-    image(iron,lx,py,wx,hy);
-    pop();
-        
-    if(pressDone6===false){
-        percent=0;
-    } else {
-        document.getElementById("water").style.visibility='visible';
+    if (percent<0){
+        var lx=x+width*2.5;
+        image(iron,lx,py,wx,hy);
     }
-        
+    pop();
+    
     }
 }
 //------------------------------------------------•°o.O Translate bg O.o°•
@@ -1099,8 +1133,6 @@ function StartToBath() {
 function BathToKitchen() {
     if(stateBath==false){
         stateBath=true;
-        
-//      Jack.position.x = width/5;
     } 
 }
     // Kitchen to Laundry
