@@ -529,7 +529,7 @@ function draw(){
         
 //(()) BUTTON - Start to Bathroom
     if(stateStart==true){
-        y=y-height //REMOVE 6
+        y=y-6 //REMOVE 6
 
         if (y<-height) {
             y=-height;
@@ -699,7 +699,7 @@ function draw(){
 
 //(()) BUTTON - Bathroom to Kitchen
     if(stateBath==true){
-        x=x-width // REMOVE 10
+        x=x-10 // REMOVE 10
         
         if (x<-width) {
             x=-width;
@@ -890,7 +890,7 @@ function draw(){
     
 //(()) BUTTON - Kitchen to Laundry
     if(stateKitchen==true){
-        x=x-width; // REMOVE 10
+        x=x-10; // REMOVE 10
 
         if (x<-width*2) {
             x=-width*2;
@@ -1043,13 +1043,13 @@ function draw(){
         //flip horizontally
         Jack.mirrorX(-1);
         //negative x velocity: move left
-        Jack.velocity.x = - 30 // REMOVE -3
+        Jack.velocity.x = - 3 // REMOVE -3
         }
         else if(mouseX > Jack.position.x + 10 && moving==true) {
         Jack.changeAnimation("moving");
         //unflip 
         Jack.mirrorX(1);
-        Jack.velocity.x = 30 // REMOVE 3
+        Jack.velocity.x = 3 // REMOVE 3
         }
         // don't move > START
         else if (y==0){
