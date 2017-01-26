@@ -1113,7 +1113,7 @@ function draw(){
     var kx=x+width*1.5;
     image(table,kx,py,wx,hy);
     // - Laundry
-    if (percent<0){
+    if (percent<100){
         var lx=x+width*2.5;
         image(iron,lx,py,wx,hy);
     }
