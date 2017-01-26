@@ -408,26 +408,28 @@ function draw(){
 /////////////////////////////////////////// BACKGROUND
     buttonStart.show();
     document.getElementById("inputName").style.visibility='visible';
-        
-    image(myBg,x,y,width*3,height*2);
-    push();
-    imageMode(CENTER);   
-    // size objects
-    // - Bathroom
-    var wx=width;
-    var hy=width*0.56;
-    var bx=x+width/2;
-    var py=y+height*1.5;
-    image(BathroomBack,bx,py,wx,hy);
-    image(TubBack,bx,py,wx,hy);
-    // - Kitchen
-    var kx=x+width*1.5;
-    image(KitchenBack,kx,py,wx,hy);
-    // - Laundry
-    var lx=x+width*2.5;
-    image(LuandryBack,lx,py,wx,hy);
-    image(Lclothes,lx,py,wx,hy);
-    pop();
+    
+    if (percent<100){
+        image(myBg,x,y,width*3,height*2);
+        push();
+        imageMode(CENTER);   
+        // size objects
+        // - Bathroom
+        var wx=width;
+        var hy=width*0.56;
+        var bx=x+width/2;
+        var py=y+height*1.5;
+        image(BathroomBack,bx,py,wx,hy);
+        image(TubBack,bx,py,wx,hy);
+        // - Kitchen
+        var kx=x+width*1.5;
+        image(KitchenBack,kx,py,wx,hy);
+        // - Laundry
+        var lx=x+width*2.5;
+        image(LuandryBack,lx,py,wx,hy);
+        image(Lclothes,lx,py,wx,hy);
+        pop();
+    }
         
 /////////////////////////////////////////// WAVES        
     if(pressDone6===false){
@@ -440,10 +442,6 @@ function draw(){
         document.getElementById("water").style.visibility='hidden';
         WMachine.visible=false;
         Mop.visible=false;
-        
-        noStroke();
-        fill('#a6cdda');
-        rect(0,0,width,height);
     }
         
 /////////////////////////////////////////// START
