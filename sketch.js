@@ -1,17 +1,17 @@
 //////////////////////// WAVES
-    var cnt=document.getElementById("count"); 
-    var water=document.getElementById("water");
-    document.getElementById("water").style.visibility='hidden';
-    var percent=cnt.innerText;
-    var interval;
-        interval=setInterval(function(){ 
-            percent++; 
-            cnt.innerHTML = percent; 
-            water.style.transform='translate(0'+','+(100-percent)+'%)';
-            if(percent==100){
-            clearInterval(interval);
-        }
-        },80);
+var cnt=document.getElementById("count"); 
+var water=document.getElementById("water");
+document.getElementById("water").style.visibility='hidden';
+var percent=cnt.innerText;
+var interval;
+interval=setInterval(function(){ 
+    percent++; 
+    cnt.innerHTML = percent; 
+    water.style.transform='translate(0'+','+(100-percent)+'%)';
+    if(percent==100){
+        clearInterval(interval);
+    }
+    },80);
 
 var week = 1;
 var userName;
@@ -23,7 +23,7 @@ var buttonStart, buttonBathroom, buttonKitchen;     // Change room
 var stateStart=false;
 var stateBath=false;
 var stateKitchen=false;
-var Expand,Jack,Bath,Dish,Garden,WMachine,Mop;     // Animations
+var Expand,Jack,Bath,Sink,Dish,Garden,WMachine,Mop;     // Animations //*
 var moving=false;
 var swimming=false;
 var restartButton;
@@ -149,10 +149,12 @@ function setup() {
     WMachine = createSprite(width/2,height/2,1,1);
     var WMachineAnimation = WMachine.addAnimation("WMClosed", "images/washing_machine-closed.png");
     WMachine.addAnimation("WMOpened", "images/washing_machine-opened.png");
+    WMachine.addAnimation("WMGlow", "images/washing_machine-closed.png","images/washing_machine-glow.png"); //*
     // Mop
     Mop = createSprite(width/2,height/2,1,1);
-    var MopAnimation = Mop.addAnimation("MopNotInUse", "images/mop1.png");
-    Mop.addAnimation("MopInUse", "images/mop2.png");
+    var MopAnimation = Mop.addAnimation("MopNotInUse", "images/mop-visible.png");
+    Mop.addAnimation("MopInUse", "images/mop-hidden.png");
+    Mop.addAnimation("MopGlow", "images/mop-visible.png", "images/mop-glow.png"); //*
 
 //-----> INPUT Laundry
     // > Washing machine
@@ -205,13 +207,15 @@ function setup() {
 /////////////////////////////////////////// KITCHEN
     // Dish
     Dish = createSprite(width/2,height/2,1,1);
-    var DishAnimation = Dish.addAnimation("Dish_none", "images/dish_none.png");
+    var DishAnimation = Dish.addAnimation("Dish_none", "images/dish.png");
     Dish.addAnimation("Dishwasher", "images/dish_dishwasher.png");
     Dish.addAnimation("Sink", "images/dish_sink1.png", "images/dish_sink1.png", "images/dish_sink1.png", "images/dish_sink2.png", "images/dish_sink2.png", "images/dish_sink2.png");
+    Dish.addAnimation("DishGlow", "images/dish.png", "images/dish-glow.png"); //*
     // Garden
     Garden = createSprite(width/2,height/2,1,1);
     var GardenAnimation = Garden.addAnimation("Kwindow", "images/windowK-closed.png");
     Garden.addAnimation("Kwindow_open", "images/windowK-opened.png");
+    Garden.addAnimation("GardenGlow", "images/windowK-closed.png", "images/garden-glow.png"); //*
     
 //-----> INPUT Kitchen
     // > Dish
@@ -317,6 +321,10 @@ function setup() {
     Bath.addAnimation("shower", "images/shower1.png", "images/shower1.png", "images/shower1.png", "images/shower2.png", "images/shower2.png", "images/shower2.png", "images/shower3.png", "images/shower3.png", "images/shower3.png");
     Bath.addAnimation("bath_none", "images/tub0.png");
     Bath.addAnimation("bath_tub", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub2.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub3.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub4.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png", "images/tub5.png");
+    
+    Sink = createSprite(JackX,JackY,height/2.4,height/1.6); //*
+    var SinkAnimation = Sink.addAnimation("Sink_before", "images/mop-hidden.png");
+    Sink.addAnimation("SinkGlow", "images/mop-hidden.png", "images/mop-hidden.png", "images/mop-hidden.png", "images/mop-hidden.png", "images/sink-glow.png", "images/sink-glow.png", "images/sink-glow.png", "images/sink-glow.png");
     
 //-----> INPUT Bathroom
     // > Shower
@@ -557,7 +565,7 @@ function draw(){
     
     if (Jack.scale <= JackScale){
         Jack.scale = JackScale;   
-        Jack.position.y=height*0.64;   //// CAMBIARE VALORI
+        Jack.position.y=height*0.64;
         moving=false;
     } if (pressDone1==true){
         Jack.position.y=height*0.56;
@@ -580,6 +588,12 @@ function draw(){
     Bath.position.x=x+width*0.5;
     Bath.position.y=y+height*1.5;
     Bath.scale=AnimationScale;
+        
+    // Sink
+    var AnimationScale=width/2265;
+    Sink.position.x=x+width*0.5;
+    Sink.position.y=y+height*1.5;
+    Sink.scale=AnimationScale;
     
 //-----> INPUT Shower
     if(y<=-height && pressDone1==false){
@@ -664,6 +678,7 @@ function draw(){
     if (pressDone1==true) {
         Bath.changeAnimation("bath_none");
         moving=true;
+        Sink.changeAnimation("SinkGlow"); //*
     } else if (pressTub==true){
         Bath.changeAnimation("bath_tub");
     } else if (pressShower==true){
@@ -698,9 +713,17 @@ function draw(){
           resultTeeth = myTeeth;
         } else { resultTeeth = defaultTeeth; }
       
+        buttonDone2.hide();
+    }
+        
+    if(pressDone2===true){
+        Sink.changeAnimation("Sink_before"); //*
         moving=true;
         buttonBathroom.show();
-        buttonDone2.hide();
+    }
+        
+    if(pressDone2==true && Jack.position.x>=width/8*7){ //*
+        stateBath = true;
     }
 
 //(()) BUTTON - Bathroom to Kitchen
@@ -709,7 +732,9 @@ function draw(){
         
         if (x<-width) {
             x=-width;
-        }        
+        } 
+        
+        buttonBathroom.hide();
     }
     if(stateBath==true && x>-width){
         Jack.position.x=Jack.position.x-11;
@@ -719,10 +744,7 @@ function draw(){
             
         }
     }
-
-    if(x<0){
-        buttonBathroom.hide();
-    }
+        
 /////////////////////////////////////////// KITCHEN
     // Dishwasher
     Dish.position.x=x+width*1.5;
@@ -881,17 +903,15 @@ function draw(){
                 } else { resultGarden = defaultGarden; }
       
             } else { resultGarden = 0; }
+            
+            moving=true;
+            buttonKitchen.show();
         }
     
-    if (Jack.position.x==width/5*4 && x==-width && pressDone4===false && pressNo===false) {
+    if(Jack.position.x==width/5*4 && x==-width && pressDone4===false && pressNo===false) {
         Garden.changeAnimation("Kwindow_open");
     } else {
         Garden.changeAnimation("Kwindow");
-    }
-
-    if (pressDone4==true || pressNo==true){
-        moving=true;
-        buttonKitchen.show();
     }
     
 //(()) BUTTON - Kitchen to Laundry
@@ -902,6 +922,7 @@ function draw(){
             x=-width*2;
         }
         
+        buttonBathroom.hide();
         buttonKitchen.hide();
     }
     
@@ -968,7 +989,7 @@ function draw(){
     }
     
             
-    if (Jack.position.x>=width/5*2 && pressDone5===false){
+    if (x==-width*2 && Jack.position.x>=width/5*2 && pressDone5===false){
         WMachine.changeAnimation("WMOpened");
     } else {
         WMachine.changeAnimation("WMClosed");
@@ -1034,6 +1055,9 @@ function draw(){
         if(userName=="" || userName==null || userName==undefined){
         text("You used "+Result+" liters of water!", 20,40);
         } else { text(userName+", you used "+Result+" liters of water!", 20,40); }
+        
+        restartButton.show();
+        
     }
         
     if (percent>=95){
@@ -1049,13 +1073,13 @@ function draw(){
         //flip horizontally
         Jack.mirrorX(-1);
         //negative x velocity: move left
-        Jack.velocity.x = - 4 // REMOVE -3
+        Jack.velocity.x = - 4 // REMOVE -4
         }
         else if(mouseX > Jack.position.x + 10 && moving==true) {
         Jack.changeAnimation("moving");
         //unflip 
         Jack.mirrorX(1);
-        Jack.velocity.x = 4 // REMOVE 3
+        Jack.velocity.x = 4 // REMOVE 4
         }
         // don't move > START
         else if (y==0){
@@ -1074,6 +1098,7 @@ function draw(){
         } 
         // don't move > toothbrush
         else if (Jack.position.x==width/10*6.5 && pressDone2==false && x==0) {
+        Sink.changeAnimation("Sink_before"); //*
         Jack.changeAnimation("toothbrush");
         Jack.velocity.x = 0;   
         }     
