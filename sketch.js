@@ -1,4 +1,4 @@
-//////////////////////// WAVES
+
 var cnt=document.getElementById("count"); 
 var water=document.getElementById("water");
 document.getElementById("water").style.visibility='hidden';
