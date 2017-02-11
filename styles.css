@@ -1,11 +1,15 @@
 /* INPUT START */
+body {
+    margin: 0px;
+    position: fixed;
+}
+
 #inputName{
-    font-size:40px;
-    /*font-family: "Arial";*/
-    color:white;
-    background:none;
-    border:none;
-    /*border-bottom:1px solid #bbe3f2;*/
+    font-size: 40px;
+    color: white;
+    background: none;
+    border: none;
+    font-family: 'Lato', sans-serif;
 }
 
 #inputName:focus {
@@ -15,23 +19,29 @@
 #inputName::-webkit-input-placeholder {
     color: #ffffff;
     opacity: 0.3;
+    font-style: italic;
 }
 
-/* INPUT BATHROOM */
-/*
-#numShower{
-    font-size:40px;
-    color:white;
-    background:none;
-    border:none;
-}*/
-.buttons{
-    font-family: "Arial";
-    background-color: transparent;
+#startButton {
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    background: none;
     border: none;
     color: white;
     text-align: center;
-    font-size: 20px;
+    font-size: 27px;
+}
+
+#toKitchen {
+    background-image: url(images/Next_room_kitchen.gif);
+    background-repeat: no-repeat;
+    border: none;
+}
+
+#toLaundry {
+    background-image: url(images/Next_room_laundry.gif);
+    background-repeat: no-repeat;
+    border: none;
 }
 
 /*

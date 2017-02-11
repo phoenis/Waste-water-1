@@ -13,8 +13,6 @@
         }
         },80);
 
-//CANCELLARE QUESTO COMMENTO!
-
 var week = 1;
 var userName;
 var Result;
@@ -25,9 +23,10 @@ var buttonStart, buttonBathroom, buttonKitchen;     // Change room
 var stateStart=false;
 var stateBath=false;
 var stateKitchen=false;
-var Expand,Jack,Bath,Dish,Garden,WMachine,Mop; // Animations
+var Expand,Jack,Bath,Dish,Garden,WMachine,Mop;     // Animations
 var moving=false;
 var swimming=false;
+var restartButton;
 
 // DROP
 var dropx;
@@ -104,19 +103,23 @@ function setup() {
     
 /////////////////////////////////////////// BUTTONS Translate bg
 // Start to Bathroom
-    buttonStart = createButton("→<br>Let's go!");
-    buttonStart.addClass('buttons');
+    buttonStart = createButton("→<br>Let's start!");
+    buttonStart.id("startButton");
     buttonStart.size(250,90);
     buttonStart.position(width/2,height/3*2);
     buttonStart.mousePressed(StartToBath);
 // Bathroom to Kitchen
-    buttonBathroom = createButton('Kitchen');
-    buttonBathroom.position(width/10*9,height/2);
+    buttonBathroom = createButton("");
+    buttonBathroom.id("toKitchen");
+    buttonBathroom.position(width-110,height/2);
+    buttonBathroom.size(50,49);
     buttonBathroom.mousePressed(BathToKitchen);
     buttonBathroom.hide();
 // Kitchen to Laundry
-    buttonKitchen = createButton('Laundry');
-    buttonKitchen.position(width/10*9,height/2);
+    buttonKitchen = createButton("");
+    buttonKitchen.id("toLaundry");
+    buttonKitchen.position(width-110,height/2);
+    buttonKitchen.size(50,49);
     buttonKitchen.mousePressed(KitchenToLaundry);
     buttonKitchen.hide();
 
@@ -124,21 +127,22 @@ function setup() {
 //-----> INPUT NAME
     var inputName = createInput();
     inputName.id("inputName");
-    inputName.position(width/2,height/2-10);
-    inputName.size(250,60);
+    inputName.position(width/2+10,height/1.8-44);
+    inputName.size(350,60);
     inputName.value = text;
     // Placeholder
-   // if (isNaN(inputName) && inputName.length<1){
     document.getElementById("inputName").placeholder = "your name..";
-    /*} else {
-        inputName.value = inputName.value + "!";
-    }*/
-    
+
 ////    Need to expand your window
     Expand = createSprite(width/2,height/2,1,1);
     var ExpandAnimation = Expand.addAnimation("Expand", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png");
     Expand.addAnimation("NotExpand", "images/expand_none.png");
     
+////    Restart Button
+    restartButton= createButton("Restart");
+    restartButton.position(width/10,height/5);
+    restartButton.mousePressed(restart);
+    restartButton.hide();
     
 /////////////////////////////////////////// LAUNDRY
     // Washing machine
@@ -381,11 +385,11 @@ function draw(){
         Expand.position.y=height*0.3;
         Expand.scale=width/1000;
 
-    if (width/height <= 1.75) {
+    if (width/height <= 1.3) {
         push();
         textSize(width/15);
         textAlign(CENTER);
-        textFont("Arial");
+        textFont("Lato");
         fill(255);
         text("Please,\nextend and refresh\nyour browser window!",width/2,height/2);
         fill(0, 102, 153);
@@ -520,9 +524,13 @@ function draw(){
         fill(255);
         textSize(40);
         textAlign(RIGHT);
-        //textFont("Arial");
-        text('Hi,',width/2-15,y+height/2+35);
+        textFont("Lato");
+        text('Hi,',width/2,y+height/1.8);
         pop();
+    }
+        
+    if (keyCode == ENTER) {
+        stateStart = true;
     }
         
 //(()) BUTTON - Start to Bathroom
@@ -1041,13 +1049,13 @@ function draw(){
         //flip horizontally
         Jack.mirrorX(-1);
         //negative x velocity: move left
-        Jack.velocity.x = - 3 // REMOVE -3
+        Jack.velocity.x = - 4 // REMOVE -3
         }
         else if(mouseX > Jack.position.x + 10 && moving==true) {
         Jack.changeAnimation("moving");
         //unflip 
         Jack.mirrorX(1);
-        Jack.velocity.x = 3 // REMOVE 3
+        Jack.velocity.x = 4 // REMOVE 3
         }
         // don't move > START
         else if (y==0){
@@ -1117,6 +1125,7 @@ function draw(){
     }
     pop();
     
+// fine del draw, non cancellare le due parentesi
     }
 }
 //------------------------------------------------•°o.O Translate bg O.o°•
@@ -1268,6 +1277,12 @@ function Q6results() {
         mopSlider.hide();
         buttonDone6.hide();
     }
+}
+
+// button RESTART
+
+function restart() {
+    location.reload();
 }
 
 //------------------------------------------------•°o.O Window resize O.o°•
