@@ -4,16 +4,14 @@
     document.getElementById("water").style.visibility='hidden';
     var percent=cnt.innerText;
     var interval;
-        interval=setInterval(function(){ 
-            percent++; 
-            cnt.innerHTML = percent; 
-            water.style.transform='translate(0'+','+(100-percent)+'%)';
-            if(percent==100){
-            clearInterval(interval);
-        }
-        },80);
-
-//CANCELLARE QUESTO COMMENTO!
+    interval=setInterval(function(){ 
+        percent++; 
+        cnt.innerHTML = percent; 
+        water.style.transform='translate(0'+','+(100-percent)+'%)';
+        if(percent==100){
+        clearInterval(interval);
+    }
+    },80);
 
 var week = 1;
 var userName;
@@ -25,9 +23,10 @@ var buttonStart, buttonBathroom, buttonKitchen;     // Change room
 var stateStart=false;
 var stateBath=false;
 var stateKitchen=false;
-var Expand,Jack,Bath,Dish,Garden,WMachine,Mop; // Animations
+var Expand,Jack,Bath,Dish,Garden,WMachine,Mop;      // Animations
 var moving=false;
 var swimming=false;
+var restartButton;
 
 // DROP
 var dropx;
@@ -100,23 +99,27 @@ function preload() {
 
 //------------------------------------------------•°o.O Setup O.o°•
 function setup() {
-    createCanvas(windowWidth,windowHeight);    
+    createCanvas(windowWidth,windowHeight);  
     
 /////////////////////////////////////////// BUTTONS Translate bg
 // Start to Bathroom
-    buttonStart = createButton("→<br>Let's go!");
-    buttonStart.addClass('buttons');
+    buttonStart = createButton("→<br>Let's start!");
+    buttonStart.id("startButton");
     buttonStart.size(250,90);
-    buttonStart.position(width/2,height/3*2);
+    buttonStart.position(width/2.1,height/1.65);
     buttonStart.mousePressed(StartToBath);
 // Bathroom to Kitchen
-    buttonBathroom = createButton('Kitchen');
-    buttonBathroom.position(width/10*9,height/2);
+    buttonBathroom = createButton("");
+    buttonBathroom.id("toKitchen");
+    buttonBathroom.position(width-110,height/2);
+    buttonBathroom.size(50,49);
     buttonBathroom.mousePressed(BathToKitchen);
     buttonBathroom.hide();
 // Kitchen to Laundry
-    buttonKitchen = createButton('Laundry');
-    buttonKitchen.position(width/10*9,height/2);
+    buttonKitchen = createButton("");
+    buttonKitchen.id("toLaundry");
+    buttonKitchen.position(width-110,height/2);
+    buttonKitchen.size(50,49);
     buttonKitchen.mousePressed(KitchenToLaundry);
     buttonKitchen.hide();
 
@@ -124,21 +127,22 @@ function setup() {
 //-----> INPUT NAME
     var inputName = createInput();
     inputName.id("inputName");
-    inputName.position(width/2,height/2-10);
-    inputName.size(250,60);
+    inputName.position(width/2+10,height/1.8-44);
+    inputName.size(350,60);
     inputName.value = text;
     // Placeholder
-   // if (isNaN(inputName) && inputName.length<1){
-    document.getElementById("inputName").placeholder = "your name..";
-    /*} else {
-        inputName.value = inputName.value + "!";
-    }*/
+    document.getElementById("inputName").placeholder = "your name...";
     
 ////    Need to expand your window
     Expand = createSprite(width/2,height/2,1,1);
     var ExpandAnimation = Expand.addAnimation("Expand", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand1.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand2.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png", "images/expand3.png");
     Expand.addAnimation("NotExpand", "images/expand_none.png");
-    
+
+////    Restart Button
+    restartButton= createButton("Restart");
+    restartButton.position(width/10,height/5);
+    restartButton.mousePressed(restart);
+    restartButton.hide();
     
 /////////////////////////////////////////// LAUNDRY
     // Washing machine
@@ -381,7 +385,7 @@ function draw(){
         Expand.position.y=height*0.3;
         Expand.scale=width/1000;
 
-    if (width/height <= 1.75) {
+    if (width/height <= 1.3) {
         push();
         textSize(width/15);
         textAlign(CENTER);
@@ -518,12 +522,16 @@ function draw(){
         
     if (stateStart==false){
         fill(255);
-        textSize(40);
+        textSize(height/20);
         textAlign(RIGHT);
-        //textFont("Arial");
-        text('Hi,',width/2-15,y+height/2+35);
+        textFont("Lato");
+        text('Hi,',width/2,height/1.8);
         pop();
     }
+        
+    if (keyCode == ENTER) {
+        stateStart = true;
+    } 
         
 //(()) BUTTON - Start to Bathroom
     if(stateStart==true){
@@ -722,7 +730,7 @@ function draw(){
     Dish.scale=AnimationScale;
     
 //-----> INPUT Dish
-    if (Jack.position.x>=width/4.5 && x==-width && pressDone1===true && pressDone2===true && pressDone3===false) {
+    if (Jack.position.x>=width/4.5 && x==-width && pressDone3===false) {
         
         moving=false;
 
@@ -813,7 +821,7 @@ function draw(){
     Garden.scale=AnimationScale;
 
 //-----> INPUT Window garden 
-    if (Jack.position.x>=width/5*4 && x==-width && pressDone1===true && pressDone2===true && pressDone3===true && pressNo===false && pressDone4===false) {
+    if (Jack.position.x>=width/5*4 && x==-width && pressNo===false && pressDone4===false) {
         moving=false;
         
             text("Do you have a garden?", width/10,height/10);
@@ -960,7 +968,7 @@ function draw(){
     }
     
             
-    if (Jack.position.x>=width/5*2 && pressDone5===false){
+    if (x==-width*2 && Jack.position.x>=width/5*2 && pressDone5===false){
         WMachine.changeAnimation("WMOpened");
     } else {
         WMachine.changeAnimation("WMClosed");
@@ -1026,6 +1034,9 @@ function draw(){
         if(userName=="" || userName==null || userName==undefined){
         text("You used "+Result+" liters of water!", 20,40);
         } else { text(userName+", you used "+Result+" liters of water!", 20,40); }
+        
+        restartButton.show();
+    
     }
         
     if (percent>=95){
@@ -1041,13 +1052,13 @@ function draw(){
         //flip horizontally
         Jack.mirrorX(-1);
         //negative x velocity: move left
-        Jack.velocity.x = - 3 // REMOVE -3
+        Jack.velocity.x = - 4 // REMOVE -4
         }
         else if(mouseX > Jack.position.x + 10 && moving==true) {
         Jack.changeAnimation("moving");
         //unflip 
         Jack.mirrorX(1);
-        Jack.velocity.x = 3 // REMOVE 3
+        Jack.velocity.x = 4 // REMOVE 4
         }
         // don't move > START
         else if (y==0){
@@ -1116,9 +1127,11 @@ function draw(){
         image(iron,lx,py,wx,hy);
     }
     pop();
-    
+
+// fine del draw, non cancellare le due parentesi
     }
 }
+
 //------------------------------------------------•°o.O Translate bg O.o°•
 
     // Start to Bathroom
@@ -1268,6 +1281,13 @@ function Q6results() {
         mopSlider.hide();
         buttonDone6.hide();
     }
+}
+
+// button RESTART and SHARE
+
+function restart() {
+    //location.href = 'https://phoenis.github.io/Waste-water-1/';
+    location.reload();
 }
 
 //------------------------------------------------•°o.O Window resize O.o°•
