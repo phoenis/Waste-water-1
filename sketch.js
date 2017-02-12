@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 //////////////////////// WAVES
-=======
-
->>>>>>> origin/master
 var cnt=document.getElementById("count"); 
 var water=document.getElementById("water");
 document.getElementById("water").style.visibility='hidden';
@@ -568,7 +564,7 @@ function draw(){
     
     if (Jack.scale <= JackScale && percent<100){
         Jack.scale = JackScale;   
-        Jack.position.y=height*0.64;
+        Jack.position.y=height*0.64;   //// CAMBIARE VALORI
         moving=false;
     } if (pressDone1==true && percent<100){
         Jack.position.y=height*0.56;
@@ -915,19 +911,16 @@ function draw(){
             buttonKitchen.show();
         }
     
-    if(Jack.position.x==width/5*4 && x==-width && pressDone4===false && pressNo===false) {
+    if (Jack.position.x==width/5*4 && x==-width && pressDone4===false && pressNo===false) {
         Garden.changeAnimation("Kwindow_open");
     } else {
         Garden.changeAnimation("Kwindow");
     }
-<<<<<<< HEAD
         
     if (pressDone4==true || pressNo==true){
         moving=true;
         buttonKitchen.show();
     }
-=======
->>>>>>> origin/master
     
 //(()) BUTTON - Kitchen to Laundry
     if(stateKitchen==true){
@@ -1084,32 +1077,17 @@ function draw(){
 /////////////////////////////////////////// JACK Animation <3
         // move left
         if(mouseX < Jack.position.x - 10 && moving==true) {
-<<<<<<< HEAD
             Jack.changeAnimation("moving");
             //flip horizontally
             Jack.mirrorX(-1);
             Jack.velocity.x = - 4 // REMOVE -4
-=======
-        Jack.changeAnimation("moving");
-        //flip horizontally
-        Jack.mirrorX(-1);
-        //negative x velocity: move left
-        Jack.velocity.x = - 4 // REMOVE -4
->>>>>>> origin/master
         }
         // move right
         else if(mouseX > Jack.position.x + 10 && moving==true) {
-<<<<<<< HEAD
             Jack.changeAnimation("moving");
             //unflip 
             Jack.mirrorX(1);
             Jack.velocity.x = 4 // REMOVE 4
-=======
-        Jack.changeAnimation("moving");
-        //unflip 
-        Jack.mirrorX(1);
-        Jack.velocity.x = 4 // REMOVE 4
->>>>>>> origin/master
         }
         // don't move > START
         else if (y==0){
@@ -1128,15 +1106,9 @@ function draw(){
         } 
         // don't move > toothbrush
         else if (Jack.position.x==width/10*6.5 && pressDone2==false && x==0) {
-<<<<<<< HEAD
             Sink.changeAnimation("Sink_before"); //*
             Jack.changeAnimation("toothbrush");
             Jack.velocity.x = 0;   
-=======
-        Sink.changeAnimation("Sink_before"); //*
-        Jack.changeAnimation("toothbrush");
-        Jack.velocity.x = 0;   
->>>>>>> origin/master
         }     
         // don't move > dish
         else if (Jack.position.x==width/4.5 && x==-width && pressDone3===false) {
