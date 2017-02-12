@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+//////////////////////// WAVES
+=======
 
+>>>>>>> origin/master
 var cnt=document.getElementById("count"); 
 var water=document.getElementById("water");
 document.getElementById("water").style.visibility='hidden';
@@ -93,8 +97,7 @@ function preload() {
     KitchenBack = loadImage('images/kitchen.png');
     table = loadImage('images/table.png');
     iron = loadImage('images/iron.png');
-    LuandryBack = loadImage('images/laundry.png');
-    Lclothes = loadImage('images/clothes.png');
+    LaundryBack = loadImage('images/laundry.png');
 }
 
 //------------------------------------------------•°o.O Setup O.o°•
@@ -309,10 +312,11 @@ function setup() {
     Jack.addAnimation("dish", "images/Jack_dish.png");
     Jack.addAnimation("garden", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden1.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden3.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png", "images/Jack_garden2.png");
     // LAUNDRY
-    Jack.addAnimation("clothes", "images/Jack_clothes1.png");
+    Jack.addAnimation("clothes", "images/Jack_clothes.png");
     Jack.addAnimation("mop", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop1.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png", "images/Jack_mop2.png");
     // RESULTS
-    Jack.addAnimation("swimming", "images/Jack_stand.png");
+    Jack.addAnimation("swimming", "images/Jack_floating1.png", "images/Jack_floating1.png", "images/Jack_floating1.png", "images/Jack_floating1.png", "images/Jack_floating2.png", "images/Jack_floating2.png", "images/Jack_floating2.png", "images/Jack_floating2.png");
+    Jack.addAnimation("float", "images/Jack_floating1.png", "images/Jack_floating1.png", "images/Jack_floating1.png", "images/Jack_floating1.png", "images/Jack_floating1.png", "images/Jack_floating1.png", "images/Jack_floating2.png", "images/Jack_floating2.png", "images/Jack_floating2.png", "images/Jack_floating2.png", "images/Jack_floating2.png", "images/Jack_floating2.png");
     
 /////////////////////////////////////////// BATHROOM
     // Bathtub - Tub
@@ -438,12 +442,11 @@ function draw(){
         image(KitchenBack,kx,py,wx,hy);
         // - Laundry
         var lx=x+width*2.5;
-        image(LuandryBack,lx,py,wx,hy);
-        image(Lclothes,lx,py,wx,hy);
+        image(LaundryBack,lx,py,wx,hy);
         pop();
     }
         
-/////////////////////////////////////////// WAVES        
+/////////////////////////////////////////// RESULTS - WAVES        
     if(pressDone6===false){
         percent=0;
     } else {
@@ -543,7 +546,7 @@ function draw(){
         
 //(()) BUTTON - Start to Bathroom
     if(stateStart==true){
-        y=y-6 //REMOVE 6
+        y=y-6; //REMOVE 6
 
         if (y<-height) {
             y=-height;
@@ -563,20 +566,24 @@ function draw(){
     }
     var JackScale = width/2134;
     
-    if (Jack.scale <= JackScale){
+    if (Jack.scale <= JackScale && percent<100){
         Jack.scale = JackScale;   
         Jack.position.y=height*0.64;
         moving=false;
-    } if (pressDone1==true){
+    } if (pressDone1==true && percent<100){
         Jack.position.y=height*0.56;
     } 
     
-    //// RESULTS
-    if (percent==90){                 
-        Jack.position.y=height*0.5;
+    //// RESULTS - WAVES
+    if (percent > 90 && percent < 100){                 
+        Jack.position.y=height*1.5;
     } 
     if (percent > 90){
         swimming=true;
+    }
+    if (Jack.position.y<=height*0.5){
+        swimming=false;
+        Jack.position.y=height*0.5;
     }
 
     //draw the sprite
@@ -728,7 +735,7 @@ function draw(){
 
 //(()) BUTTON - Bathroom to Kitchen
     if(stateBath==true){
-        x=x-10 // REMOVE 10
+        x=x-10; // REMOVE 10
         
         if (x<-width) {
             x=-width;
@@ -913,6 +920,14 @@ function draw(){
     } else {
         Garden.changeAnimation("Kwindow");
     }
+<<<<<<< HEAD
+        
+    if (pressDone4==true || pressNo==true){
+        moving=true;
+        buttonKitchen.show();
+    }
+=======
+>>>>>>> origin/master
     
 //(()) BUTTON - Kitchen to Laundry
     if(stateKitchen==true){
@@ -1062,29 +1077,44 @@ function draw(){
         
     if (percent>=95){
         moving=false;
-        Jack.scale = width/1552;    // 0.88
-        Jack.position.x=width/4;
+        Jack.scale = width/1600;    // RIMPICCIOLIRE JACK
+        Jack.position.x=width/6;
     }
         
 /////////////////////////////////////////// JACK Animation <3
-        //if mouse is to the left
+        // move left
         if(mouseX < Jack.position.x - 10 && moving==true) {
+<<<<<<< HEAD
+            Jack.changeAnimation("moving");
+            //flip horizontally
+            Jack.mirrorX(-1);
+            Jack.velocity.x = - 10 // REMOVE -4
+=======
         Jack.changeAnimation("moving");
         //flip horizontally
         Jack.mirrorX(-1);
         //negative x velocity: move left
         Jack.velocity.x = - 4 // REMOVE -4
+>>>>>>> origin/master
         }
+        // move right
         else if(mouseX > Jack.position.x + 10 && moving==true) {
+<<<<<<< HEAD
+            Jack.changeAnimation("moving");
+            //unflip 
+            Jack.mirrorX(1);
+            Jack.velocity.x = 10 // REMOVE 4
+=======
         Jack.changeAnimation("moving");
         //unflip 
         Jack.mirrorX(1);
         Jack.velocity.x = 4 // REMOVE 4
+>>>>>>> origin/master
         }
         // don't move > START
         else if (y==0){
-        Jack.changeAnimation("start");
-        Jack.velocity.x = 0;
+            Jack.changeAnimation("start");
+            Jack.velocity.x = 0;
         }
         // JACK fall down
         else if(y<0 && y>-height) {
@@ -1093,44 +1123,57 @@ function draw(){
         } 
         // don't move > shower
         else if (y<=-height && Jack.position.y==height*0.64 && pressDone1==false) {
-        Jack.changeAnimation("shower");
-        Jack.velocity.x = 0;   
+            Jack.changeAnimation("shower");
+            Jack.velocity.x = 0;   
         } 
         // don't move > toothbrush
         else if (Jack.position.x==width/10*6.5 && pressDone2==false && x==0) {
+<<<<<<< HEAD
+            Sink.changeAnimation("Sink_before"); //*
+            Jack.changeAnimation("toothbrush");
+            Jack.velocity.x = 0;   
+=======
         Sink.changeAnimation("Sink_before"); //*
         Jack.changeAnimation("toothbrush");
         Jack.velocity.x = 0;   
+>>>>>>> origin/master
         }     
         // don't move > dish
         else if (Jack.position.x==width/4.5 && x==-width && pressDone3===false) {
-        Jack.changeAnimation("dish");
-        Jack.velocity.x = 0;   
+            Jack.changeAnimation("dish");
+            Jack.velocity.x = 0;   
         }     
         // don't move > garden
         else if (Jack.position.x==width/5*4 && x==-width && pressDone4===false) {
-        Jack.changeAnimation("garden");
-        Jack.velocity.x = 0;   
+            Jack.changeAnimation("garden");
+            Jack.velocity.x = 0;   
         }     
         // don't move > washing machine
         else if (Jack.position.x==width/5*2 && x==-width*2 && pressDone5===false) {
-        Jack.changeAnimation("clothes");
-        Jack.velocity.x = 0;   
+            Jack.changeAnimation("clothes");
+            Jack.velocity.x = 0;   
         }     
         // don't move > mop
         else if (Jack.position.x==width/5*4 && x==-width*2 && pressDone6===false) {
-        Jack.changeAnimation("mop");
-        Jack.velocity.x = 0;   
+            Jack.changeAnimation("mop");
+            Jack.velocity.x = 0;   
         }
-        // swimming
-        else if(swimming===true) {
-        Jack.changeAnimation("swimming");
-        Jack.velocity.y = - 3 // REMOVE -3
+        // swimming > bottom to up
+        else if(swimming==true && moving==false && Jack.position.y > height*0.5) {
+            Jack.changeAnimation("swimming");
+            Jack.mirrorX(1);
+            Jack.velocity.y = - 4 // REMOVE -4
+        }
+        // swimming > stay floating > results
+        else if(swimming==false && moving==false && Jack.position.y==height*0.5) {
+            Jack.changeAnimation("float");
+            Jack.velocity.y = 0
         }
         // don't move > stand
         else {
-        Jack.changeAnimation("stand");
-        Jack.velocity.x = 0;
+            Jack.changeAnimation("stand");
+            Jack.velocity.y = 0;
+            Jack.velocity.x = 0;
         }    
     
 /////////////////////////////////////////// BACKGROUND
