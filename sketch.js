@@ -1088,7 +1088,7 @@ function draw(){
             Jack.changeAnimation("moving");
             //flip horizontally
             Jack.mirrorX(-1);
-            Jack.velocity.x = - 10 // REMOVE -4
+            Jack.velocity.x = - 4 // REMOVE -4
 =======
         Jack.changeAnimation("moving");
         //flip horizontally
@@ -1103,7 +1103,7 @@ function draw(){
             Jack.changeAnimation("moving");
             //unflip 
             Jack.mirrorX(1);
-            Jack.velocity.x = 10 // REMOVE 4
+            Jack.velocity.x = 4 // REMOVE 4
 =======
         Jack.changeAnimation("moving");
         //unflip 
