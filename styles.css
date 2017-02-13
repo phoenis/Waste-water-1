@@ -41,28 +41,27 @@ body {
 #toKitchen {
     background-image: url(images/Next_room_kitchen.gif);
     background-repeat: no-repeat;
+    background-color: transparent; 
     border: none;
 }
 
 #toKitchen:hover {
-    background-image: url(images/Next_room_kitchen-hover.gif);
+    background-image: url(images/Next_room_hover.gif);
     background-repeat: no-repeat;
+    background-color: transparent; 
     border: none;
 }
 
 #toLaundry {
     background-image: url(images/Next_room_laundry.gif);
     background-repeat: no-repeat;
+    background-color: transparent; 
     border: none;
 }
 
 #toLaundry:hover {
-    background-image: url(images/Next_room_laundry-hover.gif);
+    background-image: url(images/Next_room_hover.gif);
     background-repeat: no-repeat;
+    background-color: transparent; 
     border: none;
 }
-
-/*
-id con #
-classi con .
-*/
