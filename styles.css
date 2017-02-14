@@ -4,6 +4,10 @@ body {
     position: fixed;
 }
 
+#mybg {
+    z-index: -999;
+}
+
 #inputName{
     font-size: 40px;
     color: white;
