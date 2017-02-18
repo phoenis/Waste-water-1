@@ -603,14 +603,14 @@ function draw(){
 /////////////////////////////////////////// BATHROOM
     // Bathtub  //<< AGGIORNA
     var AnimationScale=width/1405;
-    Bath.position.x=x+width*0.2935;
-    Bath.position.y=y+height*1.615;
     Bath.scale=AnimationScale;
+    Bath.position.x=x+width*0.2935;
+    Bath.position.y=y+height*1.5+width*0.057;
         
     // Sink  //<< AGGIORNA
     Sink.scale=AnimationScale;
     Sink.position.x=x+width*0.706;
-    Sink.position.y=y+height*1.552;
+    Sink.position.y=y+height*1.5+width*0.026;
     
 //-----> INPUT Shower
     if(y<=-height && pressDone1==false){
@@ -773,10 +773,10 @@ function draw(){
     // Dishwasher  //<< AGGIORNA
     Dish.scale=AnimationScale;
     Dish.position.x=x+width*1.373;
-    Dish.position.y=y+height*1.52;
+    Dish.position.y=y+height*1.5+width*0.01;
         
     ///<< AGGIUNGERE
-    if (pressDone2==true && pressDone3==false && Jack.position.y!=width/4.5) {
+    if (pressDone2==true && pressDone3==false && Jack.position.y!=width/4.5 && x==-width) {
         
     Dish.onMousePressed = function() {activeSpeed();}   //<<AGGIUNGERE
     }
@@ -872,7 +872,7 @@ function draw(){
 // Window garden  //<< AGGIORNA
     Garden.scale=AnimationScale;
     Garden.position.x=x+width*1.725;
-    Garden.position.y=y+height*1.151;
+    Garden.position.y=y+height*1.5-width*0.17;
         
     ///<< AGGIUNGERE
     if (pressDone3==true && pressDone4==false && pressNo==false && Jack.position.y!=width/5*4) { 
@@ -989,10 +989,10 @@ function draw(){
 // Washing machine  //<< AGGIORNA
     WMachine.scale=AnimationScale;
     WMachine.position.x=x+width*2.502;
-    WMachine.position.y=y+height*1.596;
+    WMachine.position.y=y+height*1.5+width*0.0475;
         
     ///<< AGGIUNGERE
-    if (pressDone3==true && pressDone5==false) {
+    if (pressDone3==true && pressDone5==false && x==-width*2) {
         
     WMachine.onMousePressed = function() {activeSpeed();}   //<<AGGIUNGERE
     }
@@ -1059,7 +1059,7 @@ function draw(){
 // Mop  //<< AGGIORNA
     Mop.scale=AnimationScale;
     Mop.position.x=x+width*2.8;
-    Mop.position.y=y+height*1.55;
+    Mop.position.y=y+height*1.5+width*0.02;
         
     ///<< AGGIUNGERE
     if (pressDone5==true && pressDone6==false && Jack.position.y!=width/5*4) {
@@ -1179,6 +1179,7 @@ function draw(){
   } else if (Waste<1){
       if(userName=="" || userName==null || userName==undefined){
         
+        fill(255);
         textFont("Dosis");
         textAlign(LEFT);
         textSize(height/15);
@@ -1187,7 +1188,7 @@ function draw(){
         
         textStyle(NORMAL);
         textSize(height/24); 
-        text("Compliments! You have respected the amount of water setted by the World Health Organization, \nwhich says that 100 liters per person per day are needed to ensure that most basic human needs.", 8*width/24,2*height/9);  
+        text("Compliments! \nYou have respected the amount of water setted by the World Health Organization, \nwhich says that 100 liters per person per day \nare needed to ensure that most basic human needs.", 8*width/24,2*height/9);  
           
         } else { 
             
