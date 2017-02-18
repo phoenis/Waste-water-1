@@ -1,4 +1,8 @@
-var timeGlow; ///<<TIME
+//////////////////////// TIME
+var timeSinkGlow;
+var timeGardenGlow;
+var timeWMGlow;
+var timeMopGlow;
 
 //////////////////////// WAVES
 var cnt=document.getElementById("count"); 
@@ -686,7 +690,6 @@ function draw(){
     
     if (pressDone1==true) {
         Bath.changeAnimation("bath_none");
-        Sink.changeAnimation("SinkGlow");   //<< GLOW
         moving=true;
     } else if (pressTub==true){
         Bath.changeAnimation("bath_tub");
@@ -753,7 +756,7 @@ function draw(){
         
     }
     if(stateBath==true && x>-width){
-        Jack.position.x=Jack.position.x-11;
+        Jack.position.x=Jack.position.x-13;
         
         if (Jack.position.x<100) {
             Jack.position.x=100;
@@ -777,7 +780,6 @@ function draw(){
     if (Jack.position.x>=width/4.5 && x==-width && pressDone3===false) {
         
         moving=false;
-        Dish.changeAnimation("Dish_none");   //<< GLOW
 
         Jack.position.x=width/4.5;
             
@@ -853,7 +855,6 @@ function draw(){
     
     if (pressDone3==true) {
             Dish.changeAnimation("Dish_none");
-            Garden.changeAnimation("GardenGlow");   //<< GLOW
             moving=true;  //<<AGGIUNGI
         } else if (pressHands==true){
             Dish.changeAnimation("Sink");
@@ -937,7 +938,6 @@ function draw(){
         
             if(pressNo===true || pressDone4===true){    //<<AGGIUNGI
                 Garden.changeAnimation("Garden_closed");    //<<AGGIUNGI
-        WMachine.changeAnimation("WMGlow");   //<< GLOW
             
             moving=true;
             buttonKitchen.show();
@@ -970,7 +970,7 @@ function draw(){
     }
     
     if(stateKitchen==true && x>-width*2){
-        Jack.position.x=Jack.position.x-11;
+        Jack.position.x=Jack.position.x-13;
         
         if (Jack.position.x<100) {
             Jack.position.x=100;
@@ -1041,7 +1041,6 @@ function draw(){
         if(pressDone5===true){
             moving=true;
             WMachine.changeAnimation("WMClosed");
-            Mop.changeAnimation("MopGlow");   //<< GLOW
         }
             
     if (x==-width*2 && Jack.position.x>=width/5*2 && pressDone5===false){
@@ -1262,6 +1261,7 @@ function draw(){
         else if (Jack.position.x==width/10*6.5 && pressDone2==false && x==0) {
             Sink.changeAnimation("Sink_before");
             Jack.changeAnimation("toothbrush");
+            clearInterval(timeSinkGlow);  //<< TIME
             speedUP=false;  //<< AGGIUNGERE
             Jack.velocity.x = 0;   
         }     
@@ -1274,18 +1274,21 @@ function draw(){
         // don't move > garden
         else if (Jack.position.x==width/5*4 && x==-width && pressDone4===false) {
             Jack.changeAnimation("garden");
+            clearInterval(timeGardenGlow);  //<< TIME
             speedUP=false;  //<< AGGIUNGERE
             Jack.velocity.x = 0;   
         }     
         // don't move > washing machine
         else if (Jack.position.x==width/5*2 && x==-width*2 && pressDone5===false) {
             Jack.changeAnimation("clothes");
+            clearInterval(timeWMGlow);  //<< TIME
             speedUP=false;  //<< AGGIUNGERE
             Jack.velocity.x = 0;   
         }     
         // don't move > mop
         else if (Jack.position.x==width/5*4 && x==-width*2 && pressDone6===false) {
             Jack.changeAnimation("mop");
+            clearInterval(timeMopGlow);  //<< TIME
             speedUP=false;  //<< AGGIUNGERE
             Jack.velocity.x = 0;   
         }
@@ -1354,8 +1357,6 @@ function draw(){
 function StartToBath() {
     if(stateStart==false){
         stateStart=true;
-        
-       // timeGlow = setInterval(sinkGlow,5000); ///<<TIME
     }
 }
     // Bathroom to Kitchen
@@ -1405,6 +1406,8 @@ function Q1results(){
         selTub.hide();
         document.getElementById("numBaths").style.visibility = "hidden";
         buttonDone1.hide();
+        
+        timeSinkGlow = setInterval(sinkGlow,2000); ///<<TIME
     }
 }
 
@@ -1451,6 +1454,8 @@ function Q3results() {
         selDishwasher.hide();
         buttonDone3.hide();
         document.getElementById("numDishwasher").style.visibility = "hidden";
+        
+        timeGardenGlow = setInterval(gardenGlow,2000); ///<<TIME
     }
 }
 
@@ -1468,6 +1473,8 @@ function noOptions() {
         pressNo=true;
         buttonYes.hide();
         buttonNo.hide();
+        
+        timeWMGlow = setInterval(wmGlow,6000); ///<<TIME
     } else if(pressNo===false && pressYes===true) {
         pressYes=false;
         document.getElementById("mqGarden").style.visibility = "hidden";
@@ -1477,6 +1484,8 @@ function noOptions() {
         buttonYes.hide();
         buttonNo.hide();
         buttonDone4.hide();
+        
+        timeWMGlow = setInterval(wmGlow,6000); ///<<TIME
     }
 }
 
@@ -1489,6 +1498,8 @@ function Q4results() {
         selGarden.hide();
         gardenSlider.hide();
         buttonDone4.hide();
+        
+        timeWMGlow = setInterval(wmGlow,6000); ///<<TIME
     }
 }
 
@@ -1501,6 +1512,8 @@ function Q5results() {
         WMachineSlider.hide();
         document.getElementById("numWMachine").style.visibility = "hidden";
         buttonDone5.hide();
+        
+        timeMopGlow = setInterval(mopGlow,2000); ///<<TIME
     }
 }
 
@@ -1612,8 +1625,21 @@ function windowResized() {
     resizeCanvas(windowWidth,windowHeight);
 }
 
-function sinkGlow(){ ///<<TIME
+//------------------------------------------------•°o.O TIME Glow O.o°•
+function sinkGlow(){
     Sink.changeAnimation("SinkGlow");
+}
+
+function gardenGlow(){
+    Garden.changeAnimation("GardenGlow");
+}
+
+function wmGlow(){
+    WMachine.changeAnimation("WMGlow");
+}
+
+function mopGlow(){
+    Mop.changeAnimation("MopGlow");
 }
 
 function activeSpeed() {    //<<AGGIUNGERE
