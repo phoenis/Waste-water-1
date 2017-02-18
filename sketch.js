@@ -101,7 +101,7 @@ function preload() {
     table = loadImage('images/table.png');
     iron = loadImage('images/iron.png');
     LaundryBack = loadImage('images/laundry.png');
-    myTub=loadImage("images/wasteTub.png")
+    myTub=loadImage("images/wastetub.png")
 }
 
 //------------------------------------------------•°o.O Setup O.o°•
