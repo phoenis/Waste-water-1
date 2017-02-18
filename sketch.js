@@ -393,6 +393,10 @@ function setup() {
     buttonDone2.position(width/10,height/6);
     buttonDone2.mousePressed(Q2results);
     buttonDone2.hide();
+    
+        //FinalTubs
+    myImage = createSprite(width/2,height/2);
+    myImage.addAnimation("waste", "images/wastetub.png","images/wastetub.png","images/wastetub.png","images/wastetub.png","images/wastetub2.png","images/wastetub2.png","images/wastetub2.png","images/wastetub2.png"); 
 }
 
 //------------------------------------------------•°o.O Draw O.o°•
@@ -755,7 +759,6 @@ function draw(){
         
         buttonBathroom.hide();
         
-        Dish.changeAnimation("DishGlow");   //<< GLOW
     }
     if(stateBath==true && x>-width){
         Jack.position.x=Jack.position.x-11;
@@ -950,8 +953,6 @@ function draw(){
     
     if (Jack.position.x==width/5*4 && x==-width && pressDone4===false && pressNo===false) {
         Garden.changeAnimation("Garden_open");
-    } else {
-        Garden.changeAnimation("Garden_closed");
     }
         
     if (pressDone4==true || pressNo==true){
@@ -1129,9 +1130,91 @@ function draw(){
         Jack.position.x=width/6;
     }
         
+    ///e i risultati con vasche etc   
     if (Jack.position.y==height/2.2){
         restartButton.show();
-        ///e i risultati con vasche etc
+        
+        //vasche
+        
+        var WaterWaste = Result - 700;
+        var Waste = Math.floor(WaterWaste/100);
+        
+        
+        //testo
+        if(Waste>=1){
+        myImage.visible=true;
+            
+      if(userName=="" || userName==null || userName==undefined){
+   
+        fill(255);
+        textFont("Dosis");
+        textAlign(LEFT);
+        textSize(height/15);
+        textStyle(BOLD);   
+        text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", 8*width/24,height/6);
+        
+        textStyle(NORMAL);
+        textSize(height/24); 
+        text("according to the World Health Organization you would need only 700 liters. \nWith the water you wasted, you could fill "+Waste+" bathtubs.", 8*width/24,2*height/9);
+          
+        } else { 
+        fill(255);
+        textFont("Dosis");
+        textAlign(LEFT);
+        textSize(height/15);
+        textStyle(BOLD);     
+        text(userName+",", 8*width/24,2*height/12);    
+            
+        fill(255);
+        textFont("Dosis");
+        textAlign(LEFT);
+        textSize(height/15);
+        textStyle(BOLD);     
+        text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", 8*width/24,3*height/12); 
+            
+        textStyle(NORMAL);
+        textSize(height/24);     
+        text("according to the World Health Organization you would need only 700 liters. \nWith the water you wasted, you could fill  "+Waste+" bathtubs.", 8*width/24,7*height/24);
+        }
+  } else if (Waste<1){
+      if(userName=="" || userName==null || userName==undefined){
+        
+        textFont("Dosis");
+        textAlign(LEFT);
+        textSize(height/15);
+        textStyle(BOLD);   
+        text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", 8*width/24,height/6);
+        
+        textStyle(NORMAL);
+        textSize(height/24); 
+        text("Compliments! You have respected the amount of water setted by the World Health Organization, \nwhich says that 100 liters per person per day are needed to ensure that most basic human needs.", 8*width/24,2*height/9);  
+          
+        } else { 
+            
+        fill(255);
+        textFont("Dosis");
+        textAlign(LEFT);
+        textSize(height/15);
+        textStyle(BOLD);     
+        text(userName+",", 8*width/24,2*height/12);        
+            
+        textFont("Dosis");
+        textAlign(LEFT);
+        textSize(height/15);
+        textStyle(BOLD);   
+        text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", 8*width/24,3*height/12);
+        
+        textStyle(NORMAL);
+        textSize(height/24); 
+        text("Compliments! \nYou have respected the amount of water setted by the World Health Organization, \nwhich says that 100 liters per person per day \nare needed to ensure that most basic human needs.", 8*width/24,7*height/24);  
+        }
+        }
+        
+        wasteTubs(Waste);
+    }else if(Jack.position.y==height/2.2 && Waste<1){
+        myImage.visible=false;
+    }else if(Jack.position.y!=height/2.2){
+        myImage.visible=false;
     }
 /////////////////////////////////////////// JACK Animation <3        
         // moving left
@@ -1396,6 +1479,95 @@ function Q6results() {
 
 function restart() {
     location.reload();
+}
+
+// Final wasteTubs
+
+function wasteTubs(z){
+    
+ if(z==1){
+    
+    myImage.scale=width/4000 
+    myImage.position.x=15*width/24
+    myImage.position.y=5*height/8
+    drawSprites();   
+   
+    
+}else if(z==2){
+    for(var a=11*width/24; a<width; a+=(1/3)*width){
+
+    myImage.scale=width/4000 
+    myImage.position.x=a
+    myImage.position.y=5*height/8
+    drawSprites(); 
+    }
+    
+}else if(z==3){
+    for(var a=10*width/24; a<width; a+=(5/24)*width){
+
+    myImage.scale=width/6000 
+    myImage.position.x=a
+    myImage.position.y=5*height/8
+    drawSprites();   
+    }
+    
+}else if(z>=4 && z<9){
+    u=z%4    
+    j=Math.floor(z/4)  
+    
+    for(var a=19*width/48; a<=22*width/24; a+=(7*width/48)){
+        for(var b=height/2;b<=(8*j)*height/16; b+=5*height/16){
+    myImage.scale=width/7500 
+    myImage.position.x=a
+    myImage.position.y=b
+    drawSprites();   
+    }
+    }
+    
+    for(var c=19*width/48; c<(2+u)*width/6; c+=7*width/48){
+    myImage.scale=width/7500 
+    myImage.position.x=c
+    myImage.position.y=13*height/16
+    drawSprites();
+    }
+    
+}else if(z>=9 && z<=21){
+    j=Math.floor(z/7)
+    u=z%7    
+         
+    for(var a=(9*(width/24)); a<22*width/24; a+=(width/12)){
+        for(var b=11*height/24;b<(11/24+j/6)*height; b+=height/6){
+    myImage.scale=width/12000 
+    myImage.position.x=a
+    myImage.position.y=b
+    drawSprites();   
+    }
+    }
+    
+    for(var c=(9*(width/24)); c<(4+u)*(width/12); c+=(width/12)){
+    myImage.scale=width/12000 
+    myImage.position.x=c
+    myImage.position.y=(11/24+(j/6))*height
+    drawSprites();
+    }
+    
+}else if(z>21){
+    
+    myImage.scale=width/4000 
+    myImage.position.x=12*width/24
+    myImage.position.y=5*height/8
+    drawSprites(); 
+    
+    fill(255);
+        textFont("Dosis");
+        textAlign(LEFT);
+        textSize(height/4);
+        textStyle(BOLD);     
+        text("X"+z, 16*width/24,12*height/16);       
+}else if(z==0){
+    myImage.visible=false
+}   
+    
 }
 
 //------------------------------------------------•°o.O Window resize O.o°•
