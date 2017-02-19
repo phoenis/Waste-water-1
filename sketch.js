@@ -1740,7 +1740,7 @@ function shareFb() {
 }
 
 function shareTw() {
-    window.open("https://twitter.com/share?url=http://bit.ly/2lz8bGq&amp;text=How%20much%20water%20do%20you%20use?%20Let's%20find%20it%20out%20with%20Jack%20on&amp;hashtags=JackDoesntWaste;hashtags=beLikeJack;hashtags=waterWastage",'_blank');
+    window.open("https://twitter.com/share?url=https://phoenis.github.io/Waste-water-1/&amp;text=How%20much%20water%20do%20you%20use?%20Let's%20find%20it%20out%20with%20Jack%20on&amp;hashtags=JackDoesntWaste;hashtags=beLikeJack;hashtags=waterWastage",'_blank');
 }
 
 function infoBox() {
