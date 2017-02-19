@@ -17,7 +17,7 @@ interval=setInterval(function(){
     if(percent==100){
         clearInterval(interval);
     }
-    },80);
+    },40);
 
 var week = 1;
 var userName;
@@ -166,7 +166,7 @@ function setup() {
 ////    Button RESTART - SHARE - INFO - SOUND
     restartButton=createButton("Restart");
     restartButton.addClass("button");
-    restartButton.position(width/18.8,height/1.15);
+    restartButton.position(width/18.8,43*height/48);
     restartButton.mousePressed(restart);
     restartButton.hide();
     
@@ -1292,11 +1292,13 @@ function draw(){
         Result = resultMop + resultWMachine + resultGarden + resultDishwasher + resultHands + resultTeeth + resultBath + resultShower;
         
         userName = document.getElementById("inputName").value;
+        userNamemaiuscola = userName.toUpperCase()
 
         Mop.changeAnimation("MopNotInUse");        
     }
-        var WaterWaste = Result - 700;
-        var Waste = Math.floor(WaterWaste/100);
+        
+        var WaterWaste =Math.round(Result - 700,1);
+        var Waste = Math.round(WaterWaste/100);
         
 //// RESULTS - WAVES
     if (percent > 90 && percent < 100){                 
@@ -1327,30 +1329,28 @@ function draw(){
 // RESULTS tubs & text
     if(percent>=95 &&Jack.position.y==height/2.2 && Waste>=1){
         myImage.visible=true;
-        wasteTubs(Waste);
         restartButton.show();
-        shareButton.show();
-        
-        image(myTub,8*width/24,43*height/48,50,50)    
+        wasteTubs(Waste);
+        image(myTub,8*width/24,42*height/48,50,50)    
         fill(255);
         textFont("Lato");
         textAlign(LEFT);
         textSize(height/40);
         textStyle(NORMAL);   
-        text("= 100 liters", 9*width/24,23*height/24); 
+        text("= 100 liters", 9*width/24,45*height/48); 
             
-        if(userName=="" || userName==null || userName==undefined){
+      if(userName=="" || userName==null || userName==undefined){
    
         fill(255);
         textFont("Dosis");
         textAlign(LEFT);
         textSize(height/15);
         textStyle(BOLD);   
-        text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", 8*width/24,height/6);
+        text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", 8*width/24,3*height/24);
         
         textStyle(NORMAL);
         textSize(height/24); 
-        text("according to the World Health Organization you would need only 700 liters. \nWith the water you wasted, you could fill "+Waste+" bathtubs.", 8*width/24,2*height/9);
+        text("According to the World Health Organization you would need only 700 liters. \nWith the water you wasted, you could fill "+Waste+" bathtubs.", 8*width/24,9*height/48);
           
         } else { 
         fill(255);
@@ -1358,24 +1358,21 @@ function draw(){
         textAlign(LEFT);
         textSize(height/15);
         textStyle(BOLD);     
-        text(userName+",", 8*width/24,2*height/12);    
+        text(userNamemaiuscola+",", 8*width/24,3*height/24);    
             
         fill(255);
         textFont("Dosis");
         textAlign(LEFT);
         textSize(height/15);
         textStyle(BOLD);     
-        text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", 8*width/24,3*height/12); 
+        text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", 8*width/24,9*height/48); 
             
         textStyle(NORMAL);
         textSize(height/24);     
-        text("according to the World Health Organization you would need only 700 liters. \nWith the water you wasted, you could fill  "+Waste+" bathtubs.", 8*width/24,7*height/24);
+        text("According to the World Health Organization you would need only 700 liters. \nWith the water you wasted, you could fill  "+Waste+" bathtubs.", 8*width/24,11*height/48);
         }    
-    } else if(percent>=95 && Jack.position.y==5*height/8 && Waste<1){
-        restartButton.show();
-        shareButton.show();
-        
-        if(userName=="" || userName==null || userName==undefined){
+  } else if (percent>=95 && Jack.position.y==5*height/8 && Waste<1){
+      if(userName=="" || userName==null || userName==undefined){
         
         fill(255);
         textFont("Dosis");
@@ -1388,23 +1385,22 @@ function draw(){
         textSize(height/24); 
         text("Compliments! You have respected the amount of water setted by the World Health Organization, \nwhich says that 100 liters per person per day are needed to ensure that most basic human needs.", width/2,2*height/9);  
           
-        } else {
+        } else {    
+            
         fill(255);    
         textFont("Dosis");
         textAlign(CENTER);
         textSize(height/15);
         textStyle(BOLD);   
-        text(userName+", YOU USED "+Result+" LITERS OF WATER IN A WEEK!", width/2,height/6);
+        text(userNamemaiuscola+", YOU USED "+Result+" LITERS OF WATER IN A WEEK!", width/2,height/6);
         
         textStyle(NORMAL);
         textSize(height/24); 
         text("Compliments! You have respected the amount of water setted by the World Health Organization, \nwhich says that 100 liters per person per day are needed to ensure that most basic human needs.", width/2,2*height/9);  
         }
-    } else if(Jack.position.y==height/2.2 && Waste<1){
-        restartButton.show();
-        shareButton.show();
+        }else if(Jack.position.y==height/2.2 && Waste<1){
         myImage.visible=false;
-    } else if(Jack.position.y!=height/2.2){
+    }else if(Jack.position.y!=height/2.2){
         myImage.visible=false;
     }
 /////////////////////////////////////////// JACK Animation <3        
@@ -1736,11 +1732,11 @@ function shareOptions() {
 }
 
 function shareFb() {
-    window.open("https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fphoenis.github.io%2FWaste-water-1%2F&picture=https%3A%2F%2Fgithub.com%2Fphoenis%2FWaste-water-1%2Fblob%2Fmaster%2Fimages%2Fcard.png%3Fraw%3Dtrue&title=How+much+water+do+you+use%3F&caption=https%3A%2F%2Fgithub.com%2Fphoenis%2FWaste-water-1%2Fblob%2Fmaster%2Fimages%2Fcard.png%3Fraw%3Dtrue&quote=&description=Let%27s+find+it+out+with+Jack+%3A%29%0D%0A%23JackDoesntWaste+%23beLikeJack",'_blank');
+    window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbit.ly%2F2lz8bGq%2F&picture=https%3A%2F%2Fgithub.com%2Fphoenis%2FWaste-water-1%2Fblob%2Fmaster%2Fimages%2Fcard.png%3Fraw%3Dtrue&title=How+much+water+do+you+use%3F&caption=https%3A%2F%2Fbit.ly%2F2F2lz8bGq%2F&quote=&description=Let%27s+find+it+out+with+Jack+%3A%29",'_blank');
 }
 
 function shareTw() {
-    window.open("https://twitter.com/share?url=https://phoenis.github.io/Waste-water-1/&amp;text=How%20much%20water%20do%20you%20use?%20Let's%20find%20it%20out%20with%20Jack%20on&amp;hashtags=JackDoesntWaste;hashtags=beLikeJack;hashtags=waterWastage",'_blank');
+    window.open("https://twitter.com/share?url=https://phoenis.github.io/Waste-water-1/&amp;text=How%20much%20water%20do%20you%20use?%20Let's%20find%20it%20out%20with%20Jack%20on&amp;hashtags=JackDoesntWaste",'_blank');
 }
 
 function infoBox() {
@@ -1772,53 +1768,53 @@ function wasteTubs(z){
     
     myImage.scale=width/4000 
     myImage.position.x=15*width/24
-    myImage.position.y=5*height/8
+    myImage.position.y=9*height/16
     drawSprites(); 
     
-} else if(z==2){
+}else if(z==2){
     for(var a=11*width/24; a<width; a+=(1/3)*width){
 
     myImage.scale=width/4000 
     myImage.position.x=a
-    myImage.position.y=5*height/8
+    myImage.position.y=9*height/16
     drawSprites(); 
     }
     
-} else if(z==3){
+}else if(z==3){
     for(var a=10*width/24; a<width; a+=(5/24)*width){
 
     myImage.scale=width/6000 
     myImage.position.x=a
-    myImage.position.y=5*height/8
+    myImage.position.y=9*height/16
     drawSprites();   
     }
     
-} else if(z>=4 && z<9){
+}else if(z>=4 && z<9){
+
     u=z%4    
     j=Math.floor(z/4)  
-    
     for(var a=19*width/48; a<=22*width/24; a+=(7*width/48)){
-        for(var b=height/2;b<=(8*j)*height/16; b+=5*height/16){
+        for(var b=21*height/48;b<=((21*j)*height/48); b+=13*height/48){
     myImage.scale=width/7500 
     myImage.position.x=a
     myImage.position.y=b
-    drawSprites();   
+    drawSprites(); 
     }
     }
     
     for(var c=19*width/48; c<(2+u)*width/6; c+=7*width/48){
     myImage.scale=width/7500 
     myImage.position.x=c
-    myImage.position.y=13*height/16
+    myImage.position.y=34*height/48
     drawSprites();
     }
     
-} else if(z>=9 && z<=21){
+}else if(z>=9 && z<=21){
     j=Math.floor(z/7)
     u=z%7    
          
     for(var a=(9*(width/24)); a<22*width/24; a+=(width/12)){
-        for(var b=11*height/24;b<(11/24+j/6)*height; b+=height/6){
+        for(var b=10*height/24;b<(10/24+j/6)*height; b+=height/6){
     myImage.scale=width/12000 
     myImage.position.x=a
     myImage.position.y=b
@@ -1829,15 +1825,15 @@ function wasteTubs(z){
     for(var c=(9*(width/24)); c<(4+u)*(width/12); c+=(width/12)){
     myImage.scale=width/12000 
     myImage.position.x=c
-    myImage.position.y=(11/24+(j/6))*height
+    myImage.position.y=(10/24+(j/6))*height
     drawSprites();
     }
     
-} else if(z>21){
+}else if(z>21){
     
     myImage.scale=width/4000 
     myImage.position.x=12*width/24
-    myImage.position.y=5*height/8
+    myImage.position.y=9*height/16
     drawSprites(); 
     
     fill(255);
@@ -1845,8 +1841,8 @@ function wasteTubs(z){
         textAlign(LEFT);
         textSize(height/4);
         textStyle(BOLD);     
-        text("⨯"+z, 16*width/24,12*height/16);       
-} else if(z==0){
+        text("⨯"+z, 16*width/24,11*height/16);       
+}else if(z==0){
     myImage.visible=false
 }   
     
