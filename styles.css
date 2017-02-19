@@ -1,15 +1,203 @@
-/* INPUT START */
+/* GENERAL */
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('images/info.png') 50% 50% no-repeat #a6cdda;
+}
+
 body {
     margin: 0px;
     position: fixed;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
 
-#mybg {
-    z-index: -999;
+/* INPUT TEXT */
+
+input[type=text]{
+    font-size: 1.5em;
+    text-align: center;
+    color: #677f8c;
+    background: none;
+    border: none;
+    border-bottom: 2px solid;
+    font-family: 'Lato', sans-serif;
 }
 
+input[type=text]:focus {
+    outline: none;
+}
+
+input[type=text]::-webkit-input-placeholder {
+    color: #677f8c;
+    opacity: 0.5;
+    font-style: italic;
+}
+
+/* INPUT RANGE */
+
+input[type=range] {
+    -webkit-appearance: none;
+    background: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    height: 5px;
+    cursor: pointer;
+    background: #677F8C;
+    border-radius: 5px;
+}
+input[type=range]::-webkit-slider-thumb {
+    height: 15px;
+    width: 15px;
+    border-radius: 25px;
+    background: #A1D0FF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -5px;
+}
+
+/* DROPDOWN */
+
+.selection {
+    font-size: 1em;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    border-bottom: #677F8C 2px solid;
+    border-radius: 0px;
+    color: #677F8C;
+    background: none; 
+}
+
+/* ADDITIONAL BUTTONS - INFO/SOUND */
+
+.info {
+    background-image: url(images/info.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+.info:hover {
+    background-image: url(images/info-hover.png);
+}
+
+.infoSelected {
+    background-image: url(images/closePopUp.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+.infoSelected:hover {
+    background-image: url(images/closePopUp-hover.png);
+}
+
+.sound {
+    background-image: url(images/audio_play.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+.sound:hover {
+    background-image: url(images/audio_play-hover.png);
+}
+.noSound {
+    background-image: url(images/audio_stop.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+.noSound:hover {
+    background-image: url(images/audio_stop-hover.png);
+}
+
+/* CHANGE ROOM BUTTON */
+
+#toKitchen {
+    background-image: url(images/Next_room_kitchen.gif);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+
+#toKitchen:hover {
+    background-image: url(images/Next_room_hover.gif);
+}
+
+#toLaundry {
+    background-image: url(images/Next_room_laundry.gif);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+
+#toLaundry:hover {
+    background-image: url(images/Next_room_hover.gif);
+}
+
+/* BUTTONS IN THE BOXES */
+
+.button {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background: none;
+    border: 2.5px solid;
+    color: #677f8c;
+    text-align: center;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #677f8c;
+    border: #677f8c 2.5px solid;
+    color: white;
+}
+
+.selected {	
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background-color: #677f8c;
+    border: #677f8c 2.5px solid;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    border-radius: 5px;
+}
+
+/* RESTART AND SHARE BUTTONS */
+
+#facebook {
+    background-image: url(images/sharing-button/facebook.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+#facebook:hover {
+    background-image: url(images/sharing-button/facebook-hover.png);
+}
+
+#twitter {
+    background-image: url(images/sharing-button/twitter.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+#twitter:hover {
+    background-image: url(images/sharing-button/twitter-hover.png);
+}
+
+/* START */
 #inputName{
-    font-size: 40px;
+    font-size: 3em;
+    text-align: left;
     color: white;
     background: none;
     border: none;
@@ -17,7 +205,7 @@ body {
 }
 
 #inputName:focus {
-    outline: none
+    outline: none;
 }
 
 #inputName::-webkit-input-placeholder {
@@ -34,38 +222,10 @@ body {
     border: none;
     color: #677f8c;
     text-align: center;
-    font-size: 27px;
+    font-size: 1.6em;
     border-bottom: 2.5px solid;
 }
 
 #startButton:hover {
     color: white;
-}
-
-#toKitchen {
-    background-image: url(images/Next_room_kitchen.gif);
-    background-repeat: no-repeat;
-    background-color: transparent; 
-    border: none;
-}
-
-#toKitchen:hover {
-    background-image: url(images/Next_room_hover.gif);
-    background-repeat: no-repeat;
-    background-color: transparent; 
-    border: none;
-}
-
-#toLaundry {
-    background-image: url(images/Next_room_laundry.gif);
-    background-repeat: no-repeat;
-    background-color: transparent; 
-    border: none;
-}
-
-#toLaundry:hover {
-    background-image: url(images/Next_room_hover.gif);
-    background-repeat: no-repeat;
-    background-color: transparent; 
-    border: none;
 }
