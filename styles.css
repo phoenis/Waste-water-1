@@ -175,23 +175,23 @@ input[type=range]::-webkit-slider-thumb {
 /* RESTART AND SHARE BUTTONS */
 
 #facebook {
-    background-image: url(images/sharing-button/facebook.png);
+    background-image: url(images/facebook.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 #facebook:hover {
-    background-image: url(images/sharing-button/facebook-hover.png);
+    background-image: url(images/facebook-hover.png);
 }
 
 #twitter {
-    background-image: url(images/sharing-button/twitter.png);
+    background-image: url(images/twitter.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 #twitter:hover {
-    background-image: url(images/sharing-button/twitter-hover.png);
+    background-image: url(images/twitter-hover.png);
 }
 
 /* START */
