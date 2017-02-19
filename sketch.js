@@ -1736,7 +1736,7 @@ function shareOptions() {
 }
 
 function shareFb() {
-    window.open("https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbit.ly%2F2lz8bGq%2F&picture=https%3A%2F%2Fgithub.com%2Fphoenis%2FWaste-water-1%2Fblob%2Fmaster%2Fimages%2Fcard.png%3Fraw%3Dtrue&title=How+much+water+do+you+use%3F&caption=https%3A%2F%2Fbit.ly%2F2F2lz8bGq%2F&quote=&description=Let%27s+find+it+out+with+Jack+%3A%29",'_blank');
+    window.open("https://www.facebook.com/sharer/sharer.php?u=phoenis.github.io%2FWaste-water-1%2F&picture=https%3A%2F%2Fgithub.com%2Fphoenis%2FWaste-water-1%2Fblob%2Fmaster%2Fimages%2Fcard.png%3Fraw%3Dtrue&title=How+much+water+do+you+use%3F&caption=https%3A%2F%2Fbit.ly%2F2F2lz8bGq%2F&quote=&description=Let%27s+find+it+out+with+Jack+%3A%29",'_blank');
 }
 
 function shareTw() {
