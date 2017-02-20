@@ -1379,6 +1379,9 @@ function draw(){
         text("According to the World Health Organization you would need only 700 liters. \nWith the water you wasted, you could fill  "+Waste+" bathtubs.", 8*width/24,11*height/48);
         }    
   } else if (percent>=95 && Jack.position.y==5*height/8 && Waste<1){
+      
+        restartButton.show();
+        shareButton.show();
       if(userName=="" || userName==null || userName==undefined){
         
         fill(255);
@@ -1502,6 +1505,8 @@ function draw(){
             Jack.velocity.y = 0
         }
         else if(swimming==false && moving==false && Jack.position.y==height/2.2 && Waste>=22) {
+            restartButton.show();
+            shareButton.show();
             Jack.changeAnimation("bad");
             Jack.velocity.y = 0
         }
