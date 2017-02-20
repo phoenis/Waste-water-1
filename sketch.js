@@ -828,10 +828,6 @@ function draw(){
         Bath.changeAnimation("shower");
     }
     
-    if (pressDone1==true && pressDone2==false && Jack.position.y!=width/10*6.5) {
-        Sink.onMousePressed = function() {activeSpeed();}
-    }
-    
 //-----> INPUT Sink
     if (Jack.position.x>=width/10*6.5 && x==0 && pressDone2==false) {
         moving=false;
@@ -1856,6 +1852,7 @@ function windowResized() {
 //------------------------------------------------•°o.O TIME Glow O.o°•
 function sinkGlow(){
     Sink.changeAnimation("SinkGlow");
+    Sink.onMousePressed = function() {activeSpeed();}
 }
 
 function gardenGlow(){
