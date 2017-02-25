@@ -544,11 +544,7 @@ function draw(){
     document.getElementById("inputName").style.visibility='visible';
     
     if (percent<100){
-        if( width/height>=1.33 && width/height<=1.75) ) {
-        image(myBg_small,x,y,width*3,height*2);
-        mySound.stop();
-        soundButton.hide();
-        } else { image(myBg,x,y,width*3,height*2); }
+        image(myBg,x,y,width*3,height*2);
         
         push();
         imageMode(CENTER);   
