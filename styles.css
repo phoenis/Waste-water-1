@@ -214,34 +214,34 @@ input[type=range]::-webkit-slider-thumb {
 /* RESTART AND SHARE BUTTONS */
 
 #facebook {
-    background-image: url(images/facebook_15.png);
+    background-image: url(images/facebook_20.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 /* #facebook:hover {
-    background-image: url(images/facebook_15-hover.png);
+    background-image: url(images/facebook_20-hover.png);
 } */
 
 #twitter {
-    background-image: url(images/twitter_15.png);
+    background-image: url(images/twitter_20.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 /* #twitter:hover {
-    background-image: url(images/twitter_15-hover.png);
+    background-image: url(images/twitter_20-hover.png);
 } */
 
 #pinterest {
-    background-image: url(images/pinterest_15.png);
+    background-image: url(images/pinterest_20.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 
 /* #pinterest:hover {
-    background-image: url(images/pinterest_15-hover.png);
+    background-image: url(images/pinterest_20-hover.png);
 } */
 }
 

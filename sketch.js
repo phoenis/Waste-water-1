@@ -198,6 +198,7 @@ function setup() {
     infoButton.position(width/38,height/30);
     infoButton.size(width/30,width/30);
     infoButton.mousePressed(infoBox);
+    infoButton.touchStarted(infoBox);
     infoButton.show();
 
     soundButton=createButton("");
@@ -206,6 +207,7 @@ function setup() {
     soundButton.position(width/18.8,height/30);
     soundButton.size(width/30,width/30);
     soundButton.mousePressed(playSound);
+    soundButton.touchStarted(playSound);
     soundButton.show();
     
 /////////////////////////////////////////// LAUNDRY
@@ -505,7 +507,7 @@ function draw(){
         Expand.position.y=height*0.3;
         Expand.scale=width/1000;
 
-    if (width <= 750) {
+    if( /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         push();
         textSize(width/18);
         textAlign(CENTER);
@@ -1340,7 +1342,7 @@ function draw(){
         restartButton.show();
         shareButton.show();
         wasteTubs(Waste);
-        image(myTub,8*width/24,42.2*height/48,width/30,width/30);    
+        image(myTub,8*width/24,42.3*height/48,width/30,width/30);    
         fill(255);
         textFont("Lato");
         textAlign(LEFT);
@@ -1578,6 +1580,8 @@ function draw(){
         selWMachine.hide();
         WMachineSlider.hide();
         mopSlider.hide();
+        buttonBathroom.hide();
+        buttonKitchen.hide();
         document.getElementById("numBaths").style.visibility = "hidden";
         document.getElementById("numShower").style.visibility = "hidden";
         document.getElementById("numDishwasher").style.visibility = "hidden";
