@@ -323,7 +323,19 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 /* ADDITIONAL BUTTONS - INFO/SOUND */
-
+#seeCode {
+    font-size: 1.2em;
+    text-align: center;
+    color: #677F8C;
+    background: none;
+    border: none;
+    border-bottom: 2px solid;
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+}
+    
+    
 .info {
     background-image: url(images/info_25.png);
     background-repeat: no-repeat;

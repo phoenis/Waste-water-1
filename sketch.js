@@ -23,7 +23,7 @@ var userName;
 var Result;
 var x = 0;
 var y = 0;
-var myBg, myBg_small, BathroomBack, TubBack, myTub, mySound, myImage;
+var myBg, myBg_small, BathroomBack, TubBack, myTub, mySound, myImage, Jack_info;
 var buttonStart, buttonBathroom, buttonKitchen;     // Change room
 var stateStart=false;
 var stateBath=false;
@@ -33,7 +33,7 @@ var moving=false;
 var swimming=false;
 var speedUP=false;
 
-var infoButton;
+var infoButton, seeCode;
 var pressInfo=false;
 var soundButton;
 var restartButton;
@@ -101,7 +101,8 @@ var pressDone6 = false;
 
 function preload() {
     myBg = loadImage('images/background.png');
-    myBg_small = loadImage("images/background_small.png")
+    myBg_small = loadImage("images/background_small.png");
+    Jack_info = loadImage("images/Jack_stand.png");
     BathroomBack = loadImage('images/bathroom.png');
     TubBack = loadImage('images/tub-back.png');
     KitchenBack = loadImage('images/kitchen.png');
@@ -208,6 +209,13 @@ function setup() {
     soundButton.size(width/30,width/30);
     soundButton.mousePressed(playSound);
     soundButton.show();
+    
+    seeCode=createButton("see code on github");
+    seeCode.id("seeCode");
+    seeCode.position(width/2.1,height/1.32);
+    seeCode.size(width/8.5,width/50);
+    seeCode.mousePressed(github);
+    seeCode.hide();
     
 /////////////////////////////////////////// LAUNDRY
     // Washing machine
@@ -544,7 +552,7 @@ function draw(){
     document.getElementById("inputName").style.visibility='visible';
     
     if (percent<100){
-        image(myBg,x,y,width*3,height*2);
+        image(myBg,x,y,width*3,height*2); 
         
         push();
         imageMode(CENTER);   
@@ -1553,9 +1561,44 @@ function draw(){
         push();
         noStroke();
         fill(255);
-        rect(100, 75, width-150, height-150, 30);
+        rect(200, 75, width-400, height-150, 30);
         pop();
-
+        
+        image(Jack_info,width/4.3,height/4.2,width/6.5,height/1.8);
+        
+        push();
+        textSize(height/100*2.5);
+        fill("#58595b");
+        textFont("Lato");
+        textStyle(BOLD);
+        text("WHAT?",width/2.1,height/3.8);
+        pop();
+        
+        push();
+        textSize(height/100*2.5);
+        fill("#58595b");
+        textFont("Lato");
+        text("This is a university project built in p5.js during the\ncourse Creative Coding at the Politecnico di Milano.\n\nJack will drive you in 3 different rooms where you\nhave to answer questions about your habits.\nAt the end you'll find out how much water you waste\nin average in a week.", width/2.1,height/3.3);
+        pop();
+        
+        push();
+        textSize(height/100*2.5);
+        fill("#58595b");
+        textFont("Lato");
+        textStyle(BOLD);
+        text("WHO?",width/2.1,height/1.78);
+        pop();
+        
+        push();
+        textSize(height/100*2.5);
+        fill("#58595b");
+        textFont("Lato");
+        text("The project is developed by:\n•  Mara Cominardi\n•  Chiara Riente\n•  Sara Pizzatti", width/2.1,height/1.65);
+        pop();
+        
+        seeCode.show();
+        
+        Jack.visible=false;
         buttonStart.hide();
         buttonShower.hide();
         buttonTub.hide();
@@ -1588,6 +1631,9 @@ function draw(){
         document.getElementById("mqGarden").style.visibility = "hidden";
         document.getElementById("numWMachine").style.visibility = "hidden";
         document.getElementById("numMop").style.visibility = "hidden";
+    } else {
+        Jack.visible = true;
+        seeCode.hide();
     }
     
 // draw() ends here
@@ -1770,6 +1816,9 @@ function Q6results() {
 }
 
 // button RESTART - SHARE - SOUND - INFO
+function github() {
+     window.open("https://github.com/JackDoesntWaste/water","_blank");
+}
 
 function restart() {
     location.reload();
