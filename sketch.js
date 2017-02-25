@@ -125,7 +125,7 @@ function setup() {
 // Start to Bathroom
     buttonStart = createButton("Let's start!");
     buttonStart.id("startButton");
-    buttonStart.size(width/9.5,height/18);
+    buttonStart.size(width/9,height/18);
     buttonStart.position(width/1.87,height/1.35);
     buttonStart.mousePressed(StartToBath);
 // Bathroom to Kitchen
