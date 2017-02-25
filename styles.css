@@ -27,11 +27,13 @@ body {
     background: none;
     border: none;
     font-family: 'Lato', sans-serif;
+    margin-top: 2px;
+    margin-left: -2px;
 }
 
-/* #inputName:focus {
+#inputName:focus {
     outline: none;
-} */
+} 
 
 #inputName::-webkit-input-placeholder {
     color: #677f8c;
@@ -44,16 +46,11 @@ body {
     font-weight: bolder;
     text-transform: uppercase;
     background: none;
-    border: none;
     color: #677f8c;
     text-align: center;
-    font-size: 1em;
-    border-bottom: 2.5px solid;
+    font-size: 1.1em;
+    border: 2.5px solid;
 }
-
-/* #startButton:hover {
-    color: white;
-} */
 
 /* INPUT TEXT */
 
@@ -122,9 +119,6 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-/* .info:hover {
-    background-image: url(images/info_20-hover.png);
-} */
 
 .infoSelected {
     background-image: url(images/closePopUp_20.png);
@@ -132,9 +126,6 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-/* .infoSelected:hover {
-    background-image: url(images/closePopUp_20-hover.png);
-} */
 
 .sound {
     background-image: url(images/audio_play_20.png);
@@ -142,9 +133,6 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-/* .sound:hover {
-    background-image: url(images/audio_play_20-hover.png);
-} */
     
 .noSound {
     background-image: url(images/audio_stop_20.png);
@@ -152,9 +140,6 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-/* .noSound:hover {
-    background-image: url(images/audio_stop_20-hover.png);
-} */
 
 /* CHANGE ROOM BUTTON */
 
@@ -165,20 +150,12 @@ input[type=range]::-webkit-slider-thumb {
     border: none;
 }
 
-/* #toKitchen:hover {
-    background-image: url(images/Next_room_hover.gif);
-} */
-
 #toLaundry {
     background-image: url(images/Next_room_laundry.gif);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
-
-/* #toLaundry:hover {
-    background-image: url(images/Next_room_hover.gif);
-} */
 
 /* BUTTONS IN THE BOXES */
 
@@ -193,12 +170,6 @@ input[type=range]::-webkit-slider-thumb {
     font-size: 0.9em;
     border-radius: 5px;
 }
-
-/* .button:hover {
-    background-color: #677f8c;
-    border: #677f8c 2.5px solid;
-    color: white;
-} */
 
 .selected {	
     font-family: 'Dosis', sans-serif;
@@ -220,19 +191,13 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-/* #facebook:hover {
-    background-image: url(images/facebook_20-hover.png);
-} */
-
+	
 #twitter {
     background-image: url(images/twitter_20.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
-/* #twitter:hover {
-    background-image: url(images/twitter_20-hover.png);
-} */
 
 #pinterest {
     background-image: url(images/pinterest_20.png);
@@ -240,16 +205,10 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-
-/* #pinterest:hover {
-    background-image: url(images/pinterest_20-hover.png);
-} */
 }
 
 @media screen and (min-width: 1024px) {
-
 /* GENERAL */
-
 .loader {
 	position: fixed;
 	left: 0px;
@@ -294,11 +253,10 @@ body {
     font-weight: bolder;
     text-transform: uppercase;
     background: none;
-    border: none;
     color: #677f8c;
     text-align: center;
     font-size: 1.6em;
-    border-bottom: 2.5px solid;
+    border: 2.5px solid;
 }
 
 #startButton:hover {
