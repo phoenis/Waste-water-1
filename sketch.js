@@ -546,7 +546,6 @@ function draw(){
     if (percent<100){
         if( /webOS|iPad/i.test(navigator.userAgent) ) {
         image(myBg_small,x,y,width*3,height*2);
-        mySound.stop();
         } else { image(myBg,x,y,width*3,height*2); }
         
         push();
