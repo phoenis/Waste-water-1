@@ -23,7 +23,7 @@ var userName;
 var Result;
 var x = 0;
 var y = 0;
-var myBg, BathroomBack, TubBack, myTub, mySound;
+var myBg, myBg_small, BathroomBack, TubBack, myTub, mySound, myImage;
 var buttonStart, buttonBathroom, buttonKitchen;     // Change room
 var stateStart=false;
 var stateBath=false;
