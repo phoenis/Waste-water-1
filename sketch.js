@@ -734,7 +734,7 @@ function draw(){
         push();
         noStroke();
         fill(color('rgba(255, 255, 255, 0.9)'));
-        rect(width/1.7, height/10, width/3.8, height/1.69, 20);
+        rect(width/1.7, height/10, width/3.6, height/1.69, 20);
         pop();
         
         text("Do you prefer to take a shower\nor a bath?", width/1.64,height/6.2);
@@ -847,7 +847,7 @@ function draw(){
         push();
         noStroke();
         fill(color('rgba(255, 255, 255, 0.9)'));
-        rect(width/10, height/10, width/3.8, height/2.8, 20);
+        rect(width/10, height/10, width/3.6, height/2.8, 20);
         pop();
         
         text("How long do you leave the tap running\nwhile you are brushing your teeth?", width/8.3,height/6.2);
@@ -924,7 +924,7 @@ function draw(){
         push();
         noStroke();
         fill(color('rgba(255, 255, 255, 0.9)'));
-        rect(width/1.7, height/10, width/3.8, height/1.8, 20);
+        rect(width/1.7, height/10, width/3.6, height/1.8, 20);
         pop();
             
         text("How do you wash your dishes?", width/1.64,height/6.2);
@@ -1040,7 +1040,7 @@ function draw(){
         push();
         noStroke();
         fill(color('rgba(255, 255, 255, 0.9)'));
-        rect(width/10, height/10, width/3.8, height/1.8, 20);
+        rect(width/10, height/10, width/3.6, height/1.8, 20);
         pop();
 
         text("Do you have a garden?", width/8.3,height/6.2);
@@ -1175,7 +1175,7 @@ function draw(){
         push();
         noStroke();
         fill(color('rgba(255, 255, 255, 0.9)'));
-        rect(width/1.7, height/10, width/3.8, height/2.6, 20);
+        rect(width/1.7, height/10, width/3.6, height/2.6, 20);
         pop();
     
         text("Set the washine machine program...",width/1.64,height/6.2);
@@ -1257,7 +1257,7 @@ function draw(){
         push();
         noStroke();
         fill(color('rgba(255, 255, 255, 0.9)'));
-        rect(width/10, height/10, width/3.8, height/2.6, 20);
+        rect(width/10, height/10, width/3.6, height/2.6, 20);
         pop();
     
         text("How many times a week do you\nclean your house?",width/8.3,height/6.2);
@@ -1564,7 +1564,7 @@ function draw(){
         rect(200, 75, width-400, height-150, 30);
         pop();
         
-        image(Jack_info,width/4.3,height/4.2,width/6.5,height/1.8);
+        image(Jack_info,width/4.3,height/4.2,width/6.5,width/3.5);
         
         push();
         textSize(height/100*2.5);
