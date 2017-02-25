@@ -306,7 +306,7 @@ function setup() {
     buttonDishwasher.hide();
     
     handsSlider = createSlider(1,40,10);
-    handsSlider.position(width/1.64,height/2.4);
+    handsSlider.position(width/1.64,height/2.55);
     handsSlider.size(width/8,0);
     handsSlider.hide();
     
@@ -479,13 +479,13 @@ function setup() {
     // > Teeth
     
     teethSlider = createSlider(1,10,1);
-    teethSlider.position(width/8.3,height/3.5);
+    teethSlider.position(width/8.3,height/4);
     teethSlider.size(width/8,0);
     teethSlider.hide();
     
     buttonDone2 = createButton("Done!");
     buttonDone2.addClass("button");
-    buttonDone2.position(width/5.15,height/2.9);
+    buttonDone2.position(width/5.15,height/3);
     buttonDone2.size(width/15,height/18);
     buttonDone2.mousePressed(Q2results);
     buttonDone2.hide();
@@ -547,7 +547,6 @@ function draw(){
         if( /webOS|iPad/i.test(navigator.userAgent) ) {
         image(myBg_small,x,y,width*3,height*2);
         mySound.stop();
-        soundButton.hide();
         } else { image(myBg,x,y,width*3,height*2); }
         
         push();
@@ -846,7 +845,7 @@ function draw(){
         rect(width/10, height/10, width/3.8, height/2.8, 20);
         pop();
         
-        text("How many minutes the faucet\nis turned on while you brushing\nyour teeth?", width/8.3,height/6.2);
+        text("How long do you leave the tap running\nwhile you are brushing your teeth?", width/8.3,height/6.2);
         teethSlider.show();
         buttonDone2.show();
         
@@ -856,9 +855,9 @@ function draw(){
         textSize(height/100*2.2);
         teethMinutes = teethSlider.value();
         if(teethMinutes===1){
-            text(teethMinutes+ " minute", width/3.9,height/3.4);
+            text(teethMinutes+ " minute", width/3.9,height/3.9);
         } else {
-            text(teethMinutes+ " minutes", width/3.9,height/3.4); }
+            text(teethMinutes+ " minutes", width/3.9,height/3.9); }
         pop();
         }
   
@@ -919,7 +918,7 @@ function draw(){
 
         push();
         noStroke();
-        fill(255);
+        fill(color('rgba(255, 255, 255, 0.9)'));
         rect(width/1.7, height/10, width/3.8, height/1.8, 20);
         pop();
             
@@ -931,7 +930,7 @@ function draw(){
             document.getElementById("buttonHands").className = "selected"; 
             document.getElementById("buttonDishwasher").className = "button";
  
-            text("How long do you leave the tap\nrunning while you are doing\nyour dishes?", width/1.64,height/3.3);
+            text("How long do you leave the tap running\nwhile you are doing your dishes?", width/1.64,height/3.3);
         
             handsSlider.show();
             handsMinutes = handsSlider.value();
@@ -939,14 +938,14 @@ function draw(){
             push();
             textSize(height/100*2.2);
             if(handsMinutes===1){
-                text(handsMinutes+" minute",width/1.34,height/2.35);
+                text(handsMinutes+" minute",width/1.34,height/2.5);
             } else {
-                text(handsMinutes+" minutes",width/1.34,height/2.35);
+                text(handsMinutes+" minutes",width/1.34,height/2.5);
             }
             pop();
         
             buttonDone3.show();
-            buttonDone3.position(width/1.46,height/2.05);
+            buttonDone3.position(width/1.46,height/2.1);
         }
     
         if(pressDishwasher===true){
@@ -1585,6 +1584,7 @@ function draw(){
         mopSlider.hide();
         buttonBathroom.hide();
         buttonKitchen.hide();
+        document.getElementById("inputName").style.visibility = "hidden";
         document.getElementById("numBaths").style.visibility = "hidden";
         document.getElementById("numShower").style.visibility = "hidden";
         document.getElementById("numDishwasher").style.visibility = "hidden";
