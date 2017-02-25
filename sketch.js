@@ -289,7 +289,7 @@ function setup() {
     
 //-----> INPUT Kitchen
     // > Dish
-    buttonHands = createButton("By hands");
+    buttonHands = createButton("By hand");
     buttonHands.addClass("button");
     buttonHands.id("buttonHands");
     buttonHands.size(width/10,height/18);
@@ -919,11 +919,11 @@ function draw(){
 
         push();
         noStroke();
-        fill(color('rgba(255, 255, 255, 0.9)'));
+        fill(255);
         rect(width/1.7, height/10, width/3.8, height/1.8, 20);
         pop();
             
-        text("How do you clean your dishes?", width/1.64,height/6.2);
+        text("How do you wash your dishes?", width/1.64,height/6.2);
         buttonHands.show();
         buttonDishwasher.show();
     
