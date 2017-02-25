@@ -124,8 +124,8 @@ function setup() {
 // Start to Bathroom
     buttonStart = createButton("Let's start!");
     buttonStart.id("startButton");
-    buttonStart.size(width/7,height/18);
-    buttonStart.position(width/1.9,height/1.35);
+    buttonStart.size(width/9.5,height/18);
+    buttonStart.position(width/1.87,height/1.35);
     buttonStart.mousePressed(StartToBath);
 // Bathroom to Kitchen
     buttonBathroom = createButton("");
@@ -146,7 +146,7 @@ function setup() {
 //-----> INPUT NAME
     var inputName = createInput();
     inputName.id("inputName");
-    inputName.position(width/1.92,height/2.04);
+    inputName.position(width/1.92,height/2.08);
     inputName.size(width/3,height/10);
     inputName.value = text;
     // Placeholder
@@ -505,19 +505,22 @@ function draw(){
         Expand.position.y=height*0.3;
         Expand.scale=width/1000;
 
-    if (width/height <= 1.33) {
+    if (width <= 750) {
         push();
-        textSize(width/15);
+        textSize(width/18);
         textAlign(CENTER);
-        textStyle(BOLD);
-        textFont("Dosis");
+        textStyle(NORMAL);
+        textFont("Lato");
         fill(255);
-        text("PLEASE,\nEXTEND AND REFRESH\nYOUR BROWSER!",width/2,height/2);
+        text("We are sorry,\nbut this website is not yet\navailable on the mobile.",width/2,height/2);
         fill(0, 102, 153);
         pop();
         
         buttonStart.hide();
         document.getElementById("inputName").style.visibility='hidden';
+        mySound.stop();
+        infoButton.hide();
+        soundButton.hide();
         
         Jack.visible=false;
         Bath.visible=false;
@@ -652,12 +655,12 @@ function draw(){
         textSize((width/100)*3.5);
         textAlign(LEFT);
         textFont("Lato");
-        text("Hi,",width/2.13,height/1.78);
+        text("Hi,",width/2.13,height/1.81);
     }
     pop();
     push();
     if (stateStart==false){
-        fill(255);
+        fill(color('rgba(255, 255, 255, 0.7)'));
         textSize((width/100)*2.5);
         textAlign(LEFT);
         textFont("Lato");
@@ -1393,7 +1396,8 @@ function draw(){
         text("YOU USED "+Result+" LITERS OF WATER IN A WEEK!", width/2,height/6);
         
         textStyle(NORMAL);
-        textSize(height/24); 
+        textFont("Lato");
+        textSize(height/100*3.2); 
         text("Compliments! You have respected the amount of water setted by the World Health Organization, \nwhich says that 100 liters per person per day are needed to ensure that most basic human needs.", width/2,2*height/9);  
           
         } else {    

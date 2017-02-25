@@ -1,4 +1,4 @@
-@media screen and (max-width: 961px) {
+@media screen and (max-width: 1024px) {
 /* GENERAL */
 .loader {
 	position: fixed;
@@ -29,12 +29,12 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-#inputName:focus {
+/* #inputName:focus {
     outline: none;
-}
+} */
 
 #inputName::-webkit-input-placeholder {
-    color: #ffffff;
+    color: #677f8c;
     opacity: 0.5;
     font-style: italic;
 }
@@ -47,13 +47,13 @@ body {
     border: none;
     color: #677f8c;
     text-align: center;
-    font-size: 0.85em;
+    font-size: 1.1em;
     border-bottom: 2.5px solid;
 }
 
-#startButton:hover {
+/* #startButton:hover {
     color: white;
-}
+} */
 
 /* INPUT TEXT */
 
@@ -94,7 +94,7 @@ input[type=range]::-webkit-slider-thumb {
     height: 12px;
     width: 12px;
     border-radius: 25px;
-    background: #A1D0FF;
+    background: #a6cdda;
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -4px;
@@ -121,9 +121,9 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-.info:hover {
+/* .info:hover {
     background-image: url(images/info_15-hover.png);
-}
+} */
 
 .infoSelected {
     background-image: url(images/closePopUp_15.png);
@@ -131,9 +131,9 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-.infoSelected:hover {
+/* .infoSelected:hover {
     background-image: url(images/closePopUp_15-hover.png);
-}
+} */
 
 .sound {
     background-image: url(images/audio_play_15.png);
@@ -141,18 +141,19 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-.sound:hover {
+/* .sound:hover {
     background-image: url(images/audio_play_15-hover.png);
-}
+} */
+    
 .noSound {
     background-image: url(images/audio_stop_15.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
-.noSound:hover {
+/* .noSound:hover {
     background-image: url(images/audio_stop_15-hover.png);
-}
+} */
 
 /* CHANGE ROOM BUTTON */
 
@@ -163,9 +164,9 @@ input[type=range]::-webkit-slider-thumb {
     border: none;
 }
 
-#toKitchen:hover {
+/* #toKitchen:hover {
     background-image: url(images/Next_room_hover.gif);
-}
+} */
 
 #toLaundry {
     background-image: url(images/Next_room_laundry.gif);
@@ -174,9 +175,9 @@ input[type=range]::-webkit-slider-thumb {
     border: none;
 }
 
-#toLaundry:hover {
+/* #toLaundry:hover {
     background-image: url(images/Next_room_hover.gif);
-}
+} */
 
 /* BUTTONS IN THE BOXES */
 
@@ -192,11 +193,11 @@ input[type=range]::-webkit-slider-thumb {
     border-radius: 5px;
 }
 
-.button:hover {
+/* .button:hover {
     background-color: #677f8c;
     border: #677f8c 2.5px solid;
     color: white;
-}
+} */
 
 .selected {	
     font-family: 'Dosis', sans-serif;
@@ -218,9 +219,9 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-#facebook:hover {
+/* #facebook:hover {
     background-image: url(images/facebook_15-hover.png);
-}
+} */
 
 #twitter {
     background-image: url(images/twitter_15.png);
@@ -228,9 +229,9 @@ input[type=range]::-webkit-slider-thumb {
     background-color: transparent; 
     border: none;
 }
-#twitter:hover {
+/* #twitter:hover {
     background-image: url(images/twitter_15-hover.png);
-}
+} */
 
 #pinterest {
     background-image: url(images/pinterest_15.png);
@@ -239,12 +240,12 @@ input[type=range]::-webkit-slider-thumb {
     border: none;
 }
 
-#pinterest:hover {
+/* #pinterest:hover {
     background-image: url(images/pinterest_15-hover.png);
-}
+} */
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
 
 /* GENERAL */
 
@@ -282,7 +283,7 @@ body {
 }
 
 #inputName::-webkit-input-placeholder {
-    color: #ffffff;
+    color: #677f8c;
     opacity: 0.5;
     font-style: italic;
 }
@@ -341,7 +342,7 @@ input[type=range]::-webkit-slider-thumb {
     height: 15px;
     width: 15px;
     border-radius: 25px;
-    background: #A1D0FF;
+    background: #a6cdda;
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -5px;
