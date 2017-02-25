@@ -199,7 +199,6 @@ function setup() {
     infoButton.position(width/38,height/30);
     infoButton.size(width/30,width/30);
     infoButton.mousePressed(infoBox);
-    infoButton.touchStarted(infoBox);
     infoButton.show();
 
     soundButton=createButton("");
@@ -208,7 +207,6 @@ function setup() {
     soundButton.position(width/18.8,height/30);
     soundButton.size(width/30,width/30);
     soundButton.mousePressed(playSound);
-    soundButton.touchStarted(playSound);
     soundButton.show();
     
 /////////////////////////////////////////// LAUNDRY
@@ -546,8 +544,10 @@ function draw(){
     document.getElementById("inputName").style.visibility='visible';
     
     if (percent<100){
-        if( /iPad/i.test(navigator.userAgent) ) {
+        if( /webOS|iPad/i.test(navigator.userAgent) ) {
         image(myBg_small,x,y,width*3,height*2);
+        mySound.stop();
+        soundButton.hide();
         } else { image(myBg,x,y,width*3,height*2); }
         
         push();
