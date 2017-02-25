@@ -28,7 +28,7 @@ body {
     border: none;
     font-family: 'Lato', sans-serif;
     margin-top: 2px;
-    margin-left: -2px;
+    margin-left: 2px;
 }
 
 #inputName:focus {
@@ -46,10 +46,11 @@ body {
     font-weight: bolder;
     text-transform: uppercase;
     background: none;
+    border: none;
     color: #677f8c;
     text-align: center;
-    font-size: 1.1em;
-    border: 2.5px solid;
+    font-size: 1em;
+    border-bottom: 2.5px solid;
 }
 
 /* INPUT TEXT */
@@ -253,10 +254,11 @@ body {
     font-weight: bolder;
     text-transform: uppercase;
     background: none;
+    border: none;
     color: #677f8c;
     text-align: center;
     font-size: 1.6em;
-    border: 2.5px solid;
+    border-bottom: 2.5px solid;
 }
 
 #startButton:hover {
