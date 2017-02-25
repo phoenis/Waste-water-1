@@ -1,3 +1,4 @@
+@media screen and (max-width: 961px) {
 /* GENERAL */
 .loader {
 	position: fixed;
@@ -16,6 +17,290 @@ body {
     -moz-user-select:none;
     -ms-user-select:none;
     user-select:none;
+}
+
+/* START */
+#inputName{
+    font-size: 2em;
+    text-align: left;
+    color: white;
+    background: none;
+    border: none;
+    font-family: 'Lato', sans-serif;
+}
+
+#inputName:focus {
+    outline: none;
+}
+
+#inputName::-webkit-input-placeholder {
+    color: #ffffff;
+    opacity: 0.5;
+    font-style: italic;
+}
+
+#startButton {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    color: #677f8c;
+    text-align: center;
+    font-size: 0.85em;
+    border-bottom: 2.5px solid;
+}
+
+#startButton:hover {
+    color: white;
+}
+
+/* INPUT TEXT */
+
+input[type=text]{
+    font-size: 1em;
+    text-align: center;
+    color: #677f8c;
+    background: none;
+    border: none;
+    border-bottom: 2px solid;
+    font-family: 'Lato', sans-serif;
+}
+
+input[type=text]:focus {
+    outline: none;
+}
+
+input[type=text]::-webkit-input-placeholder {
+    color: #677f8c;
+    opacity: 0.5;
+    font-style: italic;
+}
+
+/* INPUT RANGE */
+
+input[type=range] {
+    -webkit-appearance: none;
+    background: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    height: 5px;
+    cursor: pointer;
+    background: #677F8C;
+    border-radius: 5px;
+    margin-top: -8px;
+}
+input[type=range]::-webkit-slider-thumb {
+    height: 12px;
+    width: 12px;
+    border-radius: 25px;
+    background: #A1D0FF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -4px;
+}
+
+/* DROPDOWN */
+
+.selection {
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    border-bottom: #677F8C 2px solid;
+    border-radius: 0px;
+    color: #677F8C;
+    background: none; 
+}
+
+/* ADDITIONAL BUTTONS - INFO/SOUND */
+
+.info {
+    background-image: url(images/info_15.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+.info:hover {
+    background-image: url(images/info_15-hover.png);
+}
+
+.infoSelected {
+    background-image: url(images/closePopUp_15.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+.infoSelected:hover {
+    background-image: url(images/closePopUp_15-hover.png);
+}
+
+.sound {
+    background-image: url(images/audio_play_15.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+.sound:hover {
+    background-image: url(images/audio_play_15-hover.png);
+}
+.noSound {
+    background-image: url(images/audio_stop_15.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+.noSound:hover {
+    background-image: url(images/audio_stop_15-hover.png);
+}
+
+/* CHANGE ROOM BUTTON */
+
+#toKitchen {
+    background-image: url(images/Next_room_kitchen.gif);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+
+#toKitchen:hover {
+    background-image: url(images/Next_room_hover.gif);
+}
+
+#toLaundry {
+    background-image: url(images/Next_room_laundry.gif);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+
+#toLaundry:hover {
+    background-image: url(images/Next_room_hover.gif);
+}
+
+/* BUTTONS IN THE BOXES */
+
+.button {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background: none;
+    border: 2.5px solid;
+    color: #677f8c;
+    text-align: center;
+    font-size: 0.9em;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #677f8c;
+    border: #677f8c 2.5px solid;
+    color: white;
+}
+
+.selected {	
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background-color: #677f8c;
+    border: #677f8c 2.5px solid;
+    color: white;
+    text-align: center;
+    font-size: 0.9em;
+    border-radius: 5px;
+}
+
+/* RESTART AND SHARE BUTTONS */
+
+#facebook {
+    background-image: url(images/facebook_15.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+#facebook:hover {
+    background-image: url(images/facebook_15-hover.png);
+}
+
+#twitter {
+    background-image: url(images/twitter_15.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+#twitter:hover {
+    background-image: url(images/twitter_15-hover.png);
+}
+
+#pinterest {
+    background-image: url(images/pinterest_15.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
+    border: none;
+}
+
+#pinterest:hover {
+    background-image: url(images/pinterest_15-hover.png);
+}
+}
+
+@media screen and (min-width: 768px) {
+
+/* GENERAL */
+
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('images/drop.gif') 50% 50% no-repeat #a6cdda;
+}
+
+body {
+    margin: 0px;
+    position: fixed;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+/* START */
+#inputName{
+    font-size: 3em;
+    text-align: left;
+    color: white;
+    background: none;
+    border: none;
+    font-family: 'Lato', sans-serif;
+}
+
+#inputName:focus {
+    outline: none;
+}
+
+#inputName::-webkit-input-placeholder {
+    color: #ffffff;
+    opacity: 0.5;
+    font-style: italic;
+}
+
+#startButton {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    color: #677f8c;
+    text-align: center;
+    font-size: 1.6em;
+    border-bottom: 2.5px solid;
+}
+
+#startButton:hover {
+    color: white;
 }
 
 /* INPUT TEXT */
@@ -78,42 +363,42 @@ input[type=range]::-webkit-slider-thumb {
 /* ADDITIONAL BUTTONS - INFO/SOUND */
 
 .info {
-    background-image: url(images/info.png);
+    background-image: url(images/info_25.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 .info:hover {
-    background-image: url(images/info-hover.png);
+    background-image: url(images/info_25-hover.png);
 }
 
 .infoSelected {
-    background-image: url(images/closePopUp.png);
+    background-image: url(images/closePopUp_25.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 .infoSelected:hover {
-    background-image: url(images/closePopUp-hover.png);
+    background-image: url(images/closePopUp_25-hover.png);
 }
 
 .sound {
-    background-image: url(images/audio_play.png);
+    background-image: url(images/audio_play_25.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 .sound:hover {
-    background-image: url(images/audio_play-hover.png);
+    background-image: url(images/audio_play_25-hover.png);
 }
 .noSound {
-    background-image: url(images/audio_stop.png);
+    background-image: url(images/audio_stop_25.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 .noSound:hover {
-    background-image: url(images/audio_stop-hover.png);
+    background-image: url(images/audio_stop_25-hover.png);
 }
 
 /* CHANGE ROOM BUTTON */
@@ -175,57 +460,33 @@ input[type=range]::-webkit-slider-thumb {
 /* RESTART AND SHARE BUTTONS */
 
 #facebook {
-    background-image: url(images/facebook.png);
+    background-image: url(images/facebook_25.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 #facebook:hover {
-    background-image: url(images/facebook-hover.png);
+    background-image: url(images/facebook_25-hover.png);
 }
 
 #twitter {
-    background-image: url(images/twitter.png);
+    background-image: url(images/twitter_25.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 #twitter:hover {
-    background-image: url(images/twitter-hover.png);
+    background-image: url(images/twitter_25-hover.png);
 }
 
-/* START */
-#inputName{
-    font-size: 3em;
-    text-align: left;
-    color: white;
-    background: none;
+#pinterest {
+    background-image: url(images/pinterest_25.png);
+    background-repeat: no-repeat;
+    background-color: transparent; 
     border: none;
-    font-family: 'Lato', sans-serif;
 }
 
-#inputName:focus {
-    outline: none;
+#pinterest:hover {
+    background-image: url(images/pinterest_25-hover.png);
 }
-
-#inputName::-webkit-input-placeholder {
-    color: #ffffff;
-    opacity: 0.5;
-    font-style: italic;
-}
-
-#startButton {
-    font-family: 'Dosis', sans-serif;
-    font-weight: bolder;
-    text-transform: uppercase;
-    background: none;
-    border: none;
-    color: #677f8c;
-    text-align: center;
-    font-size: 1.6em;
-    border-bottom: 2.5px solid;
-}
-
-#startButton:hover {
-    color: white;
 }
