@@ -47,7 +47,7 @@ body {
     border: none;
     color: #677f8c;
     text-align: center;
-    font-size: 1.1em;
+    font-size: 1em;
     border-bottom: 2.5px solid;
 }
 
@@ -94,6 +94,7 @@ input[type=range]::-webkit-slider-thumb {
     height: 12px;
     width: 12px;
     border-radius: 25px;
+    border: none;
     background: #a6cdda;
     cursor: pointer;
     -webkit-appearance: none;
@@ -116,43 +117,43 @@ input[type=range]::-webkit-slider-thumb {
 /* ADDITIONAL BUTTONS - INFO/SOUND */
 
 .info {
-    background-image: url(images/info_15.png);
+    background-image: url(images/info_20.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 /* .info:hover {
-    background-image: url(images/info_15-hover.png);
+    background-image: url(images/info_20-hover.png);
 } */
 
 .infoSelected {
-    background-image: url(images/closePopUp_15.png);
+    background-image: url(images/closePopUp_20.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 /* .infoSelected:hover {
-    background-image: url(images/closePopUp_15-hover.png);
+    background-image: url(images/closePopUp_20-hover.png);
 } */
 
 .sound {
-    background-image: url(images/audio_play_15.png);
+    background-image: url(images/audio_play_20.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 /* .sound:hover {
-    background-image: url(images/audio_play_15-hover.png);
+    background-image: url(images/audio_play_20-hover.png);
 } */
     
 .noSound {
-    background-image: url(images/audio_stop_15.png);
+    background-image: url(images/audio_stop_20.png);
     background-repeat: no-repeat;
     background-color: transparent; 
     border: none;
 }
 /* .noSound:hover {
-    background-image: url(images/audio_stop_15-hover.png);
+    background-image: url(images/audio_stop_20-hover.png);
 } */
 
 /* CHANGE ROOM BUTTON */

@@ -101,6 +101,7 @@ var pressDone6 = false;
 
 function preload() {
     myBg = loadImage('images/background.png');
+    myBg_small = loadImage("images/background_small.png")
     BathroomBack = loadImage('images/bathroom.png');
     TubBack = loadImage('images/tub-back.png');
     KitchenBack = loadImage('images/kitchen.png');
@@ -545,7 +546,9 @@ function draw(){
     document.getElementById("inputName").style.visibility='visible';
     
     if (percent<100){
-        image(myBg,x,y,width*3,height*2);       
+        if( /iPad/i.test(navigator.userAgent) ) {
+        image(myBg_small,x,y,width*3,height*2);
+        } else { image(myBg,x,y,width*3,height*2); }
         
         push();
         imageMode(CENTER);   
